@@ -20,6 +20,11 @@
 # production
 /build
 
+# local dev artifacts
+.audit-*.png
+.comparison/
+.cursor-screenshots/
+
 # misc
 .DS_Store
 *.pem
