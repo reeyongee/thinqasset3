@@ -42,13 +42,6 @@ export const GLOBE_LOCATIONS: GlobeLocation[] = [
     name: "Cayman Islands",
     desc: "Strategic offshore structuring through our collaborative network. Fund vehicles and SPVs in Cayman, ensuring our clients benefit from diversified and high-caliber investment opportunities.",
   },
-  {
-    id: "bermuda",
-    lat: 32.3,
-    lng: -64.78,
-    name: "Bermuda",
-    desc: "Partnership-driven access to one of the world\u2019s legacy financial centres. Structuring and fund access from the mid-Atlantic, purpose-built for institutional capital flows.",
-  },
 ];
 
 export const COBE_MARKER_STYLES = GLOBE_LOCATIONS.map(
@@ -63,7 +56,7 @@ export const GLOBE_SUBHEADING =
   "Headquarters in Dubai with a strong operational base in Mauritius. Direct fund management from our core bases, with strategic partnerships ensuring diversified, high-caliber investment opportunities across every major financial centre.";
 
 export const GLOBE_DEFAULT_COPY =
-  "Drag to explore, click a pin to learn how we operate across jurisdictions. Direct fund management from Mauritius, DIFC, and Luxembourg with strategic partnerships spanning Bermuda to Singapore.";
+  "Drag to explore, click a pin to learn how we operate across jurisdictions. Direct fund management from Mauritius, DIFC, and Luxembourg with strategic partnerships spanning Cayman to Singapore.";
 
 export const GLOBE_COBE_COLORS = {
   baseColor: [0.714, 0.627, 0.51] as [number, number, number],
