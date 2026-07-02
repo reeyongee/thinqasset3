@@ -1,10 +1,10 @@
-export const FINAL_CTA_HREF = "https://dub.sh/optimus-template";
+export const FINAL_CTA_HREF = "mailto:info@thinqasset.com";
 
 export const FINAL_CTA_COPY = {
-  title: "Join 10000+ investors",
+  title: "Speak with our team",
   subtitle:
-    "Connect your portfolio and unlock AI-powered insights in minutes. No credit card required.",
-  button: "Start free trial",
+    "Mauritius and Dubai teams — institutional fund solutions across Mauritius, DIFC, and global markets.",
+  button: "Contact Us",
 } as const;
 
 export const FINAL_CTA_TOKENS = {

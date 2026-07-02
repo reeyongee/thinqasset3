@@ -1,5 +1,5 @@
 import type { GlobeLocation } from "./constants";
-import { GLOBE_DEFAULT_BODY, GLOBE_INSTRUCTION } from "./constants";
+import { GLOBE_DEFAULT_COPY } from "./constants";
 
 type GlobeLocationCopyProps = {
   activeLocation: GlobeLocation | null;
@@ -24,17 +24,7 @@ export function GlobeLocationCopy({ activeLocation }: GlobeLocationCopyProps) {
           </p>
         </div>
       ) : (
-        <>
-          <div className="flex flex-col gap-3">
-            <p className="m-0 font-[family-name:var(--font-inter)] text-base font-normal leading-[1.4] tracking-[-0.02em] text-white max-[809px]:text-sm max-[809px]:leading-[21px]">
-              {GLOBE_INSTRUCTION}
-            </p>
-            <p className={bodyTextClass}>{GLOBE_DEFAULT_BODY}</p>
-          </div>
-          <p className="m-0 font-[family-name:var(--font-inter)] text-sm leading-[1.2] text-token-muted">
-            Click a pin to explore
-          </p>
-        </>
+        <p className={bodyTextClass}>{GLOBE_DEFAULT_COPY}</p>
       )}
     </div>
   );

@@ -12,7 +12,7 @@ type FaqItemProps = {
 
 export function FaqItem({ item, open, onToggle }: FaqItemProps) {
   return (
-    <div className="faq-item w-full overflow-hidden rounded-lg bg-[#121212]">
+    <div className="faq-item w-full overflow-hidden rounded-lg border border-[color:var(--token-btn-border)] bg-token-surface">
       <button
         type="button"
         className="faq-item-trigger flex w-full cursor-pointer items-center gap-3 border-0 bg-transparent p-5 text-left"

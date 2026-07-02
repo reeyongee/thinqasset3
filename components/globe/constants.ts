@@ -57,11 +57,13 @@ export const COBE_MARKER_STYLES = GLOBE_LOCATIONS.map(
 .cobe-marker.globe-map-marker--inactive[data-cobe-id="${loc.id}"]{opacity:calc(var(--cobe-visible-${loc.id},0)*0.35)}`,
 ).join("\n");
 
-export const GLOBE_INSTRUCTION =
-  "Drag to explore, click a pin to learn how we operate across jurisdictions.";
+export const GLOBE_LEAD = "Structured Across Jurisdictions";
 
-export const GLOBE_DEFAULT_BODY =
-  "Direct fund management from Mauritius, DIFC, and Luxembourg with strategic partnerships spanning Bermuda to Singapore.";
+export const GLOBE_SUBHEADING =
+  "Headquarters in Dubai with a strong operational base in Mauritius. Direct fund management from our core bases, with strategic partnerships ensuring diversified, high-caliber investment opportunities across every major financial centre.";
+
+export const GLOBE_DEFAULT_COPY =
+  "Drag to explore, click a pin to learn how we operate across jurisdictions. Direct fund management from Mauritius, DIFC, and Luxembourg with strategic partnerships spanning Bermuda to Singapore.";
 
 export const GLOBE_COBE_COLORS = {
   baseColor: [0.714, 0.627, 0.51] as [number, number, number],

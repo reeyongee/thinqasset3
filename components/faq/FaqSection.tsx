@@ -8,19 +8,11 @@ import { useFaqAnimations } from "./useFaqAnimations";
 
 export function FaqSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [openIds, setOpenIds] = useState<Set<string>>(() => new Set());
+  const [openId, setOpenId] = useState<string | null>(null);
   useFaqAnimations({ sectionRef });
 
   const toggleItem = useCallback((id: string) => {
-    setOpenIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
+    setOpenId((prev) => (prev === id ? null : id));
   }, []);
 
   return (
@@ -38,7 +30,7 @@ export function FaqSection() {
             <div key={item.id} className="faq-item-reveal will-change-transform">
               <FaqItem
                 item={item}
-                open={openIds.has(item.id)}
+                open={openId === item.id}
                 onToggle={() => toggleItem(item.id)}
               />
             </div>

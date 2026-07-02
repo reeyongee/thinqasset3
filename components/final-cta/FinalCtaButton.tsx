@@ -4,8 +4,6 @@ export function FinalCtaButton() {
   return (
     <a
       href={FINAL_CTA_HREF}
-      rel="noopener noreferrer"
-      target="_blank"
       className="final-cta-button group relative z-[1] inline-flex h-10 items-center justify-center gap-2 overflow-hidden rounded-[62px] px-4 no-underline transition-colors duration-200 hover:bg-white/[0.1]"
       style={{ backgroundColor: FINAL_CTA_TOKENS.btnBg }}
     >
