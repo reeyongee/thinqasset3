@@ -46,8 +46,8 @@ export const GLOBE_LOCATIONS: GlobeLocation[] = [
 
 export const COBE_MARKER_STYLES = GLOBE_LOCATIONS.map(
   (loc) =>
-    `.cobe-marker[data-cobe-id="${loc.id}"]{position:absolute;position-anchor:--cobe-${loc.id};top:anchor(center);left:anchor(center);translate:-50% -50%;opacity:var(--cobe-visible-${loc.id},0);filter:blur(calc((1 - var(--cobe-visible-${loc.id},0))*4px));transition:filter .3s;pointer-events:auto;cursor:pointer}
-.cobe-marker.globe-map-marker--inactive[data-cobe-id="${loc.id}"]{opacity:calc(var(--cobe-visible-${loc.id},0)*0.35)}`,
+    `.cobe-marker[data-cobe-id="${loc.id}"]{position:absolute;position-anchor:--cobe-${loc.id};top:anchor(center);left:anchor(center);translate:-50% -50%;opacity:var(--cobe-visible-${loc.id},0);filter:blur(calc((1 - var(--cobe-visible-${loc.id},0))*2px));transition:filter .3s;pointer-events:auto;cursor:pointer}
+.cobe-marker.globe-map-marker--inactive[data-cobe-id="${loc.id}"]{opacity:calc(var(--cobe-visible-${loc.id},0)*0.5)}`,
 ).join("\n");
 
 export const GLOBE_LEAD = "Structured Across Jurisdictions";
@@ -60,6 +60,6 @@ export const GLOBE_DEFAULT_COPY =
 
 export const GLOBE_COBE_COLORS = {
   baseColor: [0.714, 0.627, 0.51] as [number, number, number],
-  markerColor: [0.118, 0.145, 0.176] as [number, number, number],
+  markerColor: [0.788, 0.722, 0.588] as [number, number, number],
   glowColor: [0.788, 0.722, 0.588] as [number, number, number],
 };

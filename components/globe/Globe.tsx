@@ -124,10 +124,10 @@ export function Globe({
         baseColor,
         markerColor,
         glowColor,
-        markerElevation: 0,
+        markerElevation: 0.1,
         markers: GLOBE_LOCATIONS.map((loc) => ({
           location: [loc.lat, loc.lng] as [number, number],
-          size: 0,
+          size: 0.05,
           id: loc.id,
         })),
       });

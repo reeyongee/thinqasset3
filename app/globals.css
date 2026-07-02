@@ -989,18 +989,19 @@ body {
 }
 
 .globe-section .globe-map-marker__dot {
-  background-color: var(--token-muted);
+  background-color: var(--ta-gold);
   border-radius: 50%;
+  box-shadow: 0 0 6px 2px color-mix(in srgb, var(--ta-gold) 40%, transparent);
   display: block;
-  height: 10px;
+  height: 12px;
   transition: all 0.2s ease-in-out;
-  width: 10px;
+  width: 12px;
 }
 
 .globe-section .globe-map-marker::after {
-  animation: globe-marker-pulse 1.5s ease infinite;
+  animation: globe-marker-pulse 1.2s ease infinite;
   aspect-ratio: 1 / 1;
-  border: 1px solid var(--token-muted);
+  border: 1px solid color-mix(in srgb, var(--ta-gold) 60%, transparent);
   border-radius: 50%;
   content: "";
   position: absolute;
@@ -1008,7 +1009,7 @@ body {
 
 @keyframes globe-marker-pulse {
   0% {
-    background-color: color-mix(in srgb, var(--token-muted) 50%, transparent);
+    background-color: color-mix(in srgb, var(--ta-gold) 50%, transparent);
     width: 0;
   }
   40% {
@@ -1021,12 +1022,16 @@ body {
 }
 
 .globe-section .globe-map-marker--active .globe-map-marker__dot {
-  background-color: var(--token-accent);
+  background-color: var(--ta-gold-hover);
+  box-shadow:
+    0 0 8px 3px color-mix(in srgb, var(--ta-gold) 55%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--ta-white) 30%, transparent);
+  transform: scale(1.25);
 }
 
 .globe-section .globe-map-marker--active::after {
   animation: none;
-  border-color: color-mix(in srgb, var(--token-accent) 45%, transparent);
+  border-color: var(--ta-gold);
   width: 100%;
 }
 
@@ -1039,7 +1044,9 @@ body {
 }
 
 .globe-section .globe-map-marker--inactive .globe-map-marker__dot {
-  background-color: color-mix(in srgb, var(--token-muted) 35%, transparent);
+  background-color: color-mix(in srgb, var(--ta-gold) 50%, transparent);
+  box-shadow: 0 0 4px 1px color-mix(in srgb, var(--ta-gold) 20%, transparent);
+  transform: none;
 }
 
 .globe-map-marker__flag {
@@ -1048,7 +1055,7 @@ body {
 }
 
 .globe-section .globe-map-marker__flag::before {
-  background-color: var(--token-muted);
+  background-color: var(--ta-gold);
   content: "";
   display: block;
   width: 2px;
@@ -1064,11 +1071,14 @@ body {
 }
 
 .globe-section .globe-map-marker__link {
-  background-color: var(--token-btn-bg);
-  color: var(--token-muted);
+  background-color: var(--ta-navy);
+  border: 1px solid var(--token-btn-border);
+  border-radius: 4px;
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--ta-navy-deep) 60%, transparent);
+  color: var(--ta-gold);
   font-family: var(--font-inter), sans-serif;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   left: 2px;
   padding: 10px 14px;
   position: absolute;
@@ -1078,8 +1088,9 @@ body {
 
 @media (hover: hover) {
   .globe-section .globe-map-marker__link:hover {
-    background-color: var(--token-btn-bg-hover);
-    color: var(--token-accent);
+    background-color: var(--ta-navy-mid);
+    border-color: var(--ta-gold);
+    color: var(--ta-gold-hover);
   }
 
   .globe-section .globe-canvas-shell:hover .globe-drag-indicator {
