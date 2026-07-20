@@ -1,3 +1,6 @@
+"use client";
+
+import { GlowButton } from "@/components/ui/GlowButton";
 import { CTA_HREF } from "./constants";
 
 type HeroButtonProps = {
@@ -5,6 +8,9 @@ type HeroButtonProps = {
   animate?: boolean;
   animationDelay?: string;
   label?: string;
+  href?: string;
+  onClick?: () => void;
+  transitionItem?: boolean;
 };
 
 export function HeroButton({
@@ -12,21 +18,23 @@ export function HeroButton({
   animate = false,
   animationDelay = "0.2s",
   label = "Consultation",
+  href = CTA_HREF,
+  onClick,
+  transitionItem = false,
 }: HeroButtonProps) {
+  const classNames = [animate ? "hero-fade-up" : "", className]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <a
-      href={CTA_HREF}
-      className={[
-        "hero-btn group relative inline-flex h-10 items-center justify-center gap-2 overflow-hidden rounded-[62px] px-4 no-underline",
-        animate ? "hero-fade-up" : "",
-        className,
-      ].join(" ")}
+    <GlowButton
+      href={href}
+      className={classNames}
       style={animate ? { animationDelay } : undefined}
+      onClick={onClick}
+      transitionItem={transitionItem}
     >
-      <span className="hero-btn-border pointer-events-none absolute inset-0 rounded-[inherit] border-[1.5px] border-solid border-[color:var(--token-btn-border)]" />
-      <span className="whitespace-pre font-[family-name:var(--font-inter)] text-base font-medium leading-6 tracking-[-0.32px] text-white">
-        {label}
-      </span>
-    </a>
+      {label}
+    </GlowButton>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteAtmosphere } from "@/components/background/SiteAtmosphere";
-import { ProgressiveBlurVeil } from "@/components/progressive-blur/ProgressiveBlurVeil";
 import { ScrollOrchestratorProvider } from "@/components/scroll/ScrollOrchestratorProvider";
+import { TransitionProvider } from "@/components/transition/TransitionProvider";
 import { Albert_Sans, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -43,12 +43,19 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistMono.variable} ${geistSans.variable} ${inter.variable} ${albertSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"){sessionStorage.removeItem("heroIntroPlayed");document.documentElement.removeAttribute("data-intro-played");document.documentElement.removeAttribute("data-intro-ready");return;}if(sessionStorage.getItem("heroIntroPlayed")==="true"){document.documentElement.setAttribute("data-intro-played","");}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full">
         <ScrollOrchestratorProvider>
           <SiteAtmosphere />
-          {children}
-          <ProgressiveBlurVeil />
+          <TransitionProvider>{children}</TransitionProvider>
         </ScrollOrchestratorProvider>
       </body>
     </html>

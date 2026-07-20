@@ -1,0 +1,576 @@
+{
+  "auditDate": "2026-07-15",
+  "reference": "https://www.mcshannock.design/services/product-design",
+  "implementation": "http://localhost:3000/services/global-regulated-fund-platform",
+  "matched": {
+    "faqsLayout": "bg-gray-50, py 48/64/96, lg grid 2fr+3fr gap 80px, container 1280px",
+    "faqsTypography": "headline 24/30/36px, question 16/18/20px, answer 16/17/18px, icon 24/32px",
+    "accordion": "useState(0), exclusive toggle, grid-rows 0fr/1fr, icon rotate, 200ms ease-out",
+    "faqsGsap": "headline y24/0.8s power2, each faq-item y24/0.7s @ top 88%",
+    "relatedLayout": "py 48/64/96, header row, md 2-col grid gap 40/64, card 576² @1920",
+    "relatedStagger": "md:pt-20 col2 @768, lg:pt-0 @1920 (per CRS; live McShannock still shows 80px @1920)",
+    "relatedTypography": "headline 30/36/48px, card desc 16/20/30px, link 16/17/18px",
+    "relatedGsap": "three independent triggers: headline y30 power3, link y20, grid y30 @ top 88%",
+    "cardHover": "scale 1.04 @ 500ms, link underline + arrow nudge @ 300ms"
+  },
+  "intentionalDeltas": {
+    "fontFamily": "Inter (ThinqAsset) vs Geist (McShannock)",
+    "linkLabel": "View all services → /services vs View all work → /work",
+    "linkWidth": "~174px vs ~142px (label length)",
+    "relatedCards": "Sibling offerings with pillar stock images vs Sanity project photography",
+    "faqCopy": "ThinqAsset fund-platform Q&A vs McShannock UX/UI design Q&A",
+    "sectionHeights": "Slightly shorter FAQ/related bands due to copy length (~60–80px)",
+    "prefersReducedMotion": "Guard added (not in McShannock bundle)",
+    "pageTransitions": "TransitionLink on related cards and header link"
+  },
+  "fixedDuringPass": {
+    "relatedColStagger": "md:pt-20 lg:pt-0 on column 2 per CRS lg breakpoint",
+    "cardMetaBullet": "Separate mx-2 bullet span in card meta row"
+  },
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 660,
+      "ref": {
+        "pageLabel": "mcshannock",
+        "sectionCount": 6,
+        "faqs": {
+          "section": {
+            "w": 1920,
+            "h": 1200,
+            "paddingTop": "96px",
+            "paddingBottom": "96px",
+            "bg": "lab(98.2596 -0.247031 -0.706708)"
+          },
+          "grid": {
+            "gap": "80px",
+            "cols": "454.391px 681.609px"
+          },
+          "headline": {
+            "fontSize": "36px",
+            "lineHeight": "45px",
+            "fontWeight": "500"
+          },
+          "itemCount": 9,
+          "item0OpenH": 173,
+          "question": {
+            "fontSize": "20px",
+            "lineHeight": "28px"
+          },
+          "answer": {
+            "fontSize": "18px",
+            "lineHeight": "24px"
+          },
+          "icon": {
+            "w": 32,
+            "h": 32
+          },
+          "panelClass": true
+        },
+        "related": {
+          "section": {
+            "w": 1920,
+            "h": 1120.328125,
+            "paddingTop": "96px",
+            "paddingBottom": "96px",
+            "bg": "rgb(255, 255, 255)"
+          },
+          "headline": {
+            "fontSize": "48px",
+            "lineHeight": "53.3333px",
+            "fontWeight": "500"
+          },
+          "link": {
+            "fontSize": "18px",
+            "w": 142.328125
+          },
+          "gridGap": "64px",
+          "cols": [
+            {
+              "w": 576,
+              "pt": "0px"
+            },
+            {
+              "w": 576,
+              "pt": "80px"
+            }
+          ],
+          "cardImg": {
+            "w": 576,
+            "h": 576,
+            "radius": "24px"
+          },
+          "cardDesc": {
+            "fontSize": "30px",
+            "lineHeight": "32px"
+          },
+          "cardCount": 2
+        }
+      },
+      "impl": {
+        "pageLabel": "thinqasset",
+        "sectionCount": 6,
+        "faqs": {
+          "section": {
+            "w": 1920,
+            "h": 1140,
+            "paddingTop": "96px",
+            "paddingBottom": "96px",
+            "bg": "lab(98.2596 -0.247031 -0.706708)"
+          },
+          "grid": {
+            "gap": "80px",
+            "cols": "454.391px 681.609px"
+          },
+          "headline": {
+            "fontSize": "36px",
+            "lineHeight": "45px",
+            "fontWeight": "500"
+          },
+          "itemCount": 9,
+          "item0OpenH": 173,
+          "question": {
+            "fontSize": "20px",
+            "lineHeight": "28px"
+          },
+          "answer": {
+            "fontSize": "18px",
+            "lineHeight": "24px"
+          },
+          "icon": {
+            "w": 32,
+            "h": 32
+          },
+          "panelClass": true
+        },
+        "related": {
+          "section": {
+            "w": 1920,
+            "h": 1040.328125,
+            "paddingTop": "96px",
+            "paddingBottom": "96px",
+            "bg": "rgb(255, 255, 255)"
+          },
+          "headline": {
+            "fontSize": "48px",
+            "lineHeight": "53.33px",
+            "fontWeight": "500"
+          },
+          "link": {
+            "fontSize": "18px",
+            "w": 174.40625
+          },
+          "gridGap": "64px",
+          "cols": [
+            {
+              "w": 576,
+              "pt": "0px"
+            },
+            {
+              "w": 576,
+              "pt": "0px"
+            }
+          ],
+          "cardImg": {
+            "w": 576,
+            "h": 576,
+            "radius": "24px"
+          },
+          "cardDesc": {
+            "fontSize": "30px",
+            "lineHeight": "32px"
+          },
+          "cardCount": 2
+        }
+      },
+      "refAccordion": {
+        "defaultOpen": true,
+        "exclusiveOpen": false,
+        "reclickClosesAll": false,
+        "heights": {
+          "h0Open": 173,
+          "h0Closed": 173,
+          "h1Open": 101
+        },
+        "iconOpen": false
+      },
+      "implAccordion": {
+        "defaultOpen": false,
+        "exclusiveOpen": true,
+        "reclickClosesAll": true,
+        "heights": {
+          "h0Open": 173,
+          "h0Closed": 69,
+          "h1Open": 181
+        },
+        "iconOpen": true
+      },
+      "refReveal": {
+        "opacity": "1",
+        "visibility": "visible",
+        "transform": "none"
+      },
+      "implReveal": {
+        "opacity": "1",
+        "visibility": "visible",
+        "transform": "none"
+      }
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "ref": {
+        "pageLabel": "mcshannock",
+        "sectionCount": 6,
+        "faqs": {
+          "section": {
+            "w": 768,
+            "h": 1159.25,
+            "paddingTop": "64px",
+            "paddingBottom": "64px",
+            "bg": "lab(98.2596 -0.247031 -0.706708)"
+          },
+          "grid": {
+            "gap": "40px",
+            "cols": "720px"
+          },
+          "headline": {
+            "fontSize": "30px",
+            "lineHeight": "41.25px",
+            "fontWeight": "500"
+          },
+          "itemCount": 9,
+          "item0OpenH": 143,
+          "question": {
+            "fontSize": "18px",
+            "lineHeight": "28px"
+          },
+          "answer": {
+            "fontSize": "17px",
+            "lineHeight": "22px"
+          },
+          "icon": {
+            "w": 32,
+            "h": 32
+          },
+          "panelClass": true
+        },
+        "related": {
+          "section": {
+            "w": 768,
+            "h": 785.5,
+            "paddingTop": "64px",
+            "paddingBottom": "64px",
+            "bg": "rgb(255, 255, 255)"
+          },
+          "headline": {
+            "fontSize": "36px",
+            "lineHeight": "40px",
+            "fontWeight": "500"
+          },
+          "link": {
+            "fontSize": "17px",
+            "w": 123.21875
+          },
+          "gridGap": "56px 40px",
+          "cols": [
+            {
+              "w": 340,
+              "pt": "0px"
+            },
+            {
+              "w": 340,
+              "pt": "80px"
+            }
+          ],
+          "cardImg": {
+            "w": 340,
+            "h": 340,
+            "radius": "24px"
+          },
+          "cardDesc": {
+            "fontSize": "20px",
+            "lineHeight": "21px"
+          },
+          "cardCount": 2
+        }
+      },
+      "impl": {
+        "pageLabel": "thinqasset",
+        "sectionCount": 6,
+        "faqs": {
+          "section": {
+            "w": 768,
+            "h": 1168.453125,
+            "paddingTop": "64px",
+            "paddingBottom": "64px",
+            "bg": "lab(98.2596 -0.247031 -0.706708)"
+          },
+          "grid": {
+            "gap": "40px",
+            "cols": "720px"
+          },
+          "headline": {
+            "fontSize": "30px",
+            "lineHeight": "41.25px",
+            "fontWeight": "500"
+          },
+          "itemCount": 9,
+          "item0OpenH": 142.953125,
+          "question": {
+            "fontSize": "18px",
+            "lineHeight": "28px"
+          },
+          "answer": {
+            "fontSize": "17px",
+            "lineHeight": "21.998px"
+          },
+          "icon": {
+            "w": 32,
+            "h": 32
+          },
+          "panelClass": true
+        },
+        "related": {
+          "section": {
+            "w": 768,
+            "h": 785.5,
+            "paddingTop": "64px",
+            "paddingBottom": "64px",
+            "bg": "rgb(255, 255, 255)"
+          },
+          "headline": {
+            "fontSize": "36px",
+            "lineHeight": "40px",
+            "fontWeight": "500"
+          },
+          "link": {
+            "fontSize": "17px",
+            "w": 144.078125
+          },
+          "gridGap": "56px 40px",
+          "cols": [
+            {
+              "w": 340,
+              "pt": "0px"
+            },
+            {
+              "w": 340,
+              "pt": "80px"
+            }
+          ],
+          "cardImg": {
+            "w": 340,
+            "h": 340,
+            "radius": "24px"
+          },
+          "cardDesc": {
+            "fontSize": "20px",
+            "lineHeight": "21px"
+          },
+          "cardCount": 2
+        }
+      },
+      "refAccordion": {
+        "defaultOpen": false,
+        "exclusiveOpen": true,
+        "reclickClosesAll": true,
+        "heights": {
+          "h0Open": 143,
+          "h0Closed": 69,
+          "h1Open": 175
+        },
+        "iconOpen": true
+      },
+      "implAccordion": {
+        "defaultOpen": false,
+        "exclusiveOpen": true,
+        "reclickClosesAll": true,
+        "heights": {
+          "h0Open": 142.953125,
+          "h0Closed": 69,
+          "h1Open": 174.953125
+        },
+        "iconOpen": true
+      },
+      "refReveal": {
+        "opacity": "1",
+        "visibility": "visible",
+        "transform": "none"
+      },
+      "implReveal": {
+        "opacity": "1",
+        "visibility": "visible",
+        "transform": "none"
+      }
+    },
+    {
+      "width": 500,
+      "height": 660,
+      "ref": {
+        "pageLabel": "mcshannock",
+        "sectionCount": 6,
+        "faqs": {
+          "section": {
+            "w": 500,
+            "h": 991,
+            "paddingTop": "48px",
+            "paddingBottom": "48px",
+            "bg": "lab(98.2596 -0.247031 -0.706708)"
+          },
+          "grid": {
+            "gap": "32px",
+            "cols": "452px"
+          },
+          "headline": {
+            "fontSize": "24px",
+            "lineHeight": "33px",
+            "fontWeight": "500"
+          },
+          "itemCount": 9,
+          "item0OpenH": 166,
+          "question": {
+            "fontSize": "16px",
+            "lineHeight": "24px"
+          },
+          "answer": {
+            "fontSize": "16px",
+            "lineHeight": "21px"
+          },
+          "icon": {
+            "w": 24,
+            "h": 24
+          },
+          "panelClass": true
+        },
+        "related": {
+          "section": {
+            "w": 500,
+            "h": 1343,
+            "paddingTop": "48px",
+            "paddingBottom": "48px",
+            "bg": "rgb(255, 255, 255)"
+          },
+          "headline": {
+            "fontSize": "30px",
+            "lineHeight": "36px",
+            "fontWeight": "500"
+          },
+          "link": {
+            "fontSize": "16px",
+            "w": 452
+          },
+          "gridGap": "48px 40px",
+          "cols": [
+            {
+              "w": 452,
+              "pt": "0px"
+            },
+            {
+              "w": 452,
+              "pt": "0px"
+            }
+          ],
+          "cardImg": {
+            "w": 452,
+            "h": 452,
+            "radius": "24px"
+          },
+          "cardDesc": {
+            "fontSize": "16px",
+            "lineHeight": "17px"
+          },
+          "cardCount": 2
+        }
+      },
+      "impl": {
+        "pageLabel": "thinqasset",
+        "sectionCount": 6,
+        "faqs": {
+          "section": {
+            "w": 500,
+            "h": 971,
+            "paddingTop": "48px",
+            "paddingBottom": "48px",
+            "bg": "lab(98.2596 -0.247031 -0.706708)"
+          },
+          "grid": {
+            "gap": "32px",
+            "cols": "452px"
+          },
+          "headline": {
+            "fontSize": "24px",
+            "lineHeight": "33px",
+            "fontWeight": "500"
+          },
+          "itemCount": 9,
+          "item0OpenH": 166,
+          "question": {
+            "fontSize": "16px",
+            "lineHeight": "24px"
+          },
+          "answer": {
+            "fontSize": "16px",
+            "lineHeight": "21px"
+          },
+          "icon": {
+            "w": 24,
+            "h": 24
+          },
+          "panelClass": true
+        },
+        "related": {
+          "section": {
+            "w": 500,
+            "h": 1343,
+            "paddingTop": "48px",
+            "paddingBottom": "48px",
+            "bg": "rgb(255, 255, 255)"
+          },
+          "headline": {
+            "fontSize": "30px",
+            "lineHeight": "36px",
+            "fontWeight": "500"
+          },
+          "link": {
+            "fontSize": "16px",
+            "w": 452
+          },
+          "gridGap": "48px 40px",
+          "cols": [
+            {
+              "w": 452,
+              "pt": "0px"
+            },
+            {
+              "w": 452,
+              "pt": "0px"
+            }
+          ],
+          "cardImg": {
+            "w": 452,
+            "h": 452.00006103515625,
+            "radius": "24px"
+          },
+          "cardDesc": {
+            "fontSize": "16px",
+            "lineHeight": "17px"
+          },
+          "cardCount": 2
+        }
+      },
+      "refAccordion": null,
+      "implAccordion": null,
+      "refReveal": {
+        "opacity": "1",
+        "visibility": "visible",
+        "transform": "none"
+      },
+      "implReveal": {
+        "opacity": "1",
+        "visibility": "visible",
+        "transform": "none"
+      }
+    }
+  ]
+}

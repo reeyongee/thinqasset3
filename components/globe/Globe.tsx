@@ -7,17 +7,38 @@ import {
   GLOBE_LOCATIONS,
 } from "./constants";
 
+type GlobeProps = {
+  onLocationClick?: (id: string | null) => void;
+  mode?: "explore" | "chapter";
+  chapterPhi?: number;
+  chapterTheta?: number;
+  activeLocationId?: string | null;
+  /**
+   * When true in chapter mode, camera eases from a wide start into the
+   * chapter angles instead of snapping immediately.
+   */
+  flyIn?: boolean;
+  flyInStartPhi?: number;
+  flyInStartTheta?: number;
+};
+
 export function Globe({
   onLocationClick,
-}: {
-  onLocationClick?: (id: string | null) => void;
-}) {
+  mode = "explore",
+  chapterPhi,
+  chapterTheta,
+  activeLocationId = null,
+  flyIn = false,
+  flyInStartPhi = 4.2,
+  flyInStartTheta = 0.15,
+}: GlobeProps) {
+  const isChapterMode = mode === "chapter";
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const globeRef = useRef<any>(null);
-  const phiRef = useRef(4.2);
-  const thetaRef = useRef(0.3);
+  const phiRef = useRef(flyIn ? flyInStartPhi : 4.2);
+  const thetaRef = useRef(flyIn ? flyInStartTheta : 0.3);
   const velRef = useRef({ x: 0, y: 0 });
   const pointerDown = useRef(false);
   const pointerX = useRef(0);
@@ -27,7 +48,10 @@ export function Globe({
   const visibleRef = useRef(false);
   const frameIdRef = useRef(0);
   const startLoopRef = useRef<(() => void) | null>(null);
+  const flyInRef = useRef(flyIn);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const targetPhiRef = useRef(phiRef.current);
+  const targetThetaRef = useRef(thetaRef.current);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -63,6 +87,7 @@ export function Globe({
     };
 
     const onDown = (e: PointerEvent) => {
+      if (isChapterMode) return;
       pointerDown.current = true;
       pointerX.current = e.clientX;
       pointerY.current = e.clientY;
@@ -72,7 +97,7 @@ export function Globe({
       canvas.style.cursor = "grabbing";
     };
     const onMove = (e: PointerEvent) => {
-      if (!pointerDown.current) return;
+      if (isChapterMode || !pointerDown.current) return;
       const dx = e.clientX - pointerX.current;
       const dy = e.clientY - pointerY.current;
       pointerX.current = e.clientX;
@@ -98,9 +123,11 @@ export function Globe({
       if (canvas) width = canvas.offsetWidth;
     };
 
-    canvas.addEventListener("pointerdown", onDown);
-    window.addEventListener("pointermove", onMove);
-    window.addEventListener("pointerup", onUp);
+    if (!isChapterMode) {
+      canvas.addEventListener("pointerdown", onDown);
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+    }
     window.addEventListener("resize", onResize);
 
     import("cobe").then(({ default: createGlobe }) => {
@@ -143,7 +170,11 @@ export function Globe({
           return;
         }
 
-        if (autoRotate.current) {
+        if (isChapterMode) {
+          const lerp = flyInRef.current ? 0.045 : 0.12;
+          phiRef.current += (targetPhiRef.current - phiRef.current) * lerp;
+          thetaRef.current += (targetThetaRef.current - thetaRef.current) * lerp;
+        } else if (autoRotate.current) {
           phiRef.current += 0.003;
         } else if (!pointerDown.current) {
           const v = velRef.current;
@@ -185,33 +216,73 @@ export function Globe({
       }
       if (idleTimer.current) clearTimeout(idleTimer.current);
       globeRef.current?.destroy();
-      canvas.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerup", onUp);
+      if (!isChapterMode) {
+        canvas.removeEventListener("pointerdown", onDown);
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+      }
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [isChapterMode]);
+
+  useEffect(() => {
+    flyInRef.current = flyIn;
+  }, [flyIn]);
+
+  useEffect(() => {
+    if (!isChapterMode) return;
+    if (typeof chapterPhi === "number") {
+      targetPhiRef.current = chapterPhi;
+      if (!flyIn) {
+        phiRef.current = chapterPhi;
+      }
+    }
+    if (typeof chapterTheta === "number") {
+      targetThetaRef.current = chapterTheta;
+      if (!flyIn) {
+        thetaRef.current = chapterTheta;
+      }
+    }
+    if (flyIn) {
+      phiRef.current = flyInStartPhi;
+      thetaRef.current = flyInStartTheta;
+    }
+    autoRotate.current = false;
+    velRef.current = { x: 0, y: 0 };
+    startLoopRef.current?.();
+  }, [
+    chapterPhi,
+    chapterTheta,
+    isChapterMode,
+    flyIn,
+    flyInStartPhi,
+    flyInStartTheta,
+  ]);
 
   const handleMarkerClick = (id: string) => {
+    if (isChapterMode) return;
     const next = activeId === id ? null : id;
     setActiveId(next);
     onLocationClick?.(next);
   };
+
+  const highlightedId = isChapterMode ? activeLocationId : activeId;
 
   return (
     <div ref={rootRef} className="globe-canvas relative size-full">
       <canvas
         ref={canvasRef}
         className="block size-full touch-none"
-        style={{ cursor: "grab" }}
+        style={{ cursor: isChapterMode ? "default" : "grab" }}
       />
-      {GLOBE_LOCATIONS.map((loc) => (
+      {!isChapterMode &&
+        GLOBE_LOCATIONS.map((loc) => (
         <div
           key={loc.id}
           className={`globe-map-marker globe-map-marker--offices-1 cobe-marker${
-            activeId === loc.id
+            highlightedId === loc.id
               ? " globe-map-marker--active"
-              : activeId
+              : highlightedId
                 ? " globe-map-marker--inactive"
                 : ""
           }`}

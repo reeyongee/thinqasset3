@@ -1,0 +1,60 @@
+{
+  "auditDate": "2026-07-15",
+  "reference": "https://www.mcshannock.design/services/product-design",
+  "implementation": "http://localhost:3000/services/global-regulated-fund-platform",
+  "viewport": "1920×660 desktop, 500×660 mobile",
+  "matched": {
+    "sectionOrder": "landing → offerings → rationale → outcomes",
+    "rationaleSectionH": "826px",
+    "rationaleTextCol": "960×730, pl 352 / pr 96 / py 80 @1920",
+    "rationaleImage": "770×730, border-radius 24px 0 0 24px",
+    "outcomesImage": "770×730, border-radius 0 24px 24px 0",
+    "headlineDesktop": "36px / 44px / weight 500",
+    "ctaHeight": "58px",
+    "mobileRationaleOrder": "image order-1, text order-2",
+    "mobileSectionPt": "48px",
+    "gsapRationaleText": "timeline on .sd-rationale-text: headline y30/0.8s power3.out, desc y20/0.6s @-=0.4, cta y16/0.5s @-=0.3",
+    "gsapImageClip": "0.9s power3.inOut inset reveal on image wrappers @ top 88%",
+    "gsapOutcomesText": "headline + desc timeline, no CTA",
+    "gsapBenefits": "per-item border scaleX 0.4s, icon back.out @-=0.15, text x:-12 @-=0.25",
+    "preScrollStates": "headline opacity 0 / y 30px; image clip-path inset bottom 100%",
+    "primaryCtaFlair": "white 250% circle + #444FE9 ring span"
+  },
+  "fixedDuringPass": {
+    "sectionOrder": "Pillar hub had rationale/outcomes before offerings — reordered to match McShannock",
+    "animationTimelines": "Rationale hook rewrote from staggered onEnter to proper GSAP timeline overlaps with autoAlpha",
+    "outcomesAnimation": "Benefits now use gsap.from with autoAlpha; text column uses timeline not onEnter callbacks",
+    "cssOpacityOverride": "Removed opacity:1!important on rationale/outcomes content that blocked autoAlpha fades",
+    "rationaleImageClasses": "Removed lg:min-h-[730px] forced heights from component; sizing via CSS",
+    "outcomesImageAlign": "Removed lg:self-start that broke grid stretch parity"
+  },
+  "intentionalDeltas": {
+    "fontFamily": "Inter vs Geist",
+    "ctaLabel": "Consultation → /consultation vs Start a project → /contact",
+    "ctaWidth": "~183px vs ~202px",
+    "outcomesSectionH": "~994px vs 961px (longer ThinqAsset benefit copy wraps)",
+    "benefitItemH": "~106px vs ~80px item 0 (content length)",
+    "images": "Pillar stock images vs McShannock Sanity CDN photography",
+    "copy": "ThinqAsset fund-platform rationale/outcomes vs UX design copy",
+    "extraSectionBelow": "services-detail body still present",
+    "prefersReducedMotion": "Guard added (not in McShannock bundle)"
+  },
+  "desktopMeasurements": {
+    "mcshannock": {
+      "rationaleH": 826,
+      "outcomesH": 961,
+      "rationaleImg": "770×730",
+      "outcomesTextH": 769,
+      "ctaW": 202.34,
+      "benefit0H": 80
+    },
+    "thinqPostFix": {
+      "rationaleH": 826,
+      "outcomesH": 993.8,
+      "rationaleImg": "770×730",
+      "outcomesTextH": 801.8,
+      "ctaW": 183.02,
+      "benefit0H": 106.5
+    }
+  }
+}

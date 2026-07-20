@@ -1,0 +1,87 @@
+.scroll-svg {
+  --ss-pad: clamp(1.25rem, 3vw, 2.5rem);
+  min-height: 100dvh;
+  padding: var(--ss-pad);
+  padding-bottom: calc(var(--ss-pad) + 2rem);
+  color: var(--ta-white);
+  background:
+    radial-gradient(
+      110% 70% at 50% -8%,
+      color-mix(in srgb, #2a4d6e 22%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      80% 50% at 85% 20%,
+      color-mix(in srgb, var(--ta-gold) 8%, transparent),
+      transparent 50%
+    ),
+    var(--ta-navy-deep);
+}
+
+.scroll-svg-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.35rem;
+}
+
+.scroll-svg-grid--bare {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 960px) {
+  .scroll-svg-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.scroll-svg-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ta-grey-border) 65%, transparent);
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--ta-navy-mid) 28%, transparent),
+      color-mix(in srgb, var(--ta-navy) 55%, transparent)
+    );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--ta-white) 8%, transparent),
+    0 18px 40px color-mix(in srgb, #000 28%, transparent);
+}
+
+.scroll-svg-frame {
+  position: relative;
+  aspect-ratio: 560 / 420;
+  width: 100%;
+  background: #12171d;
+  overflow: hidden;
+}
+
+.scroll-svg-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    125deg,
+    color-mix(in srgb, var(--ta-white) 7%, transparent) 0%,
+    transparent 32%,
+    transparent 68%,
+    color-mix(in srgb, var(--ta-gold) 5%, transparent) 100%
+  );
+}
+
+.scroll-svg-stage {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-svg-frame::after {
+    display: none;
+  }
+}

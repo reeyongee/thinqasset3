@@ -63,3 +63,20 @@ export const GLOBE_COBE_COLORS = {
   markerColor: [0.788, 0.722, 0.588] as [number, number, number],
   glowColor: [0.788, 0.722, 0.588] as [number, number, number],
 };
+
+/** Convert lat/lng to Cobe camera angles that face the location. */
+export function locationToAngles(
+  lat: number,
+  lng: number,
+): { phi: number; theta: number } {
+  return {
+    phi: Math.PI - (lng * Math.PI) / 180,
+    theta: (lat * Math.PI) / 180,
+  };
+}
+
+/** Wide starting view before a chapter fly-in. */
+export const GLOBE_FLY_IN_START = {
+  phi: 4.2,
+  theta: 0.15,
+} as const;

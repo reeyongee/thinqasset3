@@ -1,0 +1,354 @@
+{
+  "auditDate": "2026-07-15",
+  "reference": "https://www.mcshannock.design/services/product-design",
+  "implementation": "http://localhost:3000/services/global-regulated-fund-platform",
+  "matched": {
+    "layout": "bg-black symmetric py 48/64/96, max-w-228 headline, embla viewport px 16/24/136",
+    "slides": "sc-slide widths 340/360/608, mr 16/20/24, aspect 542/304 image",
+    "gsap": "single timeline @ top 88%: heading y40/1s, slides x60/0.8s stagger 0.1, nav y20/0.6s",
+    "embla": "loop, align start, slidesToScroll 1, dragFree false, containScroll trimSnaps",
+    "interactions": "card border hover primary blue, nav prev/next, translate3d track",
+    "placement": "outside article after related work"
+  },
+  "intentionalDeltas": {
+    "slideCount": "2 other pillars vs 6 McShannock design services",
+    "icons": "OfferingIcon SVG vs Sanity 32px icons",
+    "images": "Pillar stock PNGs vs Sanity photography",
+    "hoverBorder": "hover:border-[#444fe9] vs hover:border-primary (same colour)",
+    "copy": "ThinqAsset pillar blurbs vs McShannock service descriptions",
+    "headline": "Our other services (same label; maps to platforms)",
+    "prefersReducedMotion": "Guard added",
+    "pageTransitions": "TransitionLink on Learn more"
+  },
+  "fixedDuringPass": {},
+  "structuralDeltas": {
+    "carouselScrollAt1920": "With 2 pillar slides (1240px) both fit in 1648px viewport — Embla next produces 0px transform; McShannock needs scroll with 6 slides",
+    "sectionHeight": "~72–95px shorter on impl due to 2 cards vs 6"
+  },
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 900,
+      "ref": {
+        "section": {
+          "h": 1079,
+          "py": "96px / 96px",
+          "bg": "rgb(0, 0, 0)"
+        },
+        "heading": {
+          "fs": "48px",
+          "lh": "54px",
+          "fw": "600",
+          "maxW": "912px"
+        },
+        "slide": {
+          "w": 608,
+          "mr": "24px",
+          "count": 6
+        },
+        "card": {
+          "pad": "32px",
+          "radius": "24px",
+          "border": "lab(8.11897 0.811279 -12.254)"
+        },
+        "img": {
+          "w": 542,
+          "h": 304
+        },
+        "title": {
+          "fs": "24px",
+          "lh": "32px"
+        },
+        "desc": {
+          "fs": "18px",
+          "lh": "24px"
+        },
+        "nav": {
+          "mt": "40px",
+          "gap": "16px",
+          "btnW": 60,
+          "btnH": 60
+        },
+        "viewportPad": "136px",
+        "trackTransform": "none",
+        "inArticle": false
+      },
+      "impl": {
+        "section": {
+          "h": 1007,
+          "py": "96px / 96px",
+          "bg": "rgb(0, 0, 0)"
+        },
+        "heading": {
+          "fs": "48px",
+          "lh": "54px",
+          "fw": "600",
+          "maxW": "912px"
+        },
+        "slide": {
+          "w": 608,
+          "mr": "24px",
+          "count": 2
+        },
+        "card": {
+          "pad": "32px",
+          "radius": "24px",
+          "border": "lab(8.11897 0.811279 -12.254)"
+        },
+        "img": {
+          "w": 542,
+          "h": 304
+        },
+        "title": {
+          "fs": "24px",
+          "lh": "32px"
+        },
+        "desc": {
+          "fs": "18px",
+          "lh": "24px"
+        },
+        "nav": {
+          "mt": "40px",
+          "gap": "16px",
+          "btnW": 60,
+          "btnH": 60
+        },
+        "viewportPad": "136px",
+        "trackTransform": "none",
+        "inArticle": false
+      },
+      "refIx": {
+        "carousel": {
+          "before": "transform: translate3d(0px, 0px, 0px);",
+          "after1": "transform: translate3d(-577.35px, 0px, 0px);",
+          "after2": "transform: translate3d(-1207.17px, 0px, 0px);"
+        },
+        "cardHover": "lab(8.11897 0.811279 -12.254)"
+      },
+      "implIx": {
+        "carousel": {
+          "before": "transform: translate3d(0px, 0px, 0px);",
+          "after1": "transform: translate3d(0px, 0px, 0px);",
+          "after2": "transform: translate3d(0px, 0px, 0px);"
+        },
+        "cardHover": "lab(8.11897 0.811279 -12.254)"
+      }
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "ref": {
+        "section": {
+          "h": 831.359375,
+          "py": "64px / 64px",
+          "bg": "rgb(0, 0, 0)"
+        },
+        "heading": {
+          "fs": "30px",
+          "lh": "34px",
+          "fw": "600",
+          "maxW": "912px"
+        },
+        "slide": {
+          "w": 360,
+          "mr": "20px",
+          "count": 6
+        },
+        "card": {
+          "pad": "24px",
+          "radius": "16px",
+          "border": "lab(8.11897 0.811279 -12.254)"
+        },
+        "img": {
+          "w": 310,
+          "h": 173.859375
+        },
+        "title": {
+          "fs": "20px",
+          "lh": "28px"
+        },
+        "desc": {
+          "fs": "16px",
+          "lh": "21px"
+        },
+        "nav": {
+          "mt": "32px",
+          "gap": "16px",
+          "btnW": 52,
+          "btnH": 52
+        },
+        "viewportPad": "24px",
+        "trackTransform": "none",
+        "inArticle": false
+      },
+      "impl": {
+        "section": {
+          "h": 754.359375,
+          "py": "64px / 64px",
+          "bg": "rgb(0, 0, 0)"
+        },
+        "heading": {
+          "fs": "30px",
+          "lh": "34px",
+          "fw": "600",
+          "maxW": "912px"
+        },
+        "slide": {
+          "w": 360,
+          "mr": "20px",
+          "count": 2
+        },
+        "card": {
+          "pad": "24px",
+          "radius": "16px",
+          "border": "lab(8.11897 0.811279 -12.254)"
+        },
+        "img": {
+          "w": 310,
+          "h": 173.859375
+        },
+        "title": {
+          "fs": "20px",
+          "lh": "28px"
+        },
+        "desc": {
+          "fs": "16px",
+          "lh": "21px"
+        },
+        "nav": {
+          "mt": "32px",
+          "gap": "16px",
+          "btnW": 52,
+          "btnH": 52
+        },
+        "viewportPad": "24px",
+        "trackTransform": "none",
+        "inArticle": false
+      },
+      "refIx": {
+        "carousel": {
+          "before": "transform: translate3d(0px, 0px, 0px);",
+          "after1": "transform: translate3d(-347.4px, 0px, 0px);",
+          "after2": "transform: translate3d(-725.83px, 0px, 0px);"
+        },
+        "cardHover": "lab(8.11897 0.811279 -12.254)"
+      },
+      "implIx": {
+        "carousel": {
+          "before": "transform: translate3d(0px, 0px, 0px);",
+          "after1": "transform: translate3d(-36.57px, 0px, 0px);",
+          "after2": "transform: translate3d(-39.83px, 0px, 0px);"
+        },
+        "cardHover": "lab(8.11897 0.811279 -12.254)"
+      }
+    },
+    {
+      "width": 500,
+      "height": 700,
+      "ref": {
+        "section": {
+          "h": 701.625,
+          "py": "48px / 48px",
+          "bg": "rgb(0, 0, 0)"
+        },
+        "heading": {
+          "fs": "24px",
+          "lh": "27px",
+          "fw": "600",
+          "maxW": "912px"
+        },
+        "slide": {
+          "w": 340,
+          "mr": "16px",
+          "count": 6
+        },
+        "card": {
+          "pad": "16px",
+          "radius": "16px",
+          "border": "lab(8.11897 0.811279 -12.254)"
+        },
+        "img": {
+          "w": 306,
+          "h": 171.625
+        },
+        "title": {
+          "fs": "18px",
+          "lh": "28px"
+        },
+        "desc": {
+          "fs": "14px",
+          "lh": "19px"
+        },
+        "nav": {
+          "mt": "24px",
+          "gap": "12px",
+          "btnW": 48,
+          "btnH": 48
+        },
+        "viewportPad": "16px",
+        "trackTransform": "none",
+        "inArticle": false
+      },
+      "impl": {
+        "section": {
+          "h": 606.625,
+          "py": "48px / 48px",
+          "bg": "rgb(0, 0, 0)"
+        },
+        "heading": {
+          "fs": "24px",
+          "lh": "27px",
+          "fw": "600",
+          "maxW": "912px"
+        },
+        "slide": {
+          "w": 340,
+          "mr": "16px",
+          "count": 2
+        },
+        "card": {
+          "pad": "16px",
+          "radius": "16px",
+          "border": "lab(8.11897 0.811279 -12.254)"
+        },
+        "img": {
+          "w": 306,
+          "h": 171.625
+        },
+        "title": {
+          "fs": "18px",
+          "lh": "28px"
+        },
+        "desc": {
+          "fs": "14px",
+          "lh": "19px"
+        },
+        "nav": {
+          "mt": "24px",
+          "gap": "12px",
+          "btnW": 48,
+          "btnH": 48
+        },
+        "viewportPad": "16px",
+        "trackTransform": "none",
+        "inArticle": false
+      },
+      "refIx": {
+        "carousel": {
+          "before": "transform: translate3d(0px, 0px, 0px);",
+          "after1": "transform: translate3d(-329.05px, 0px, 0px);",
+          "after2": "transform: translate3d(-676.13px, 0px, 0px);"
+        },
+        "cardHover": "lab(8.11897 0.811279 -12.254)"
+      },
+      "implIx": {
+        "carousel": {
+          "before": "transform: translate3d(0px, 0px, 0px);",
+          "after1": "transform: translate3d(-225.39px, 0px, 0px);",
+          "after2": "transform: translate3d(-243.11px, 0px, 0px);"
+        },
+        "cardHover": "lab(8.11897 0.811279 -12.254)"
+      }
+    }
+  ]
+}

@@ -118,8 +118,14 @@ export const CTA_ARMS: CtaArm[] = [
   },
 ];
 
-/** Measured on source: ~360° every 50s at fixed scroll (7.2°/s). */
-export const CTA_ROTATION_DURATION_S = 50;
+/** Framer source reference: ~360° every 50s (7.2°/s). */
+export const CTA_ROTATION_BASE_DURATION_S = 50;
+
+/** Slow ambient wheel to match scroll-scrub pacing elsewhere on the site. */
+export const CTA_ROTATION_PACE_MULTIPLIER = 3;
+
+export const CTA_ROTATION_DURATION_S =
+  CTA_ROTATION_BASE_DURATION_S * CTA_ROTATION_PACE_MULTIPLIER;
 
 /** Framer inline style on circle layer. */
 export const CTA_PERSPECTIVE_PX = 1200;

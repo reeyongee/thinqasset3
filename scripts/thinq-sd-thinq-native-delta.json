@@ -1,0 +1,230 @@
+{
+  "auditDate": "2026-07-15",
+  "pages": {
+    "subOffering": "http://localhost:3000/services/fund-as-a-service",
+    "pillarHub": "http://localhost:3000/services/global-regulated-fund-platform"
+  },
+  "implementation": {
+    "subOffering": {
+      "h1": {
+        "fontSize": "60px",
+        "lineHeight": "64.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Offerings": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Rationale": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Faqs": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Related": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Carousel": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "body": {
+        "fontSize": "16px",
+        "lineHeight": "25.6px",
+        "fontWeight": "400",
+        "fontFamily": "Inter",
+        "color": "color(srgb 1 1 1 / 0.68)"
+      },
+      "cardDesc": {
+        "fontSize": "18px",
+        "lineHeight": "26.1px",
+        "fontWeight": "400",
+        "fontFamily": "Inter",
+        "color": "rgb(255, 255, 255)"
+      },
+      "breadcrumb": {
+        "fontSize": "13px",
+        "lineHeight": "18.2px",
+        "fontWeight": "400",
+        "fontFamily": "Inter",
+        "color": "color(srgb 1 1 1 / 0.68)"
+      },
+      "eyebrow": null,
+      "cta": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": "400",
+        "fontFamily": "Inter",
+        "color": "rgb(255, 255, 255)"
+      },
+      "container": "1200px",
+      "glass": "color(srgb 0.164706 0.145098 0.172549 / 0.72)",
+      "accentIcon": "rgb(182, 160, 130)",
+      "carouselHoverReady": true,
+      "progressiveBlur": false
+    },
+    "pillarHub": {
+      "h1": {
+        "fontSize": "60px",
+        "lineHeight": "64.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Offerings": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Rationale": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Faqs": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Related": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "h2Carousel": {
+        "fontSize": "40px",
+        "lineHeight": "44.8px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\"",
+        "color": "rgb(255, 255, 255)"
+      },
+      "body": {
+        "fontSize": "16px",
+        "lineHeight": "25.6px",
+        "fontWeight": "400",
+        "fontFamily": "Inter",
+        "color": "color(srgb 1 1 1 / 0.68)"
+      },
+      "cardDesc": {
+        "fontSize": "18px",
+        "lineHeight": "26.1px",
+        "fontWeight": "400",
+        "fontFamily": "Inter",
+        "color": "rgb(255, 255, 255)"
+      },
+      "breadcrumb": null,
+      "eyebrow": {
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "fontWeight": "500",
+        "fontFamily": "Inter",
+        "color": "rgb(182, 160, 130)"
+      },
+      "cta": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": "400",
+        "fontFamily": "Inter",
+        "color": "rgb(255, 255, 255)"
+      },
+      "container": "1200px",
+      "glass": "color(srgb 0.164706 0.145098 0.172549 / 0.72)",
+      "accentIcon": "rgb(182, 160, 130)",
+      "carouselHoverReady": true,
+      "progressiveBlur": false
+    },
+    "carouselHover": "rgba(182, 160, 130, 0.25)"
+  },
+  "siteReference": {
+    "home": {
+      "heroHeadline": {
+        "fontSize": "64px",
+        "lineHeight": "70.4px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\""
+      },
+      "heroBtn": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": "400",
+        "fontFamily": "Inter"
+      }
+    },
+    "about": {
+      "sectionTitle": {
+        "fontSize": "76px",
+        "lineHeight": "77.52px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\""
+      },
+      "eyebrow": {
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "fontWeight": "500",
+        "fontFamily": "Inter"
+      }
+    },
+    "services": {
+      "heroHeadline": {
+        "fontSize": "37.6px",
+        "lineHeight": "42.112px",
+        "fontWeight": "400",
+        "fontFamily": "\"LP Saturnia\""
+      },
+      "eyebrow": {
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "fontWeight": "500",
+        "fontFamily": "Inter"
+      }
+    }
+  },
+  "alignedWithSite": {
+    "h2Unified": "40px display (.sd-h2) across offerings, rationale, FAQs, related, carousel",
+    "h1": "clamp(2.5rem, 5vw, 3.75rem) display on landing",
+    "body": "16px Inter on descriptions and FAQ answers",
+    "cta": "hero-btn 16px / 40px height → /consultation",
+    "container": "max-width 1200px (.sd-container)",
+    "accent": "var(--ta-gold) on icons, links, carousel hover",
+    "canvas": "navy mesh + glass cards (no white/gray-50 bands)",
+    "breadcrumb": "sub-offering landing only",
+    "progressiveBlur": "re-enabled for /services routes"
+  },
+  "intentionalDeltas": {
+    "mcshannockStructure": "Section order and GSAP motion preserved from CRS port",
+    "typographyFamily": "LP Saturnia/display + Inter vs McShannock Geist",
+    "relatedCards": "2 sibling offerings vs McShannock project grid",
+    "carouselSlides": "2 other pillars vs 6 McShannock services",
+    "copyAndImagery": "ThinqAsset pillar PNGs and copy",
+    "ctaDestination": "/consultation vs McShannock contact",
+    "noFinalCta": "No closing CTA band per product decision"
+  }
+}

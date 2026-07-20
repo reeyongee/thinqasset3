@@ -1,5 +1,10 @@
 export const HERO_BG_IMAGE = "/assets/hero-bg.png";
 
+export const HERO_BG_POSTER = "/thinqasset-assets/hero/prism-hero-poster.webp";
+export const HERO_BG_VIDEO_MP4 = "/thinqasset-assets/hero/prism-hero.mp4";
+export const HERO_BG_VIDEO_WEBM = "/thinqasset-assets/hero/prism-hero.webm";
+export const HERO_BG_CRUISE_RATE = 0.85;
+
 export const CTA_HREF = "mailto:info@thinqasset.com";
 
 export const HEADLINE_WORDS = [

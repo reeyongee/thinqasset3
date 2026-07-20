@@ -19,9 +19,10 @@ type AppearAnimationOptions = {
   visibleThreshold?: number;
 };
 
-function bindPlayIfVisible(
+/** If the trigger is already on screen, play the paused tween/timeline immediately. */
+export function bindPlayIfVisible(
   trigger: Element,
-  tween: gsap.core.Tween,
+  tween: gsap.core.Tween | gsap.core.Timeline,
   scrollTrigger: ScrollTrigger,
   visibleThreshold = DEFAULT_VISIBLE_THRESHOLD,
 ) {

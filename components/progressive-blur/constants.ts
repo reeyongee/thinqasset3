@@ -120,10 +120,18 @@ export const PROGRESSIVE_BLUR_LAYERS_TOP_LITE: BlurLayer[] = [
 /** Fixed veil height (px). Ratio ≈ 32.73% of viewport at 660px. */
 export const PROGRESSIVE_BLUR_HEIGHT_PX = 216;
 
+/** Shorter band for text-heavy pages (e.g. contact form). */
+export const PROGRESSIVE_BLUR_HEIGHT_SOFT_PX = 72;
+
 /** Visible edge vignettes — black on navy (navy-on-navy was imperceptible). */
 export const PROGRESSIVE_BLUR_TOP_DARKEN = `linear-gradient(to bottom, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.28) 38%, transparent 100%)`;
 
 export const PROGRESSIVE_BLUR_BOTTOM_DARKEN = `linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.22) 44%, transparent 100%)`;
+
+/** Soft vignettes — keep atmosphere without eating form copy. */
+export const PROGRESSIVE_BLUR_TOP_DARKEN_SOFT = `linear-gradient(to bottom, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.1) 45%, transparent 100%)`;
+
+export const PROGRESSIVE_BLUR_BOTTOM_DARKEN_SOFT = `linear-gradient(to top, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.08) 45%, transparent 100%)`;
 
 /** Aliases for lite mode (same visible treatment). */
 export const PROGRESSIVE_BLUR_TOP_DARKEN_LITE = PROGRESSIVE_BLUR_TOP_DARKEN;

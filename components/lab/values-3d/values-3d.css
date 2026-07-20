@@ -1,0 +1,122 @@
+.values-3d {
+  --v3d-pad: clamp(1.25rem, 3vw, 2.5rem);
+  min-height: 100dvh;
+  padding: var(--v3d-pad);
+  padding-bottom: calc(var(--v3d-pad) + 3rem);
+  color: var(--ta-white);
+  background:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      color-mix(in srgb, #2a4d6e 28%, transparent),
+      transparent 55%
+    ),
+    var(--ta-navy-deep);
+}
+
+.values-3d-intro {
+  max-width: 40rem;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.values-3d-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ta-gold);
+}
+
+.values-3d-intro h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.values-3d-lede {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ta-grey-muted);
+}
+
+.values-3d-lede code {
+  font-size: 0.85em;
+  color: color-mix(in srgb, var(--ta-gold) 70%, var(--ta-white));
+}
+
+.values-3d-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .values-3d-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .values-3d-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    justify-self: center;
+    width: 100%;
+  }
+}
+
+.values-3d-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ta-grey-border) 70%, transparent);
+  background: color-mix(in srgb, var(--ta-navy) 55%, transparent);
+}
+
+.values-3d-canvas {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  min-height: 280px;
+  background: var(--ta-navy-deep);
+}
+
+@media (min-width: 900px) {
+  .values-3d-canvas {
+    min-height: 360px;
+  }
+}
+
+.values-3d-card-meta {
+  padding: 1rem 1.15rem 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--ta-grey-border) 55%, transparent);
+}
+
+.values-3d-card-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.values-3d-card-meta h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.values-3d-duration {
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--ta-gold);
+}
+
+.values-3d-card-meta p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--ta-grey-muted);
+}

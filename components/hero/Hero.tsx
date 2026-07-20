@@ -1,11 +1,12 @@
-import { HeroNav } from "./HeroNav";
+"use client";
+
+import { HeroIntro } from "@/components/hero/HeroIntro";
 import { ScrollStory } from "@/components/scroll-story/ScrollStory";
 
 export function Hero() {
   return (
-    <>
-      <HeroNav />
+    <HeroIntro>
       <ScrollStory />
-    </>
+    </HeroIntro>
   );
 }

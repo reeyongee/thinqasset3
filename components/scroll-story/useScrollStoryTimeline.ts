@@ -3,7 +3,6 @@
 import type { RefObject } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   runWithScrollBreakpoints,
@@ -11,28 +10,45 @@ import {
 } from "@/lib/scroll/scrollOrchestrator";
 import {
   BEAT_STARTS,
-  GRAPH_CANDLE_GROW_DURATION,
-  GRAPH_FRAME_FADE_DURATION,
-  GRAPH_PHASE_DURATION,
   GRAPH_PHASE_START,
-  GRAPH_POV_END_DESKTOP,
-  GRAPH_POV_END_MOBILE,
-  GRAPH_POV_START,
   HERO_FADE_END,
   SCROLL_RUNWAY_DESKTOP,
   SCROLL_RUNWAY_MOBILE,
   STORY_BEATS,
 } from "./constants";
-import { GRAPH_CHART_BASELINE_Y } from "./graphChartData";
-import { getPathProgressForX } from "./graphPathUtils";
+import { getBeatTimeline } from "@/components/lab/scroll-svg/beatTimelineRegistry";
 import { scrollStoryProgressStore } from "./scrollStoryProgressStore";
+import { waitForScrollStoryReady } from "@/lib/transition/waitForHeroIntro";
 
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger);
+
+let scrollStoryTimelineGeneration = 0;
 
 type UseScrollStoryTimelineProps = {
   sectionRef: RefObject<HTMLElement | null>;
   stickyRef: RefObject<HTMLDivElement | null>;
 };
+
+async function waitForBeatTimelines(
+  section: HTMLElement,
+  expected: number,
+): Promise<gsap.core.Timeline[]> {
+  for (let attempt = 0; attempt < 60; attempt++) {
+    const stages = section.querySelectorAll<SVGSVGElement>(
+      ".scroll-story-beat-viz .scroll-svg-stage",
+    );
+    if (stages.length >= expected) {
+      const timelines = [...stages].map((stage) => getBeatTimeline(stage));
+      if (timelines.every((tl): tl is gsap.core.Timeline => Boolean(tl))) {
+        return timelines;
+      }
+    }
+    await new Promise<void>((resolve) => {
+      requestAnimationFrame(() => resolve());
+    });
+  }
+  return [];
+}
 
 export function useScrollStoryTimeline({
   sectionRef,
@@ -40,243 +56,173 @@ export function useScrollStoryTimeline({
 }: UseScrollStoryTimelineProps) {
   useGSAP(
     () => {
-      const section = sectionRef.current;
-      const sticky = stickyRef.current;
-      if (!section || !sticky) return;
+      let disposed = false;
+      let teardown: (() => void) | undefined;
 
-      const heroContent = section.querySelector<HTMLElement>(
-        ".scroll-story-hero-content",
-      );
-      const image = section.querySelector<HTMLElement>(".scroll-story-image");
-      const graph = section.querySelector<HTMLElement>(".scroll-story-graph");
-      const path = section.querySelector<SVGPathElement>(".scroll-story-path");
-      const pathGhost = section.querySelector<SVGPathElement>(
-        ".scroll-story-path-ghost",
-      );
-      const focalPoint = section.querySelector<SVGCircleElement>(
-        ".scroll-story-focal-point",
-      );
-      const povPan = section.querySelector<SVGGElement>(
-        ".scroll-story-pov-pan",
-      );
-      const povScale = section.querySelector<SVGGElement>(
-        ".scroll-story-pov-scale",
-      );
-      const dots = section.querySelectorAll<SVGCircleElement>(
-        ".scroll-story-dots circle",
-      );
-      const chartFrame = section.querySelector<SVGGElement>(
-        ".scroll-story-chart-frame",
-      );
-      const candles = section.querySelectorAll<SVGGElement>(
-        ".scroll-story-candle",
-      );
-      const beats = STORY_BEATS.map((_, i) =>
-        section.querySelector<HTMLElement>(`.scroll-story-beat-${i}`),
-      );
+      void waitForScrollStoryReady().then(async () => {
+        if (disposed) return;
 
-      if (
-        !heroContent ||
-        !image ||
-        !graph ||
-        !path ||
-        !focalPoint ||
-        !povPan ||
-        !povScale
-      ) {
-        return;
-      }
+        const generation = ++scrollStoryTimelineGeneration;
+        const section = sectionRef.current;
+        const sticky = stickyRef.current;
+        if (!section || !sticky) return;
+        if (generation !== scrollStoryTimelineGeneration) return;
 
-      const pathLength = path.getTotalLength();
-      const drawPaths = pathGhost ? [path, pathGhost] : [path];
-      gsap.set(drawPaths, {
-        strokeDasharray: pathLength,
-        strokeDashoffset: pathLength,
-      });
-      gsap.set(dots, { attr: { r: "0" } });
-
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-
-      if (chartFrame) {
-        gsap.set(chartFrame, { opacity: prefersReducedMotion ? 1 : 0 });
-      }
-
-      candles.forEach((candle) => {
-        const x = candle.getAttribute("data-candle-x") ?? "0";
-        const origin = `${x}px ${GRAPH_CHART_BASELINE_Y}px`;
-        gsap.set(candle, {
-          scaleY: prefersReducedMotion ? 1 : 0.001,
-          transformOrigin: origin,
-          svgOrigin: origin,
-        });
-      });
-
-      gsap.set(povScale, {
-        transformOrigin: "0px 0px",
-        ...GRAPH_POV_START,
-      });
-
-      const xTo = gsap.quickTo(povPan, "x", { duration: 0.3 });
-      const yTo = gsap.quickTo(povPan, "y", { duration: 0.3 });
-
-      const syncPan = () => {
-        xTo(-(gsap.getProperty(focalPoint, "x") as number));
-        yTo(-(gsap.getProperty(focalPoint, "y") as number));
-      };
-
-      gsap.set(povPan, {
-        x: -(gsap.getProperty(focalPoint, "x") as number),
-        y: -(gsap.getProperty(focalPoint, "y") as number),
-      });
-
-      const revertBreakpoints = runWithScrollBreakpoints(({ isMobile }) => {
-        const end = isMobile ? SCROLL_RUNWAY_MOBILE : SCROLL_RUNWAY_DESKTOP;
-        const graphDur = GRAPH_PHASE_DURATION;
-        const graphStart = GRAPH_PHASE_START;
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end,
-            pin: sticky,
-            scrub: 1,
-            anticipatePin: 1,
-            onUpdate: (self) => {
-              scrollStoryProgressStore.setProgress(self.progress, self.isActive);
-            },
-            onLeave: () => {
-              scrollStoryProgressStore.setProgress(1, false);
-            },
-            onEnterBack: (self) => {
-              scrollStoryProgressStore.setProgress(self.progress, self.isActive);
-            },
-          },
-          defaults: { duration: 1, ease: "none" },
-          onUpdate: syncPan,
-        });
-
-        tl.to(
-          heroContent,
-          { opacity: 0, y: -12, duration: HERO_FADE_END },
-          0,
+        const heroContent = section.querySelector<HTMLElement>(
+          ".scroll-story-hero-content",
+        );
+        const image = section.querySelector<HTMLElement>(".scroll-story-image");
+        const beatStage = section.querySelector<HTMLElement>(
+          ".scroll-story-beats-visual",
+        );
+        const beatViz = STORY_BEATS.map((_, i) =>
+          section.querySelector<HTMLElement>(`.scroll-story-beat-viz-${i}`),
+        );
+        const beats = STORY_BEATS.map((_, i) =>
+          section.querySelector<HTMLElement>(`.scroll-story-beat-${i}`),
         );
 
-        tl.to(image, { opacity: 0, duration: 0.08 }, graphStart - 0.02);
-        tl.fromTo(
-          graph,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.1 },
-          graphStart,
+        if (!heroContent || !image || !beatStage) return;
+
+        const beatTimelines = await waitForBeatTimelines(
+          section,
+          STORY_BEATS.length,
         );
+        if (disposed || generation !== scrollStoryTimelineGeneration) return;
 
-        if (chartFrame) {
-          tl.to(
-            chartFrame,
-            { opacity: 1, duration: GRAPH_FRAME_FADE_DURATION },
-            graphStart - 0.02,
-          );
-        }
+        gsap.set(heroContent, { opacity: 1, y: 0, clearProps: "filter" });
+        gsap.set(beatViz, { opacity: 0 });
+        gsap.set(beatStage, { opacity: 0 });
 
-        if (candles.length > 0 && !prefersReducedMotion) {
-          candles.forEach((candle) => {
-            const x = Number(candle.getAttribute("data-candle-x") ?? 0);
-            const pathProgress = getPathProgressForX(path, x);
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
 
-            tl.to(
-              candle,
-              {
-                scaleY: 1,
-                duration: GRAPH_CANDLE_GROW_DURATION,
-                ease: "power2.out",
-              },
-              graphStart + pathProgress * graphDur,
-            );
-          });
-        }
-
-        tl.to(
-          drawPaths,
-          { strokeDashoffset: 0, duration: graphDur },
-          graphStart,
-        );
-
-        tl.to(
-          focalPoint,
-          {
-            motionPath: {
-              path,
-              align: path,
-              alignOrigin: [0.5, 0.5],
-            },
-            immediateRender: true,
-            duration: graphDur,
-          },
-          graphStart,
-        );
-
-        dots.forEach((dot) => {
-          const x = Number(dot.getAttribute("cx") ?? 0);
-          const pathProgress = getPathProgressForX(path, x);
-
-          tl.to(
-            dot,
-            { attr: { r: "1.5" }, duration: 0.03, ease: "power2.out" },
-            graphStart + pathProgress * graphDur,
-          );
-        });
-
-        if (isMobile) {
-          tl.fromTo(
-            povScale,
-            { ...GRAPH_POV_START, scale: 1.6 },
-            { ...GRAPH_POV_END_MOBILE, duration: graphDur },
-            graphStart,
-          );
-        } else {
-          tl.fromTo(
-            povScale,
-            { ...GRAPH_POV_START },
-            {
-              ...GRAPH_POV_END_DESKTOP,
-              ease: "expo.inOut",
-              duration: graphDur,
-            },
-            graphStart,
-          );
-        }
-
-        const beatFade = 0.14;
-
-        beats.forEach((beat, index) => {
-          if (!beat) return;
-
-          const start = BEAT_STARTS[index] ?? graphStart;
-
-          tl.fromTo(
-            beat,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: beatFade * 0.5 },
-            start,
-          );
-
-          if (index < beats.length - 1) {
-            tl.to(
-              beat,
-              { opacity: 0, y: -12, duration: beatFade * 0.5 },
-              start + beatFade,
-            );
+        beatTimelines.forEach((tl) => {
+          tl.pause(0);
+          if (prefersReducedMotion) {
+            tl.progress(1);
           }
         });
+
+        const revertBreakpoints = runWithScrollBreakpoints(({ isMobile }) => {
+          const end = isMobile ? SCROLL_RUNWAY_MOBILE : SCROLL_RUNWAY_DESKTOP;
+          const beatsStart = GRAPH_PHASE_START;
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end,
+              pin: sticky,
+              scrub: 1,
+              anticipatePin: 1,
+              onUpdate: (self) => {
+                scrollStoryProgressStore.setProgress(
+                  self.progress,
+                  self.isActive,
+                );
+              },
+              onLeave: () => {
+                scrollStoryProgressStore.setProgress(1, false);
+              },
+              onEnterBack: (self) => {
+                scrollStoryProgressStore.setProgress(
+                  self.progress,
+                  self.isActive,
+                );
+              },
+            },
+            defaults: { duration: 1, ease: "none" },
+          });
+
+          tl.to(
+            heroContent,
+            { opacity: 0, y: -12, duration: HERO_FADE_END },
+            0,
+          );
+
+          tl.to(image, { opacity: 0, duration: 0.08 }, beatsStart - 0.02);
+          tl.fromTo(
+            beatStage,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.12 },
+            beatsStart,
+          );
+
+          const beatFade = 0.14;
+          const beatEnds = [
+            ...BEAT_STARTS.slice(1),
+            1,
+          ] as number[];
+
+          beats.forEach((beat, index) => {
+            if (!beat) return;
+            const start = BEAT_STARTS[index] ?? beatsStart;
+            const next = beatEnds[index] ?? 1;
+            const viz = beatViz[index];
+            const beatTl = beatTimelines[index];
+
+            tl.fromTo(
+              beat,
+              { opacity: 0, y: 24 },
+              { opacity: 1, y: 0, duration: beatFade * 0.5 },
+              start,
+            );
+
+            if (viz) {
+              tl.fromTo(
+                viz,
+                { opacity: 0 },
+                { opacity: 1, duration: beatFade * 0.45 },
+                start,
+              );
+            }
+
+            if (beatTl && !prefersReducedMotion) {
+              // Scrub assemble animation across the beat's scroll window
+              tl.fromTo(
+                beatTl,
+                { time: 0 },
+                {
+                  time: beatTl.duration(),
+                  duration: Math.max(0.12, next - start - 0.04),
+                  ease: "none",
+                },
+                start + 0.02,
+              );
+            } else if (beatTl && prefersReducedMotion) {
+              beatTl.progress(1);
+            }
+
+            if (index < beats.length - 1) {
+              tl.to(
+                beat,
+                { opacity: 0, y: -12, duration: beatFade * 0.5 },
+                start + beatFade,
+              );
+              if (viz) {
+                tl.to(
+                  viz,
+                  { opacity: 0, duration: beatFade * 0.45 },
+                  next - 0.06,
+                );
+              }
+            }
+          });
+        });
+
+        scheduleScrollRefresh();
+
+        teardown = () => {
+          scrollStoryProgressStore.reset();
+          revertBreakpoints();
+        };
       });
 
-      scheduleScrollRefresh();
-
       return () => {
-        scrollStoryProgressStore.reset();
-        revertBreakpoints();
+        disposed = true;
+        teardown?.();
       };
     },
     { scope: sectionRef, dependencies: [] },

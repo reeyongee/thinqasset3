@@ -1,0 +1,100 @@
+{
+  "capturedAt": "2026-07-16",
+  "reference": {
+    "url": "https://www.mcshannock.design/services/product-design",
+    "props": { "variant": "block", "theme": "dark" }
+  },
+  "implementation": {
+    "url": "http://localhost:3000/services/global-regulated-fund-platform",
+    "props": { "variant": "block", "theme": "dark" }
+  },
+  "viewportDesktop": "1440x900",
+  "matches": [
+    "Header total height 94px (16px top pad + 78px pill)",
+    "Scroll threshold 70px → floating glass pill",
+    "Scroll threshold 400px + direction → mobile hide",
+    "Floating outer max-width ~934px, pill ~902px",
+    "Pill border-radius 9999px, backdrop-filter blur(60px)",
+    "Pill floating background rgba(0,0,0,0.2)",
+    "Expanded outer max-width 1360px, pill ~1328px",
+    "Desktop lg+ keeps header visible when hidden class applied",
+    "Scroll-up restores header immediately",
+    "Nav/CTA hidden below lg; hamburger visible",
+    "GSAP CTA flair: scale 1 on hover, label flips white",
+    "Mobile menu: z-55 overlay, body scroll lock, 75ms link stagger"
+  ],
+  "deltas": [
+    {
+      "area": "Resting solid bar color",
+      "reference": "rgb(0, 0, 0) pure black",
+      "implementation": "rgb(22, 28, 36) var(--ta-navy-deep)",
+      "severity": "intentional-brand",
+      "note": "ThinqAsset navy-deep instead of McShannock black"
+    },
+    {
+      "area": "Nav link count & labels",
+      "reference": "4 links: Work, Services, About, Insights @ 18px gap-40px",
+      "implementation": "5 links: Home, About Us, Services, Why ThinqAsset, Global Footprint @ 16px gap-24px",
+      "severity": "intentional-content",
+      "note": "ThinqAsset IA; floating pill slightly denser"
+    },
+    {
+      "area": "Desktop CTA label & href",
+      "reference": "Start a project → /contact",
+      "implementation": "Consultation → /consultation",
+      "severity": "intentional-content"
+    },
+    {
+      "area": "Logo asset",
+      "reference": "Separate symbol + text SVGs; text slides away on scroll",
+      "implementation": "Single mask wordmark; width clip to ~2.75rem on scroll (lg+)",
+      "severity": "structural-brand",
+      "note": "Same motion intent, different asset model"
+    },
+    {
+      "area": "Font family",
+      "reference": "Geist 18px nav",
+      "implementation": "Inter 16px nav",
+      "severity": "intentional-brand"
+    },
+    {
+      "area": "Home page resting state",
+      "reference": "overlay/light → transparent header + pill",
+      "implementation": "overlay/light → transparent (matched)",
+      "severity": "match"
+    },
+    {
+      "area": "Mobile hide translate @ scroll 600",
+      "reference": "translate: 0px -100%",
+      "implementation": "translate: 0px -100% (via site-header--hidden)",
+      "severity": "match"
+    },
+    {
+      "area": "Deep scroll header class @ desktop",
+      "reference": "-translate-y-full lg:translate-y-0 (computed transform none)",
+      "implementation": "site-header--hidden (computed transform none @ lg)",
+      "severity": "match"
+    },
+    {
+      "area": "Legacy nav chrome",
+      "reference": "N/A",
+      "implementation": "Removed hero-nav-bar gradient blur strip",
+      "severity": "intentional",
+      "note": "Old .hero-nav-bar gradient no longer used"
+    }
+  ],
+  "probeComparison": {
+    "top": {
+      "ref": { "headerH": 94, "outerW": 1360, "pillW": 1328, "pillRadius": 0 },
+      "live": { "headerH": 94, "outerW": 1360, "pillW": 1328, "pillRadius": 0 }
+    },
+    "scrolled": {
+      "ref": { "outerW": 935, "pillW": 903, "pillBackdrop": "blur(59.86px)" },
+      "live": { "outerW": 935, "pillW": 903, "pillBackdrop": "blur(59.86px)" }
+    },
+    "deep-down": {
+      "ref": { "outerW": 934, "pillW": 902 },
+      "live": { "outerW": 934, "pillW": 902 }
+    }
+  }
+}

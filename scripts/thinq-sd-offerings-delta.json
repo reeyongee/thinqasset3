@@ -1,0 +1,63 @@
+{
+  "auditDate": "2026-07-14",
+  "reference": "https://www.mcshannock.design/services/product-design",
+  "implementation": "http://localhost:3000/services/global-regulated-fund-platform",
+  "viewport": "1920×660 desktop, 500×660 mobile",
+  "matched": {
+    "sectionPadding": "py-12/16/24 → 48/64/96px",
+    "gridDesktop": "512px + 608px, gap 96px, container 1216px",
+    "headlineDesktop": "48px / 60px / weight 500",
+    "headlineMobile": "24px / 30px",
+    "offeringNameDesktop": "24px / 37.33px / weight 600",
+    "offeringNameMobile": "16px",
+    "offeringDescDesktop": "18px / 29.25px, mt 4px",
+    "offeringDescMobile": "14px / 22.75px",
+    "icon": "32×32, color rgb(68, 79, 233)",
+    "borders": "item1 full white, items 2+ white/20",
+    "itemPadding": "py-5 → 20px, item0 height 139.83px (with desc)",
+    "ctaDesktop": "58px height, 18px font, 14px/24px padding, pill radius",
+    "ctaVisibility": "desktop hidden lg:block / mobile mt-6 lg:hidden",
+    "mobileStack": "48px section py, 40px grid gap, 452px grid width",
+    "gsap": "ScrollTrigger start top 88%, headline y30/0.8s, CTA y20/0.6s, per-item border/icon/name/desc timeline with overlaps",
+    "flair": "button__flair absolute inset-0, 250% circle, GSAP quickTo x/yPercent on mousemove"
+  },
+  "intentionalDeltas": {
+    "fontFamily": "Inter (ThinqAsset) vs Geist (McShannock)",
+    "ctaLabel": "Consultation → /consultation vs Start a project → /contact",
+    "ctaWidth": "~181px vs ~202px (label length)",
+    "itemCount": "16 pillar offerings on hub vs 5 UX items on reference",
+    "subOfferingPages": "3 highlight bullets (name-only) vs 5 full name+desc rows",
+    "content": "ThinqAsset fund/structures/corporate copy vs McShannock product-design copy",
+    "extraSectionBelow": "services-detail body still present after offerings band",
+    "prefersReducedMotion": "Guard added (not in McShannock bundle)",
+    "pageTransitions": "TransitionLink + data-transition-* on CTA label"
+  },
+  "fixedDuringPass": {
+    "subPageItemMapping": "Sub-offering pages now use page.highlights (3 items) instead of full 16-item pillar catalog",
+    "ctaLabelShortened": "Consultation for closer button proportions",
+    "flairScale": "Scale on .button__flair wrapper with gsap.set initial scale 0 (matches McShannock DOM)",
+    "leading15": "lg:leading-15 on headline per class manifest"
+  },
+  "desktopMeasurements": {
+    "mcshannock": {
+      "sectionH": 891.14,
+      "gridCols": "512px 608px",
+      "itemCount": 5,
+      "ctaW": 202.34
+    },
+    "thinqPillarHub": {
+      "gridCols": "512px 608px",
+      "itemCount": 16,
+      "item0h": 139.83,
+      "ctaW": 181.02
+    },
+    "thinqSubPage": {
+      "itemCount": 3,
+      "item0h": 74
+    }
+  },
+  "mobileMeasurements": {
+    "mcshannock": { "sectionPy": "48px", "gridGap": "40px", "item0h": 113.5 },
+    "thinq": { "sectionPy": "48px", "gridGap": "40px", "item0h": 74 }
+  }
+}
