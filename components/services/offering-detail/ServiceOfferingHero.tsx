@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { TransitionLink } from "@/components/transition/TransitionLink";
 import { StructureJurisdictionHeroMap } from "./StructureJurisdictionHeroMap";
+import { STRUCTURE_CITY_CAMERAS } from "./structureCityCameras";
 import type { OfferingGlobeLocationId } from "./types";
 import { useServiceOfferingHeroAnimation } from "./useServiceOfferingHeroAnimation";
 
@@ -40,13 +41,29 @@ export function ServiceOfferingHero({
 }: ServiceOfferingHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   useServiceOfferingHeroAnimation({ sectionRef });
+  const isCityMap = Boolean(globeLocationId);
 
   return (
     <section
       ref={sectionRef}
-      className="od-hero sd-section"
+      className={
+        isCityMap ? "od-hero od-hero--city-map sd-section" : "od-hero sd-section"
+      }
       data-transition-page
     >
+      {isCityMap && globeLocationId ? (
+        <div className="od-hero__map-bleed" aria-hidden>
+          <StructureJurisdictionHeroMap locationId={globeLocationId} />
+          <div className="od-hero__media-overlays">
+            <div className="od-hero__media-atmosphere" />
+            <div className="od-hero__media-veil" />
+            <p className="od-hero__city-map-label">
+              {STRUCTURE_CITY_CAMERAS[globeLocationId].label}
+            </p>
+          </div>
+        </div>
+      ) : null}
+
       <div className="od-hero__top sd-container">
         <div className="od-hero__chrome">
           <nav
@@ -116,17 +133,9 @@ export function ServiceOfferingHero({
         </div>
       </div>
 
-      <div className="od-hero__media-wrap">
-        <div
-          className={
-            globeLocationId
-              ? "od-hero__media od-hero__media--city-map"
-              : "od-hero__media"
-          }
-        >
-          {globeLocationId ? (
-            <StructureJurisdictionHeroMap locationId={globeLocationId} />
-          ) : (
+      {!isCityMap ? (
+        <div className="od-hero__media-wrap">
+          <div className="od-hero__media">
             <Image
               src={image.src}
               alt={image.alt}
@@ -136,10 +145,12 @@ export function ServiceOfferingHero({
               className="od-hero__img"
               priority
             />
-          )}
-          <div className="od-hero__media-veil" aria-hidden />
+            <div className="od-hero__media-overlays" aria-hidden>
+              <div className="od-hero__media-veil" />
+            </div>
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }

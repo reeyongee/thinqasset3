@@ -25,7 +25,9 @@ export function useServiceOfferingHeroAnimation({ sectionRef }: Props) {
       const kicker = section.querySelector(".od-hero__kicker");
       const title = section.querySelector(".od-hero__title");
       const lede = section.querySelector(".od-hero__lede");
-      const media = section.querySelector(".od-hero__media");
+      const media =
+        section.querySelector(".od-hero__media") ??
+        section.querySelector(".od-hero__map-bleed");
 
       if (reduceMotion) {
         gsap.set(

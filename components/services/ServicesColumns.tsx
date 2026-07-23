@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useId, useState } from "react";
 import { TransitionLink } from "@/components/transition/TransitionLink";
-import { GlowButton } from "@/components/ui/GlowButton";
 import { SERVICE_COLUMNS, type ServiceColumn } from "./constants";
 
 type ServicesColumnsProps = {
@@ -33,31 +32,15 @@ export function ServicesColumns({
             className="services-column"
             data-expanded={expanded}
             data-transition-item
-            tabIndex={0}
-            aria-expanded={expanded}
-            aria-controls={panelId}
-            onMouseEnter={() => setActiveId(column.id)}
-            onFocus={() => setActiveId(column.id)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                setActiveId((current) =>
-                  current === column.id ? null : column.id,
-                );
-              }
-            }}
-            onClick={(event) => {
-              if (
-                event.target instanceof Element &&
-                event.target.closest("a")
-              ) {
-                return;
-              }
-              setActiveId((current) =>
-                current === column.id ? null : column.id,
-              );
-            }}
+            aria-labelledby={titleId}
           >
+            <TransitionLink
+              href={column.href}
+              className="services-column__hit"
+              aria-label={`Explore ${column.title}`}
+              onMouseEnter={() => setActiveId(column.id)}
+              onFocus={() => setActiveId(column.id)}
+            />
             <div className="services-column__media" aria-hidden="true">
               <div className="services-column__media-shift">
                 <Image
@@ -105,17 +88,13 @@ export function ServicesColumns({
               </div>
             </div>
 
-            <GlowButton
-              href={column.href}
-              className="services-column__cta"
-              variant="gold"
-              size="sm"
+            <span
+              className="services-column__cta glow-button glow-button--gold glow-button--sm"
               data-visible={expanded}
-              tabIndex={expanded ? 0 : -1}
               aria-hidden={!expanded}
             >
-              Explore pillar
-            </GlowButton>
+              <span className="glow-button__label">Explore pillar</span>
+            </span>
           </article>
         );
       })}
