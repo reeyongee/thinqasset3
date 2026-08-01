@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useIsPhoneViewport } from "@/components/mobile-home/useIsPhoneViewport";
 import { usePrefersReducedMotion } from "@/components/progressive-blur/usePrefersReducedMotion";
 import { SiteBackground } from "./SiteBackground";
 
 export function SiteAtmosphere() {
-  const pathname = usePathname();
   const prefersReducedMotion = usePrefersReducedMotion();
+  const isPhone = useIsPhoneViewport();
   const [useWebGL, setUseWebGL] = useState(true);
 
   useEffect(() => {
@@ -16,10 +16,12 @@ export function SiteAtmosphere() {
     setUseWebGL(supported);
   }, []);
 
+  const enableWebGL = useWebGL && !isPhone;
+
   return (
     <SiteBackground
-      useWebGL={useWebGL}
-      interactive={!prefersReducedMotion && useWebGL}
+      useWebGL={enableWebGL}
+      interactive={!prefersReducedMotion && enableWebGL}
     />
   );
 }

@@ -132,15 +132,15 @@ export function FooterTopRow() {
 
       <div className="inner-footer-right">
         <div className="div-block-4 add-gap">
-          <div className="div-block-3">
+          <div className="div-block-3 footer-top-nav-grid">
             {FOOTER_MENU_COLUMNS.map((column) => (
               <div
-                key={column.map((item) => item.href).join("-")}
+                key={column.map((item) => item.label).join("-")}
                 className="footer-menu-container"
               >
                 {column.map((item) => (
                   <TransitionLink
-                    key={item.href}
+                    key={item.label}
                     href={item.href}
                     className="footer-menu-link"
                   >
@@ -169,6 +169,8 @@ export function FooterTopRow() {
 
           <FooterSocialBlock className="footer-section-container-inner-v2 hide-tablet" />
         </div>
+
+        <FooterSocialBlock className="footer-section-container-inner-v2 footer-social-mobile" />
       </div>
     </div>
   );

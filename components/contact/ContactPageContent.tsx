@@ -209,6 +209,7 @@ export function ContactPageContent() {
                       key={card.id}
                       type="button"
                       className="contact-hero__bottom__button"
+                      data-transition-item
                       onClick={openForm}
                     >
                       {inner}
@@ -222,6 +223,7 @@ export function ContactPageContent() {
                       key={card.id}
                       href={card.href}
                       className="contact-hero__bottom__button"
+                      data-transition-item
                     >
                       {inner}
                     </TransitionLink>
@@ -233,6 +235,7 @@ export function ContactPageContent() {
                     key={card.id}
                     href={card.href!}
                     className="contact-hero__bottom__button"
+                    data-transition-item
                   >
                     {inner}
                   </a>

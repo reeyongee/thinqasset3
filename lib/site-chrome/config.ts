@@ -19,6 +19,7 @@ const DEFAULT: SiteChromeConfig = { chrome: true, progressiveBlur: true };
  * "/checkout": { chrome: false },
  */
 const ROUTE_OVERRIDES: Record<string, SiteChromeConfig> = {
+  "/": { chrome: true, progressiveBlurSoft: true },
   "/contact": { chrome: true, progressiveBlurSoft: true },
   "/lab/fund-flow": { chrome: false },
   "/lab/investment-structuring": { chrome: false },

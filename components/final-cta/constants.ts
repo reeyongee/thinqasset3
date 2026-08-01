@@ -1,4 +1,4 @@
-export const FINAL_CTA_HREF = "mailto:info@thinqasset.com";
+export const FINAL_CTA_HREF = "/contact";
 
 export const FINAL_CTA_COPY = {
   title: "Speak with our team",

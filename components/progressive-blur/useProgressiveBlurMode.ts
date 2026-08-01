@@ -8,7 +8,7 @@ const LOW_END_CORE_THRESHOLD = 4;
 
 function detectMode(): ProgressiveBlurMode {
   if (typeof navigator === "undefined") {
-    return "full";
+    return "lite";
   }
 
   const cores = navigator.hardwareConcurrency ?? 8;
@@ -16,7 +16,8 @@ function detectMode(): ProgressiveBlurMode {
     return "static";
   }
 
-  return "full";
+  // 4-layer stack — Phase 3 default for capable devices.
+  return "lite";
 }
 
 let mode = detectMode();
@@ -33,7 +34,7 @@ function getSnapshot() {
 }
 
 function getServerSnapshot(): ProgressiveBlurMode {
-  return "full";
+  return "lite";
 }
 
 if (typeof window !== "undefined") {

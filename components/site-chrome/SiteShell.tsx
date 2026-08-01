@@ -12,7 +12,7 @@ type SiteShellProps = {
 
 export function SiteShell({ children }: SiteShellProps) {
   const pathname = usePathname();
-  const { chrome } = getSiteChromeConfig(pathname);
+  const { chrome, progressiveBlur } = getSiteChromeConfig(pathname);
 
   if (!chrome) {
     return <>{children}</>;
@@ -23,7 +23,7 @@ export function SiteShell({ children }: SiteShellProps) {
       <SiteNav />
       <main className="site-content">{children}</main>
       <Footer />
-      <ProgressiveBlurVeil />
+      {progressiveBlur !== false ? <ProgressiveBlurVeil /> : null}
     </>
   );
 }

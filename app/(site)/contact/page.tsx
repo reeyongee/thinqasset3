@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ContactPageContent } from "@/components/contact/ContactPageContent";
+import { ContactViewportGate } from "@/components/mobile-contact/ContactViewportGate";
 
 export const metadata: Metadata = {
   title: "Contact — THINQASSET",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactPageContent />;
+  return <ContactViewportGate />;
 }

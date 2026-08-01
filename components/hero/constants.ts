@@ -5,7 +5,7 @@ export const HERO_BG_VIDEO_MP4 = "/thinqasset-assets/hero/prism-hero.mp4";
 export const HERO_BG_VIDEO_WEBM = "/thinqasset-assets/hero/prism-hero.webm";
 export const HERO_BG_CRUISE_RATE = 0.85;
 
-export const CTA_HREF = "mailto:info@thinqasset.com";
+export const CTA_HREF = "/contact";
 
 export const HEADLINE_WORDS = [
   "Innovative",

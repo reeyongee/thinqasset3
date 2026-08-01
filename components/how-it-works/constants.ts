@@ -1,4 +1,4 @@
-export const CTA_HREF = "mailto:info@thinqasset.com";
+export const CTA_HREF = "/contact";
 
 export type StepData = {
   id: string;

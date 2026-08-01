@@ -43,6 +43,9 @@ function getContentTargets(): Element[] {
     );
   }
 
+  const globeHero = main.querySelector(".globe-scroll__hero-content");
+  if (globeHero) return [globeHero];
+
   const hero = main.querySelector(".scroll-story-hero-content");
   if (hero) return [hero];
 
@@ -57,6 +60,9 @@ function getHomeShellSections(): Element[] {
     const el = child as HTMLElement;
     if (el.matches("[data-transition-nav]")) return false;
     if (el.querySelector(".scroll-story-hero-content")) return false;
+    if (el.matches(".globe-scroll") || el.querySelector(".globe-scroll__hero-content")) {
+      return false;
+    }
     return true;
   });
 }

@@ -418,6 +418,7 @@ export function MeshCanvas({
     };
 
     let animationId = 0;
+    let moving = false;
 
     const updateBounds = () => {
       const rect = canvas.getBoundingClientRect();
@@ -432,6 +433,7 @@ export function MeshCanvas({
       canvas.height = Math.floor(rect.height * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);
       needsDrawRef.current = true;
+      ensureLoop();
     };
 
     const onMove = (event: PointerEvent) => {
@@ -448,12 +450,16 @@ export function MeshCanvas({
         event.clientY,
         bounds,
       );
-      if (point) mouseTargetRef.current = point;
+      if (point) {
+        mouseTargetRef.current = point;
+        ensureLoop();
+      }
     };
 
     const resetMouseTarget = () => {
       mouseTargetRef.current = [...DEFAULT_MOUSE_POINT];
       needsDrawRef.current = true;
+      ensureLoop();
     };
 
     const syncPointerIfOverCanvas = (event: PointerEvent) => {
@@ -470,11 +476,17 @@ export function MeshCanvas({
         event.clientY,
         bounds,
       );
-      if (point) mouseTargetRef.current = point;
+      if (point) {
+        mouseTargetRef.current = point;
+        ensureLoop();
+      }
     };
 
     const updateMovingPoint = () => {
-      if (!interactive) return;
+      if (!interactive) {
+        moving = false;
+        return;
+      }
 
       const [targetX, targetY] = mouseTargetRef.current;
       const [currentX, currentY] = warp.src[MOUSE_POINT_INDEX];
@@ -487,6 +499,9 @@ export function MeshCanvas({
         warp.src[MOUSE_POINT_INDEX][1] += deltaY;
         warp.update();
         needsDrawRef.current = true;
+        moving = true;
+      } else {
+        moving = false;
       }
     };
 
@@ -518,8 +533,23 @@ export function MeshCanvas({
     };
 
     const tick = () => {
+      if (!isVisibleRef.current) {
+        animationId = 0;
+        return;
+      }
+
       updateMovingPoint();
       draw();
+
+      if (moving || needsDrawRef.current) {
+        animationId = requestAnimationFrame(tick);
+      } else {
+        animationId = 0;
+      }
+    };
+
+    const ensureLoop = () => {
+      if (animationId || !isVisibleRef.current) return;
       animationId = requestAnimationFrame(tick);
     };
 
@@ -544,6 +574,8 @@ export function MeshCanvas({
 
         if (!entry.isIntersecting) {
           resetMouseTarget();
+          cancelAnimationFrame(animationId);
+          animationId = 0;
           return;
         }
 
@@ -553,12 +585,13 @@ export function MeshCanvas({
             new PointerEvent("pointermove", { clientX: x, clientY: y }),
           );
         }
+        ensureLoop();
       },
       { threshold: 0 },
     );
     visibilityObserver.observe(canvas);
 
-    animationId = requestAnimationFrame(tick);
+    ensureLoop();
 
     return () => {
       cancelAnimationFrame(animationId);

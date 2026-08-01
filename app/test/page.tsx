@@ -19,14 +19,36 @@ export default function TestValuesPage() {
         }}
       >
         <a
+          href="/test/ripe-hero"
+          style={{
+            color: "var(--ta-gold)",
+            textDecoration: "none",
+            borderBottom: "1px solid color-mix(in srgb, var(--ta-gold) 40%, transparent)",
+            marginRight: "1rem",
+          }}
+        >
+          RIPE hero lab →
+        </a>
+        <a
           href="/test/svg-beats"
+          style={{
+            color: "var(--ta-gold)",
+            textDecoration: "none",
+            borderBottom: "1px solid color-mix(in srgb, var(--ta-gold) 40%, transparent)",
+            marginRight: "1rem",
+          }}
+        >
+          SVG scroll beats lab →
+        </a>
+        <a
+          href="/test/fin-globe"
           style={{
             color: "var(--ta-gold)",
             textDecoration: "none",
             borderBottom: "1px solid color-mix(in srgb, var(--ta-gold) 40%, transparent)",
           }}
         >
-          SVG scroll beats lab →
+          Fin globe scroll lab →
         </a>
       </p>
       <Values3dGallery />

@@ -1,4 +1,4 @@
-import { ServicesPageContent } from "@/components/services/ServicesPageContent";
+import { ServicesViewportGate } from "@/components/mobile-services/ServicesViewportGate";
 
 export const metadata = {
   title: "Services | THINQASSET",
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function ServicesPage() {
-  return <ServicesPageContent />;
+  return <ServicesViewportGate />;
 }
