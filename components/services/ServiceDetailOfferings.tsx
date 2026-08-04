@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useRef } from "react";
+import { CONSULTATION_HREF } from "@/lib/transition/constants";
 import { OfferingIcon } from "./OfferingIcon";
 import { ServiceDetailCta } from "./ServiceDetailCta";
 import { useServiceDetailOfferingsAnimation } from "./useServiceDetailOfferingsAnimation";
@@ -57,7 +58,7 @@ function buildOfferingImageLayers(items: readonly ServiceOfferingItem[]) {
 export function ServiceDetailOfferings({
   headline,
   items,
-  ctaHref = "/contact",
+  ctaHref = CONSULTATION_HREF,
   ctaLabel = "Consultation",
   imageHoldItems,
 }: ServiceDetailOfferingsProps) {

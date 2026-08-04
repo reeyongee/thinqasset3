@@ -1,19 +1,35 @@
 "use client";
 
 import { FinalCtaSection } from "@/components/final-cta/FinalCtaSection";
+import { PageHero } from "@/components/page-hero/PageHero";
+import { ScrollSection } from "@/components/scroll/ScrollSection";
+import { SERVICES_HERO } from "@/components/services/constants";
 import { ServicesColumns } from "@/components/services/ServicesColumns";
-import { ServicesHero } from "@/components/services/ServicesHero";
 import "@/components/services/services.css";
 
 export function DesktopServices() {
   return (
-    <>
-      <div className="services-page" data-transition-page>
-        <ServicesHero />
+    <div className="services-page" data-transition-page>
+      <PageHero
+        priority
+        lines={[
+          SERVICES_HERO.headlineLines[0],
+          <>
+            {SERVICES_HERO.headlineLines[1].split(" ")[0]}{" "}
+            <em className="italic text-brass">
+              {SERVICES_HERO.headlineLines[1].split(" ").slice(1).join(" ")}
+            </em>
+          </>,
+        ]}
+        subtitle={SERVICES_HERO.subline}
+        meta={[SERVICES_HERO.eyebrow, SERVICES_HERO.brand, SERVICES_HERO.meta]}
+      />
+      <ScrollSection chapter={{ num: "01", label: "Platforms" }}>
         <ServicesColumns />
-      </div>
-
-      <FinalCtaSection />
-    </>
+      </ScrollSection>
+      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+        <FinalCtaSection />
+      </ScrollSection>
+    </div>
   );
 }

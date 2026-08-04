@@ -20,7 +20,9 @@ const DEFAULT: SiteChromeConfig = { chrome: true, progressiveBlur: true };
  */
 const ROUTE_OVERRIDES: Record<string, SiteChromeConfig> = {
   "/": { chrome: true, progressiveBlurSoft: true },
-  "/contact": { chrome: true, progressiveBlurSoft: true },
+  "/about": { chrome: true, progressiveBlur: false },
+  "/contact": { chrome: true, progressiveBlur: false },
+  "/services": { chrome: true, progressiveBlur: false },
   "/lab/fund-flow": { chrome: false },
   "/lab/investment-structuring": { chrome: false },
 };
@@ -29,5 +31,13 @@ const ROUTE_OVERRIDES: Record<string, SiteChromeConfig> = {
 export const INNER_PAGE_BLUR_SCROLL_THRESHOLD = 1;
 
 export function getSiteChromeConfig(pathname: string): SiteChromeConfig {
-  return ROUTE_OVERRIDES[pathname] ?? DEFAULT;
+  if (ROUTE_OVERRIDES[pathname]) {
+    return ROUTE_OVERRIDES[pathname];
+  }
+
+  if (pathname.startsWith("/services")) {
+    return { chrome: true, progressiveBlur: false };
+  }
+
+  return DEFAULT;
 }

@@ -7,8 +7,7 @@ export type UseCaseData = {
   mobileCtaLabel: string;
 };
 
-const image = (path: string) =>
-  `https://framerusercontent.com/images/${path}?width=2400&height=1800`;
+const image = (name: string) => `/assets/use-cases/${name}`;
 
 export const USE_CASES: UseCaseData[] = [
   {
@@ -17,7 +16,7 @@ export const USE_CASES: UseCaseData[] = [
     title: "Planning for retirement",
     description:
       "Model different scenarios, optimize withdrawal strategies, and ensure your portfolio aligns with your retirement timeline and risk tolerance.",
-    image: image("m1V9SF18Du3fqzbeeaGekbzDw.jpg"),
+    image: image("retirement.png"),
     mobileCtaLabel: "Start building",
   },
   {
@@ -26,7 +25,7 @@ export const USE_CASES: UseCaseData[] = [
     title: "Rebalancing your portfolio",
     description:
       "Identify allocation drift, receive rebalancing recommendations, and maintain your target asset mix without emotional bias or guesswork.",
-    image: image("2EkT9zJPBpn4rMC04oboMF0vc.jpg"),
+    image: image("rebalancing.png"),
     mobileCtaLabel: "Get started",
   },
   {
@@ -35,7 +34,7 @@ export const USE_CASES: UseCaseData[] = [
     title: "Optimizing for taxes",
     description:
       "Discover tax-loss harvesting opportunities, manage capital gains efficiently, and maximize after-tax returns with intelligent timing strategies.",
-    image: image("wcTUIaBkvOoGZg7AhcdETLDB34E.jpg"),
+    image: image("taxes.png"),
     mobileCtaLabel: "Get started",
   },
   {
@@ -44,7 +43,7 @@ export const USE_CASES: UseCaseData[] = [
     title: "Managing portfolio risk",
     description:
       "Quantify your exposure with advanced metrics, stress-test against market scenarios, and understand how volatility impacts your holdings.",
-    image: image("ZjCOfALwUpZiMhoU5I4EYMvA.jpg"),
+    image: image("risk.png"),
     mobileCtaLabel: "Get started",
   },
 ];

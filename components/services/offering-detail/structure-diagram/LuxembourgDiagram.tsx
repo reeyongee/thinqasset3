@@ -1,0 +1,1 @@
+export { LuxembourgDiagram } from "./MauritiusDiagram";

@@ -3,7 +3,10 @@ import { FooterAddressCard } from "./FooterAddressCard";
 
 export function FooterOfficesRow() {
   return (
-    <div className="inner-footer middle">
+    <div
+      className="inner-footer middle"
+      data-office-count={FOOTER_OFFICES.length}
+    >
       {FOOTER_OFFICES.map((office) => (
         <FooterAddressCard key={office.country} office={office} />
       ))}

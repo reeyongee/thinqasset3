@@ -73,6 +73,10 @@
   --site-header-menu-size: 2.375rem;
   --site-header-max-expanded: 1360px;
   --site-header-max-floating: 934px;
+
+  /* Visible viewport — synced via ViewportHeightSync (resize/orientation only) */
+  --app-vh: 100dvh;
+  --app-vw: 100vw;
 }
 
 @theme inline {
@@ -92,6 +96,17 @@
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-lp-saturnia);
+
+  /* TBG founder-letter test theme (app/test/tbg-letter) — aliased to site palette */
+  --color-ink: var(--ta-navy);
+  --color-ink2: var(--ta-navy-card);
+  --color-paper: var(--ta-white);
+  --color-paper2: var(--ta-grey-light);
+  --color-brass: var(--ta-gold);
+  --color-line: color-mix(in srgb, var(--ta-white) 14%, transparent);
+  --color-lineink: color-mix(in srgb, var(--ta-navy-deep) 14%, transparent);
+  --font-grotesk: var(--font-archivo), sans-serif;
+  --font-tmono: var(--font-tbgmono), monospace;
 }
 
 .font-display {
@@ -116,8 +131,8 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  width: 100vw;
-  height: 100vh;
+  width: var(--app-vw, 100vw);
+  height: var(--app-vh, 100vh);
   pointer-events: none;
   overflow: hidden;
 }

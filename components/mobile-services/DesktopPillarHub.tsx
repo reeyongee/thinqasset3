@@ -1,6 +1,9 @@
+"use client";
+
 import { FinalCtaSection } from "@/components/final-cta/FinalCtaSection";
+import { PageHero } from "@/components/page-hero/PageHero";
+import { ScrollSection } from "@/components/scroll/ScrollSection";
 import { ServiceDetailFaqs } from "@/components/services/ServiceDetailFaqs";
-import { ServiceDetailLanding } from "@/components/services/ServiceDetailLanding";
 import { ServiceDetailOfferings } from "@/components/services/ServiceDetailOfferings";
 import { ServiceDetailOutcomes } from "@/components/services/ServiceDetailOutcomes";
 import { ServiceDetailOtherServices } from "@/components/services/ServiceDetailOtherServices";
@@ -18,6 +21,14 @@ export function DesktopPillarHub({ data }: DesktopPillarHubProps) {
   const { landing, offerings, rationale, carousel, outcomes, faqs, spotlight, related } =
     data;
 
+  const heroMeta = [
+    landing.eyebrow ?? "Services",
+    landing.breadcrumb
+      ? `Services / ${landing.breadcrumb.pillarTitle}`
+      : "ThinqAsset",
+    "Global fund infrastructure",
+  ];
+
   const offeringsBand = offerings ? (
     <ServiceDetailOfferings
       headline={offerings.headline}
@@ -31,19 +42,16 @@ export function DesktopPillarHub({ data }: DesktopPillarHubProps) {
   ) : null;
 
   return (
-    <>
-      <div className="sd-landing-page">
+    <div className="sd-landing-page" data-transition-page>
+      <PageHero
+        lines={[landing.title]}
+        subtitle={landing.description}
+        meta={heroMeta}
+        imageSrc={landing.image.src}
+      />
+      <ScrollSection chapter={{ num: "01", label: landing.eyebrow ?? "Overview" }}>
         <article className="services-page">
-          <ServiceDetailLanding
-            title={landing.title}
-            description={landing.description}
-            image={landing.image}
-            eyebrow={landing.eyebrow}
-            breadcrumb={landing.breadcrumb}
-          />
-
           {offeringsBand}
-
           <ServiceDetailRationale
             headline={rationale.headline}
             paragraphs={rationale.paragraphs}
@@ -75,9 +83,10 @@ export function DesktopPillarHub({ data }: DesktopPillarHubProps) {
             />
           ) : null}
         </article>
-      </div>
-
-      <FinalCtaSection />
-    </>
+      </ScrollSection>
+      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+        <FinalCtaSection />
+      </ScrollSection>
+    </div>
   );
 }

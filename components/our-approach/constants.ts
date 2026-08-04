@@ -14,8 +14,8 @@ export const APPROACH_STEPS: ApproachStep[] = [
     title: "15+ Sub-Funds Launched",
     description:
       "Within a single VCC structure—purpose-built for segregated capital and scale.",
-    image: "/assets/stats/subfunds.jpg",
-    imageAlt: "Professionals at a meeting table",
+    image: "/assets/stats/subfunds-approach.jpg",
+    imageAlt: "Fund architecture schematic — layered sub-fund cells",
   },
   {
     id: "insights",
@@ -23,8 +23,8 @@ export const APPROACH_STEPS: ApproachStep[] = [
     title: "40+ Double Tax Agreements",
     description:
       "Double tax agreements via Mauritius, connecting Asia, Europe, and Africa.",
-    image: "/assets/stats/dtas.jpg",
-    imageAlt: "Business handshake",
+    image: "/assets/stats/dtas-approach.jpg",
+    imageAlt: "Cross-border treaty network handshake",
   },
   {
     id: "action",
@@ -32,8 +32,8 @@ export const APPROACH_STEPS: ApproachStep[] = [
     title: "Built For Precision",
     description:
       "60% lower operational costs versus traditional domiciles. We engineer fund structures for efficiency, not overhead.",
-    image: "/assets/benefits/bespoke.jpg",
-    imageAlt: "Minimal executive office with natural light",
+    image: "/assets/benefits/bespoke-approach.jpg",
+    imageAlt: "Precision-engineered fund structures",
   },
 ];
 

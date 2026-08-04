@@ -61,7 +61,7 @@ export function signalIntroCompleteOnce(): void {
   signalIntroComplete();
 }
 
-/** Called from inline reload script only — resets intro for a true hard refresh. */
+/** Called on hard refresh — resets intro so the hero animation can replay. */
 export function resetIntroSessionForReload(): void {
   if (typeof window === "undefined") return;
   introCompletionSignaled = false;

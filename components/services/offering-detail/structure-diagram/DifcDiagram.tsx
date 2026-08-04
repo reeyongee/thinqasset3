@@ -1,0 +1,1 @@
+export { DifcDiagram } from "./MauritiusDiagram";

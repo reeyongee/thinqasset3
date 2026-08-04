@@ -1,10 +1,28 @@
 "use client";
 
 import type { FormEvent, MouseEvent } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import { createPortal } from "react-dom";
+import { PageHero } from "@/components/page-hero/PageHero";
+import { ScrollSection } from "@/components/scroll/ScrollSection";
 import { TransitionLink } from "@/components/transition/TransitionLink";
 import { splitWords } from "@/lib/contact/splitWords";
+import {
+  lockPageScroll,
+  unlockPageScroll,
+} from "@/lib/scroll/lockPageScroll";
+import {
+  DEFAULT_COUNTRY_CODE,
+  sanitizePersonName,
+} from "@/lib/contact/phone";
 import { ContactFormButton } from "./ContactFormButton";
+import { PhoneField } from "./PhoneField";
 import {
   CONTACT_CTA_CARDS,
   EXPERTISE_OPTIONS,
@@ -18,6 +36,7 @@ type FormState = {
   firstName: string;
   lastName: string;
   email: string;
+  countryCode: string;
   phone: string;
   expertise: ExpertiseOption | "";
   message: string;
@@ -27,15 +46,23 @@ const INITIAL_FORM: FormState = {
   firstName: "",
   lastName: "",
   email: "",
+  countryCode: DEFAULT_COUNTRY_CODE,
   phone: "",
   expertise: "",
   message: "",
 };
 
-export function ContactPageContent() {
+function subscribeNoop() {
+  return () => {};
+}
+
+export function ContactPageContent({ startWithForm = false }: { startWithForm?: boolean }) {
   const rootRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLParagraphElement>(null);
+  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const successDescRef = useRef<HTMLParagraphElement>(null);
+  const autoOpenedRef = useRef(false);
   const [pageStep, setPageStep] = useState<1 | 2>(1);
   const [activeSubstep, setActiveSubstep] = useState(1);
   const [validatedSteps, setValidatedSteps] = useState<number[]>([]);
@@ -46,11 +73,13 @@ export function ContactPageContent() {
   const { playFormIntro, playHeroIntro, animateSuccess } = useContactMotion(
     rootRef,
     headlineRef,
+    formRef,
   );
 
   useEffect(() => {
     return () => {
       document.body.classList.remove("contact-step-2");
+      unlockPageScroll();
     };
   }, []);
 
@@ -72,12 +101,31 @@ export function ContactPageContent() {
     if (transitionLock) return;
     setTransitionLock(true);
     document.body.classList.add("contact-step-2");
+    lockPageScroll();
     window.setTimeout(() => {
       playFormIntro();
       setPageStep(2);
       window.setTimeout(() => setTransitionLock(false), 1000);
     }, 250);
   }, [playFormIntro, transitionLock]);
+
+  useEffect(() => {
+    if (!startWithForm || autoOpenedRef.current) return;
+    const timer = window.setTimeout(() => {
+      autoOpenedRef.current = true;
+      openForm();
+      const url = new URL(window.location.href);
+      if (url.searchParams.has("form")) {
+        url.searchParams.delete("form");
+        window.history.replaceState(
+          {},
+          "",
+          `${url.pathname}${url.search}${url.hash}`,
+        );
+      }
+    }, 150);
+    return () => window.clearTimeout(timer);
+  }, [openForm, startWithForm]);
 
   const closeForm = useCallback(() => {
     if (transitionLock) return;
@@ -86,6 +134,7 @@ export function ContactPageContent() {
       playHeroIntro();
       setPageStep(1);
       document.body.classList.remove("contact-step-2");
+      unlockPageScroll();
       setActiveSubstep(1);
       setValidatedSteps([]);
       setShowSuccess(false);
@@ -157,26 +206,38 @@ export function ContactPageContent() {
   };
 
   return (
-    <section
-      ref={rootRef}
-      className="contact-page"
-      data-transition-page
-      data-step={pageStep}
-    >
+    <>
+      <PageHero
+        lines={[
+          "Consultation",
+          <>
+            The right structure starts with a{" "}
+            <em className="italic text-brass">conversation.</em>
+          </>,
+        ]}
+        meta={["Contact", "ThinqAsset", "Global advisory"]}
+      />
+      <ScrollSection chapter={{ num: "01", label: "Contact" }}>
+        <section
+          ref={rootRef}
+          className="contact-page contact-page--page-hero"
+          data-transition-page
+          data-step={pageStep}
+        >
       <div className="contact-page__container">
         <section
           className={`contact-hero ${pageStep === 1 ? "is-selected" : ""}`}
         >
           <div className="contact-hero__inner">
-            <p className="contact-hero__eyebrow" data-transition-text="body">
+            <p className="contact-hero__eyebrow contact-hero__eyebrow--hidden" data-transition-text="body">
               Contact
             </p>
 
-            <div className="contact-hero__top">
+            <div className="contact-hero__top contact-hero__top--hidden">
               <h1 data-transition-text="headline">Consultation</h1>
             </div>
 
-            <div className="contact-hero__middle">
+            <div className="contact-hero__middle contact-hero__middle--hidden">
               <div className="contact-hero__middle__inner">
                 <p className="contact-hero__middle__header">Contact</p>
                 <h2 data-transition-text="headline">
@@ -244,23 +305,15 @@ export function ContactPageContent() {
             </div>
           </div>
         </section>
-
-        <div
-          className={`contact-hero__form ${pageStep === 2 ? "is-selected" : ""}`}
-        >
-          <div className="contact-hero__form__top">
-            <div className="contact-hero__form__top__inner">
-              <button
-                type="button"
-                className="contact-hero__form__top__button"
-                onClick={closeForm}
-              >
-                <span className="contact-form__back-arrow" aria-hidden />
-                Start a dialogue
-              </button>
-            </div>
-          </div>
-
+      </div>
+    </section>
+      </ScrollSection>
+      {mounted
+        ? createPortal(
+            <div
+              ref={formRef}
+              className={`contact-hero__form ${pageStep === 2 ? "is-selected" : ""}`}
+            >
           <button
             type="button"
             className="contact-hero__form__close"
@@ -275,7 +328,7 @@ export function ContactPageContent() {
             </div>
           </button>
 
-          <div className="contact-hero__form__left">
+          <div className="contact-hero__form__close-rail">
             <button
               type="button"
               className="contact-hero__form__close"
@@ -340,11 +393,14 @@ export function ContactPageContent() {
                               type="text"
                               placeholder="First name"
                               required
+                              minLength={1}
+                              maxLength={60}
+                              autoComplete="given-name"
                               value={form.firstName}
                               onChange={(e) =>
                                 setForm((f) => ({
                                   ...f,
-                                  firstName: e.target.value,
+                                  firstName: sanitizePersonName(e.target.value),
                                 }))
                               }
                             />
@@ -357,11 +413,14 @@ export function ContactPageContent() {
                               type="text"
                               placeholder="Last name"
                               required
+                              minLength={1}
+                              maxLength={60}
+                              autoComplete="family-name"
                               value={form.lastName}
                               onChange={(e) =>
                                 setForm((f) => ({
                                   ...f,
-                                  lastName: e.target.value,
+                                  lastName: sanitizePersonName(e.target.value),
                                 }))
                               }
                             />
@@ -374,33 +433,35 @@ export function ContactPageContent() {
                               type="email"
                               placeholder="Email"
                               required
+                              autoComplete="email"
+                              inputMode="email"
                               value={form.email}
                               onChange={(e) =>
                                 setForm((f) => ({
                                   ...f,
-                                  email: e.target.value,
+                                  email: e.target.value.trimStart(),
+                                }))
+                              }
+                              onBlur={(e) =>
+                                setForm((f) => ({
+                                  ...f,
+                                  email: e.target.value.trim(),
                                 }))
                               }
                             />
                             <label htmlFor="email">Email</label>
                           </div>
-                          <div className="page__input__container">
-                            <input
-                              id="phone"
-                              name="phone"
-                              type="tel"
-                              placeholder="Phone"
-                              required
-                              value={form.phone}
-                              onChange={(e) =>
-                                setForm((f) => ({
-                                  ...f,
-                                  phone: e.target.value,
-                                }))
-                              }
-                            />
-                            <label htmlFor="phone">Phone</label>
-                          </div>
+                          <PhoneField
+                            id="phone"
+                            countryCode={form.countryCode}
+                            phone={form.phone}
+                            onCountryCodeChange={(countryCode) =>
+                              setForm((f) => ({ ...f, countryCode }))
+                            }
+                            onPhoneChange={(phone) =>
+                              setForm((f) => ({ ...f, phone }))
+                            }
+                          />
                           <input type="submit" hidden />
                         </form>
                       </div>
@@ -554,8 +615,10 @@ export function ContactPageContent() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
+            </div>,
+            document.body,
+          )
+        : null}
+    </>
   );
 }

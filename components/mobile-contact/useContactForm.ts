@@ -3,11 +3,17 @@
 import type { FormEvent } from "react";
 import { useCallback, useEffect, useState } from "react";
 import type { ExpertiseOption } from "@/components/contact/constants";
+import {
+  lockPageScroll,
+  unlockPageScroll,
+} from "@/lib/scroll/lockPageScroll";
+import { DEFAULT_COUNTRY_CODE } from "@/lib/contact/phone";
 
 export type ContactFormState = {
   firstName: string;
   lastName: string;
   email: string;
+  countryCode: string;
   phone: string;
   expertise: ExpertiseOption | "";
   message: string;
@@ -17,6 +23,7 @@ const INITIAL_FORM: ContactFormState = {
   firstName: "",
   lastName: "",
   email: "",
+  countryCode: DEFAULT_COUNTRY_CODE,
   phone: "",
   expertise: "",
   message: "",
@@ -30,16 +37,16 @@ export function useContactForm() {
 
   useEffect(() => {
     if (wizardOpen) {
-      document.body.style.overflow = "hidden";
       document.body.classList.add("contact-step-2");
+      lockPageScroll();
     } else {
-      document.body.style.overflow = "";
       document.body.classList.remove("contact-step-2");
+      unlockPageScroll();
     }
 
     return () => {
-      document.body.style.overflow = "";
       document.body.classList.remove("contact-step-2");
+      unlockPageScroll();
     };
   }, [wizardOpen]);
 

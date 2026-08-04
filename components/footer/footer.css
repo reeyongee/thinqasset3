@@ -649,6 +649,11 @@
     gap: 0;
   }
 
+  .footer-v2 .inner-footer.middle[data-office-count="3"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
   .footer-v2 .inner-footer.bottom {
     display: flex;
     flex-flow: column;

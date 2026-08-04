@@ -1,7 +1,10 @@
 import {
   resolveOfferingCarouselImage,
+  resolveOfferingHeroImage,
   type ServiceColumn,
 } from "@/components/services/constants";
+import { FinalCtaSection } from "@/components/final-cta/FinalCtaSection";
+import { ScrollSection } from "@/components/scroll/ScrollSection";
 import { ServiceOfferingAudiences } from "./ServiceOfferingAudiences";
 import { ServiceOfferingHero } from "./ServiceOfferingHero";
 import { ServiceOfferingJourney } from "./ServiceOfferingJourney";
@@ -10,6 +13,7 @@ import { ServiceOfferingPager } from "./ServiceOfferingPager";
 import { ServiceOfferingProof } from "./ServiceOfferingProof";
 import { ServiceOfferingRelated } from "./ServiceOfferingRelated";
 import { ServiceOfferingStack } from "./ServiceOfferingStack";
+import { StructureDiagram } from "./structure-diagram/StructureDiagram";
 import { getOfferingDetail } from "./getOfferingDetail";
 import type { OfferingDetailContent } from "./types";
 import {
@@ -76,7 +80,7 @@ export function ServiceOfferingDetail({
   offeringIndex,
 }: ServiceOfferingDetailProps) {
   const copy = PILLAR_COPY[pillar.id];
-  const heroImage = resolveOfferingCarouselImage(pillar.id, offeringIndex);
+  const heroImage = resolveOfferingHeroImage(content.slug);
   const stackImage = resolveOfferingCarouselImage(
     pillar.id,
     offeringIndex + 2,
@@ -112,60 +116,67 @@ export function ServiceOfferingDetail({
     .filter((card): card is NonNullable<typeof card> => card !== null);
 
   return (
-    <div className="od-page sd-landing-page">
-      <article className="services-page od-article">
-        <ServiceOfferingHero
-          index={content.index}
-          title={content.title}
-          lede={content.lede}
-          kicker={copy.kicker}
-          image={heroImage}
-          globeLocationId={content.heroGlobeLocationId}
-          breadcrumb={{
-            pillarTitle: pillar.title,
-            pillarHref: pillar.href,
-          }}
-          nav={{
-            previousHref: previous.href,
-            previousTitle: previous.title,
-            nextHref: next.href,
-            nextTitle: next.title,
-          }}
-        />
+    <div className="od-page sd-landing-page" data-transition-page>
+      <ServiceOfferingHero
+        index={content.index}
+        title={content.title}
+        lede={content.lede}
+        kicker={copy.kicker}
+        image={heroImage}
+        breadcrumb={{
+          pillarTitle: pillar.title,
+          pillarHref: pillar.href,
+        }}
+        nav={{
+          previousHref: previous.href,
+          previousTitle: previous.title,
+          nextHref: next.href,
+          nextTitle: next.title,
+        }}
+      />
 
-        <ServiceOfferingManifest
-          statement={content.statement}
-          narrative={content.narrative}
-        />
-
-        <ServiceOfferingStack
-          capabilities={content.capabilities}
-          image={stackImage}
-        />
-
-        <ServiceOfferingJourney steps={content.journey} />
-
-        <ServiceOfferingAudiences audiences={content.audiences} />
-
-        <ServiceOfferingProof outcomes={content.outcomes} />
-
-        {relatedCards.length > 0 ? (
-          <ServiceOfferingRelated
-            headline={copy.relatedHeadline}
-            pillarHref={pillar.href}
-            pillarLabel={copy.relatedLabel}
-            cards={relatedCards}
+      <ScrollSection chapter={{ num: "01", label: copy.kicker }}>
+        <article className="services-page od-article">
+          <ServiceOfferingManifest
+            statement={content.statement}
+            narrative={content.narrative}
           />
-        ) : null}
 
-        <ServiceOfferingPager
-          currentLabel={copy.pagerLabel}
-          position={offeringIndex + 1}
-          total={total}
-          previous={previous}
-          next={next}
-        />
-      </article>
+          <StructureDiagram slug={content.slug} />
+
+          <ServiceOfferingStack
+            capabilities={content.capabilities}
+            image={stackImage}
+          />
+
+          <ServiceOfferingJourney steps={content.journey} />
+
+          <ServiceOfferingAudiences audiences={content.audiences} />
+
+          <ServiceOfferingProof outcomes={content.outcomes} />
+
+          {relatedCards.length > 0 ? (
+            <ServiceOfferingRelated
+              headline={copy.relatedHeadline}
+              pillarHref={pillar.href}
+              pillarLabel={copy.relatedLabel}
+              cards={relatedCards}
+            />
+          ) : null}
+
+          <ServiceOfferingPager
+            currentLabel={copy.pagerLabel}
+            position={offeringIndex + 1}
+            total={total}
+            previous={previous}
+            next={next}
+          />
+        </article>
+      </ScrollSection>
+
+      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+        <FinalCtaSection />
+      </ScrollSection>
     </div>
   );
 }

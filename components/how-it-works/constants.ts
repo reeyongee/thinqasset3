@@ -1,5 +1,6 @@
-export const CTA_HREF = "/contact";
+import { CONSULTATION_HREF } from "@/lib/transition/constants";
 
+export const CTA_HREF = CONSULTATION_HREF;
 export type StepData = {
   id: string;
   number: string;

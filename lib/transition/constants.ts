@@ -1,5 +1,5 @@
-/** Internal route used to demo page transitions from the landing Consultation CTA. */
-export const CONSULTATION_TEST_HREF = "/contact";
+/** Consultation form — contact page with the form overlay open. */
+export const CONSULTATION_HREF = "/contact?form=1";
 
 export const TRANSITION_SELECTORS = {
   page: "[data-transition-page]",

@@ -7,6 +7,16 @@ export const metadata: Metadata = {
     "Start a consultation with ThinqAsset Fund Management — fund platform, structures, and corporate infrastructure.",
 };
 
-export default function ContactPage() {
-  return <ContactViewportGate />;
+type ContactPageProps = {
+  searchParams: Promise<{ form?: string | string[] }>;
+};
+
+function wantsFormOpen(form: string | string[] | undefined) {
+  const value = Array.isArray(form) ? form[0] : form;
+  return value === "1" || value === "open" || value === "true";
+}
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const params = await searchParams;
+  return <ContactViewportGate startWithForm={wantsFormOpen(params.form)} />;
 }

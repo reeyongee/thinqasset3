@@ -5,6 +5,7 @@ import {
   HEADER_SCROLL_HIDE_THRESHOLD,
   HEADER_SCROLL_SCROLLED_THRESHOLD,
 } from "@/lib/site-chrome/headerConfig";
+import { isPageScrollLocked } from "@/lib/scroll/lockPageScroll";
 
 export function useHeaderScrollState() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,6 +16,8 @@ export function useHeaderScrollState() {
     prevYRef.current = window.scrollY;
 
     const onScroll = () => {
+      if (isPageScrollLocked()) return;
+
       const y = window.scrollY;
       const scrollingDown = y > prevYRef.current;
 

@@ -8,7 +8,7 @@ import {
   HERO_BG_VIDEO_MP4,
   HERO_BG_VIDEO_WEBM,
 } from "@/components/hero/constants";
-import { CONSULTATION_TEST_HREF } from "@/lib/transition/constants";
+import { CONSULTATION_HREF } from "@/lib/transition/constants";
 
 function subscribeReducedMotion(onStoreChange: () => void) {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -76,7 +76,7 @@ export function MobileHero() {
 
         <HeroButton
           className="w-full"
-          href={CONSULTATION_TEST_HREF}
+          href={CONSULTATION_HREF}
           transitionItem
         />
       </div>

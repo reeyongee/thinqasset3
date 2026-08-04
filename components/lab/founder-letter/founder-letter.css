@@ -1,0 +1,935 @@
+/* ============================================================
+   Founder Letter — scrollytelling experience (editorial pass)
+   Tokens: only globals.css brand tokens + LP Saturnia display font.
+
+   Cadence: Hero (dense, loud) → Purpose (sparse, narrow) →
+   Footprint (medium, column) → Ecosystem (dense, fanned deck) →
+   Trust (quiet, monumental) → Closing (understated, right-set).
+   ============================================================ */
+
+.fl-page {
+  --fl-max: 1280px;
+  --fl-accent: var(--ta-gold);
+  --fl-accent-hover: var(--ta-gold-hover);
+  --fl-muted: var(--ta-grey-muted);
+  --fl-border: var(--ta-grey-border);
+  --fl-surface: color-mix(in srgb, var(--ta-navy-card) 72%, transparent);
+  --fl-display: var(--font-lp-saturnia), serif;
+  --fl-body: var(--font-inter), sans-serif;
+  --fl-pad-x: clamp(1.25rem, 4vw, 3rem);
+  /* Editorial reading measure — never wider than this */
+  --fl-measure: 65ch;
+  position: relative;
+  min-height: 100vh;
+  color: var(--ta-white);
+  background: transparent;
+  overflow: clip;
+}
+
+/* --- Atmosphere: fixed gradient wash + grain -------------------- */
+.fl-page__bg {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 60% 45% at 82% 10%,
+      color-mix(in srgb, var(--ta-navy-mid) 34%, transparent) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 10% 90%,
+      color-mix(in srgb, var(--ta-navy-card) 30%, transparent) 0%,
+      transparent 62%
+    ),
+    linear-gradient(180deg, var(--ta-navy-deep) 0%, var(--ta-navy) 100%);
+}
+
+.fl-noise {
+  position: fixed;
+  inset: -50%;
+  z-index: 40;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- Scroll rail -------------------------------------------------- */
+.fl-rail {
+  position: fixed;
+  top: 50%;
+  right: 1.25rem;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.fl-rail__label {
+  font-family: var(--fl-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--fl-muted) 72%, transparent);
+  writing-mode: vertical-rl;
+}
+
+.fl-rail__track {
+  position: relative;
+  width: 1px;
+  height: 9rem;
+  overflow: hidden;
+  background: var(--fl-border);
+}
+
+.fl-rail__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--fl-accent) 0%,
+    color-mix(in srgb, var(--fl-accent) 30%, transparent) 100%
+  );
+}
+
+/* --- Kicker (chapter marker) — typographic level 5 --------------- */
+.fl-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin: 0;
+}
+
+.fl-kicker__num {
+  font-family: var(--fl-display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  color: var(--fl-accent);
+}
+
+.fl-kicker__rule {
+  width: 2.5rem;
+  height: 1px;
+  background: color-mix(in srgb, var(--fl-accent) 60%, transparent);
+}
+
+.fl-kicker__label {
+  font-family: var(--fl-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--fl-muted);
+}
+
+/* --- Ghost numeral — the grid-breaking watermark ------------------ */
+.fl-ghost {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-family: var(--fl-display);
+  font-size: clamp(8rem, 20vw, 16rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fl-accent) 24%, transparent);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --- Scrub word --------------------------------------------------- */
+.fl-word {
+  display: inline-block;
+  white-space: pre;
+  will-change: transform, opacity, filter;
+}
+
+/* --- Generic scene shell ------------------------------------------ */
+/* Vertical rhythm is deliberately inconsistent per scene (see below). */
+.fl-scene {
+  position: relative;
+  padding: clamp(5rem, 14vh, 9rem) var(--fl-pad-x);
+}
+
+.fl-scene__inner {
+  position: relative;
+  max-width: var(--fl-max);
+  margin-inline: auto;
+}
+
+/* Typographic level 2 — chapter statements (deliberately below hero/trust) */
+.fl-scene__title {
+  margin: 1.5rem 0 0;
+  font-family: var(--fl-display);
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--ta-white);
+  text-wrap: balance;
+}
+
+.fl-scene__title--medium {
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+}
+
+.fl-scene__underscore {
+  width: 7.5rem;
+  height: 1px;
+  margin-top: 2.25rem;
+  background: linear-gradient(90deg, var(--fl-accent) 0%, transparent 100%);
+  transform-origin: left center;
+}
+
+.fl-scene__support {
+  margin: 1.75rem 0 0;
+  max-width: var(--fl-measure);
+  font-family: var(--fl-body);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--fl-muted);
+  text-wrap: pretty;
+}
+
+.fl-scene__body {
+  margin: 3rem 0 0;
+  max-width: var(--fl-measure);
+  font-family: var(--fl-body);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--ta-white) 72%, transparent);
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .fl-scene__body {
+    font-size: 1.125rem;
+  }
+}
+
+/* --- Hero — THE anchor: oversized portrait + restrained copy ------ */
+.fl-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--fl-pad-x);
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .fl-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    justify-content: stretch;
+    column-gap: clamp(3rem, 6vw, 6rem);
+    padding-inline: var(--fl-pad-x);
+  }
+}
+
+.fl-hero__wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 70% 20%,
+      color-mix(in srgb, var(--fl-accent) 10%, transparent) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 40%,
+      color-mix(in srgb, var(--ta-navy-deep) 55%, transparent) 100%
+    );
+}
+
+.fl-hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--ta-navy-deep) 88%, transparent) 0%,
+    transparent 55%
+  );
+}
+
+@media (min-width: 1024px) {
+  .fl-hero__scrim {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--ta-navy-deep) 90%, transparent) 0%,
+      color-mix(in srgb, var(--ta-navy-deep) 40%, transparent) 46%,
+      transparent 68%
+    );
+  }
+}
+
+.fl-hero__content {
+  position: relative;
+  z-index: 3;
+  max-width: var(--fl-max);
+  width: 100%;
+  margin-inline: auto;
+  padding: 5rem 0;
+}
+
+@media (min-width: 1024px) {
+  .fl-hero__content {
+    max-width: none;
+    margin: 0;
+    padding: 3rem 0;
+  }
+}
+
+.fl-hero__eyebrow {
+  margin: 0 0 1.5rem;
+  font-family: var(--fl-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fl-muted);
+}
+
+.fl-hero__title {
+  margin: 0;
+  font-family: var(--fl-display);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--ta-white);
+}
+
+.fl-hero__title-line {
+  display: block;
+}
+
+.fl-hero__title-word {
+  display: inline-block;
+  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  line-height: 0.98;
+}
+
+.fl-hero__title-word--gold {
+  color: var(--fl-accent);
+}
+
+.fl-hero__sub {
+  margin: 2rem 0 0;
+  max-width: 46ch;
+  font-family: var(--fl-body);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--ta-white) 72%, transparent);
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .fl-hero__sub {
+    font-size: 1rem;
+  }
+}
+
+.fl-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.fl-hero__meta-item {
+  font-family: var(--fl-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--fl-muted) 78%, transparent);
+}
+
+/* Portrait — smaller than before, sinks lower-right for diagonal eye travel */
+.fl-hero__portrait-wrap {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 1;
+  width: min(44vw, 620px);
+  transform: translateY(-50%);
+  will-change: transform, opacity;
+}
+
+@media (min-width: 1024px) {
+  .fl-hero__portrait-wrap {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(100%, 460px);
+    margin-left: auto;
+    align-self: end;
+    padding-bottom: 1rem;
+    transform: none;
+  }
+}
+
+.fl-hero__portrait-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid var(--fl-border);
+  background: var(--fl-surface);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+}
+
+.fl-hero__portrait-img {
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.fl-hero__portrait-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ta-navy) 18%, transparent) 0%,
+    transparent 40%,
+    color-mix(in srgb, var(--ta-navy-deep) 62%, transparent) 100%
+  );
+}
+
+.fl-hero__portrait-caption {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.25rem;
+  z-index: 2;
+  font-family: var(--fl-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ta-white) 82%, transparent);
+}
+
+.fl-hero__brand {
+  position: absolute;
+  bottom: 2rem;
+  left: var(--fl-pad-x);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fl-hero__brand-name {
+  font-family: var(--fl-display);
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+  color: var(--ta-white);
+}
+
+.fl-hero__brand-sub {
+  font-family: var(--fl-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--fl-muted);
+}
+
+.fl-hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--ta-navy-deep);
+  opacity: 0.35;
+}
+
+/* --- Purpose — sparse, narrow manifesto column -------------------- */
+.fl-scene--purpose {
+  padding-top: clamp(9rem, 22vh, 15rem);
+  padding-bottom: clamp(9rem, 22vh, 15rem);
+}
+
+.fl-scene--purpose .fl-scene__title {
+  max-width: 15em;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+}
+
+/* --- Footprint — narrow editorial column -------------------------- */
+.fl-scene--footprint {
+  padding-top: clamp(5rem, 12vh, 9rem);
+  padding-bottom: clamp(7rem, 16vh, 12rem);
+}
+
+.fl-scene--footprint .fl-scene__title {
+  max-width: 22em;
+}
+
+.fl-timeline {
+  position: relative;
+  margin-top: 4.5rem;
+  max-width: 34rem;
+}
+
+.fl-timeline__rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.375rem;
+  width: 1px;
+}
+
+.fl-timeline__track {
+  position: absolute;
+  inset: 0;
+  background: var(--fl-border);
+}
+
+.fl-timeline__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: top center;
+  background: linear-gradient(
+    180deg,
+    var(--fl-accent) 0%,
+    color-mix(in srgb, var(--fl-accent) 28%, transparent) 100%
+  );
+}
+
+.fl-timeline__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fl-timeline__node {
+  position: relative;
+  padding-left: 2.5rem;
+  will-change: transform, opacity, filter;
+}
+
+.fl-timeline__dot {
+  position: absolute;
+  top: 0.35rem;
+  left: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: var(--fl-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--fl-accent) 22%, transparent);
+}
+
+.fl-timeline__place {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 0.5rem;
+  font-family: var(--fl-display);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ta-white);
+}
+
+.fl-timeline__tag {
+  font-family: var(--fl-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fl-accent);
+}
+
+.fl-timeline__label {
+  margin: 0 0 0.5rem;
+  font-family: var(--fl-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--ta-white) 78%, transparent);
+}
+
+.fl-timeline__detail {
+  margin: 0;
+  max-width: 52ch;
+  font-family: var(--fl-body);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--fl-muted);
+  text-wrap: pretty;
+}
+
+/* --- Ecosystem — dense fanned deck (the one loud middle) ---------- */
+.fl-ecosystem {
+  position: relative;
+  height: 360vh;
+}
+
+.fl-ecosystem__pinned {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.fl-ecosystem__statement-wrap {
+  position: relative;
+  z-index: 3;
+  max-width: var(--fl-max);
+  width: 100%;
+}
+
+.fl-ecosystem__statement {
+  margin: 1.5rem 0 0;
+  max-width: 32rem;
+  font-family: var(--fl-display);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--ta-white);
+  text-wrap: balance;
+}
+
+.fl-ecosystem__deck {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Cards vary in width, aspect ratio, rotation and lateral offset —
+   a fanned hand, not a neat stack of identical rectangles. */
+.fl-ecosystem__card {
+  --card-w: min(30rem, 84vw);
+  --card-r: 16 / 9;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: var(--card-w);
+  aspect-ratio: var(--card-r);
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--fl-border);
+  background: var(--fl-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 24px 70px -32px rgba(0, 0, 0, 0.65);
+  will-change: transform, opacity, filter;
+}
+
+.fl-ecosystem__card:nth-child(3n + 1) {
+  --card-w: min(24rem, 78vw);
+}
+
+.fl-ecosystem__card:nth-child(3n + 2) {
+  --card-w: min(31rem, 84vw);
+  --card-r: 4 / 3;
+}
+
+.fl-ecosystem__card:nth-child(3n) {
+  --card-w: min(20rem, 72vw);
+  --card-r: 3 / 2;
+}
+
+.fl-ecosystem__card-num {
+  font-family: var(--fl-display);
+  font-size: 0.9375rem;
+  letter-spacing: 0.1em;
+  color: var(--fl-accent);
+}
+
+.fl-ecosystem__card-label {
+  font-family: var(--fl-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ta-white);
+}
+
+/* --- Trust — the quiet monumental screen -------------------------- */
+.fl-scene--trust {
+  padding-top: clamp(13rem, 30vh, 24rem);
+  padding-bottom: clamp(13rem, 30vh, 24rem);
+}
+
+.fl-trust__monument {
+  margin: 0;
+  font-family: var(--fl-display);
+  font-size: clamp(6rem, 20vw, 15rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  text-align: center;
+  color: var(--ta-white);
+}
+
+.fl-trust__period {
+  color: var(--fl-accent);
+}
+
+.fl-trust__body {
+  margin: 4.5rem auto 0;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.fl-trust__footnote {
+  margin: 5rem auto 0;
+  max-width: 26rem;
+  text-align: center;
+  font-family: var(--fl-body);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--fl-muted);
+  text-wrap: pretty;
+}
+
+/* --- Closing — understated, right-set signature ------------------- */
+.fl-scene--closing {
+  padding-top: clamp(6rem, 14vh, 10rem);
+  padding-bottom: clamp(10rem, 24vh, 18rem);
+}
+
+.fl-closing__statement {
+  margin: 2rem 0 0;
+  max-width: 38rem;
+  font-family: var(--fl-display);
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ta-white);
+  text-wrap: balance;
+}
+
+.fl-closing__thanks {
+  margin: 2.5rem 0 0;
+  max-width: 52ch;
+  font-family: var(--fl-body);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--fl-muted);
+  text-wrap: pretty;
+}
+
+.fl-closing__signrow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5rem;
+}
+
+.fl-closing__sign {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  text-align: right;
+}
+
+.fl-closing__rule {
+  width: 6rem;
+  height: 1px;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, transparent 0%, var(--fl-accent) 100%);
+  transform-origin: right center;
+}
+
+.fl-closing__sign-name {
+  margin: 0;
+  font-family: var(--fl-display);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  letter-spacing: 0.01em;
+  color: var(--ta-white);
+}
+
+.fl-closing__sign-org,
+.fl-closing__sign-place {
+  margin: 0;
+  font-family: var(--fl-body);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--fl-muted);
+}
+
+.fl-closing__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 7rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--fl-border);
+}
+
+.fl-closing__brand {
+  font-family: var(--fl-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  color: var(--ta-white);
+}
+
+.fl-closing__brand-sub {
+  font-family: var(--fl-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--fl-muted);
+}
+
+.fl-closing__est {
+  font-family: var(--fl-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--fl-muted) 78%, transparent);
+  margin-left: auto;
+}
+
+/* --- Reduced motion -------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fl-ecosystem {
+    height: auto;
+  }
+
+  .fl-ecosystem__pinned {
+    position: static;
+    height: auto;
+    display: block;
+    padding: 4rem var(--fl-pad-x);
+  }
+
+  .fl-ecosystem__deck {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+    pointer-events: auto;
+  }
+
+  .fl-ecosystem__card {
+    position: relative;
+    width: auto;
+    aspect-ratio: auto;
+    min-height: 6.5rem;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .fl-hero__portrait-wrap {
+    transform: none;
+  }
+}
+
+/* --- Mobile ----------------------------------------------------------- */
+@media (max-width: 1023.98px) {
+  .fl-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 6rem;
+  }
+
+  .fl-hero__portrait-wrap {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 74vw;
+    max-width: 24rem;
+    margin-top: 2.5rem;
+    transform: none;
+  }
+
+  .fl-hero__content {
+    position: relative;
+    z-index: 3;
+    padding: 0;
+  }
+
+  .fl-hero__title-word {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .fl-hero__brand {
+    display: none;
+  }
+
+  .fl-rail {
+    display: none;
+  }
+
+  .fl-ecosystem__pinned {
+    padding: 2rem 1.25rem;
+  }
+
+  .fl-ecosystem__statement {
+    font-size: clamp(1.4rem, 5.5vw, 2rem);
+    max-width: 24rem;
+  }
+
+  .fl-ghost {
+    font-size: clamp(6rem, 34vw, 9rem);
+  }
+
+  .fl-scene--purpose {
+    padding-top: clamp(7rem, 20vh, 11rem);
+    padding-bottom: clamp(7rem, 20vh, 11rem);
+  }
+
+  .fl-scene--trust {
+    padding-top: clamp(10rem, 26vh, 18rem);
+    padding-bottom: clamp(10rem, 26vh, 18rem);
+  }
+
+  .fl-trust__monument {
+    font-size: clamp(5rem, 28vw, 9rem);
+  }
+
+  .fl-closing__signrow {
+    justify-content: flex-start;
+  }
+
+  .fl-closing__sign {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .fl-closing__rule {
+    background: linear-gradient(90deg, var(--fl-accent) 0%, transparent 100%);
+    transform-origin: left center;
+  }
+}

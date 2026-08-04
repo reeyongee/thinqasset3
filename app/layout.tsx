@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { AppBootstrap } from "@/components/bootstrap/AppBootstrap";
 import { SiteAtmosphere } from "@/components/background/SiteAtmosphere";
 import { ScrollOrchestratorProvider } from "@/components/scroll/ScrollOrchestratorProvider";
 import { TransitionProvider } from "@/components/transition/TransitionProvider";
+import { ViewportHeightSync } from "@/components/viewport/ViewportHeightSync";
 import { Albert_Sans, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -34,6 +36,12 @@ export const metadata: Metadata = {
     "ThinqAsset Fund Management Ltd delivers tailored investment strategies and unparalleled client service, connecting the Middle East with global investment opportunities across Mauritius, DIFC, Luxembourg, and beyond.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -45,14 +53,9 @@ export default function RootLayout({
       className={`${geistMono.variable} ${geistSans.variable} ${inter.variable} ${albertSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"){sessionStorage.removeItem("heroIntroPlayed");document.documentElement.removeAttribute("data-intro-played");document.documentElement.removeAttribute("data-intro-ready");return;}if(sessionStorage.getItem("heroIntroPlayed")==="true"){document.documentElement.setAttribute("data-intro-played","");}}catch(e){}})();`,
-          }}
-        />
-      </head>
       <body className="min-h-full">
+        <AppBootstrap />
+        <ViewportHeightSync />
         <ScrollOrchestratorProvider>
           <SiteAtmosphere />
           <TransitionProvider>{children}</TransitionProvider>

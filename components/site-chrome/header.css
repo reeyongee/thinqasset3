@@ -125,6 +125,7 @@ html[data-mobile-menu-open] .site-header {
   width: calc(var(--site-header-logo-height, 30px) * 1360 / 335);
   max-width: none;
   margin: 0;
+  transform: translateY(-0.1875rem);
 }
 
 .site-header__logo-wrap {
@@ -162,13 +163,29 @@ html[data-mobile-menu-open] .site-header {
   align-items: center;
   align-self: center;
   white-space: nowrap;
-  font-family: var(--font-inter), sans-serif;
-  font-size: var(--site-header-nav-size, 1rem);
-  font-weight: 500;
+  font-family: var(--font-lp-saturnia), serif;
+  font-size: var(--site-header-nav-size, 1.0625rem);
+  font-weight: 400;
   line-height: var(--site-header-nav-leading, 1);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-decoration: none;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header__cta-wrap .glow-button {
+  align-self: center;
+  min-height: 0;
+  padding-block: 0.3125rem;
+  padding-inline: 0.875rem;
+  line-height: var(--site-header-nav-leading, 1);
+}
+
+.site-header__cta-wrap .glow-button__label {
+  font-family: var(--font-lp-saturnia), serif;
+  font-size: var(--site-header-nav-size, 1.0625rem);
+  font-weight: 400;
+  line-height: var(--site-header-nav-leading, 1);
+  letter-spacing: -0.03em;
 }
 
 .site-header__nav-link--dark {
@@ -365,6 +382,13 @@ html[data-mobile-menu-open] .site-header {
   transition:
     opacity 0.55s cubic-bezier(0.12, 0.23, 0.17, 0.99),
     transform 0.55s cubic-bezier(0.12, 0.23, 0.17, 0.99);
+}
+
+.site-mobile-menu__cta .glow-button__label {
+  font-family: var(--font-lp-saturnia), serif;
+  font-weight: 400;
+  line-height: var(--site-header-nav-leading, 1);
+  letter-spacing: -0.03em;
 }
 
 .site-mobile-menu--open .site-mobile-menu__cta {

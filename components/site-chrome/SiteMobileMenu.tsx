@@ -9,6 +9,10 @@ import {
   HEADER_CTA,
   SITE_NAV_LINKS,
 } from "@/lib/site-chrome/headerConfig";
+import {
+  lockPageScroll,
+  unlockPageScroll,
+} from "@/lib/scroll/lockPageScroll";
 
 function subscribeNoop() {
   return () => {};
@@ -63,9 +67,13 @@ export function SiteMobileMenu({
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      lockPageScroll();
+    } else {
+      unlockPageScroll();
+    }
     return () => {
-      document.body.style.overflow = "";
+      unlockPageScroll();
     };
   }, [open]);
 

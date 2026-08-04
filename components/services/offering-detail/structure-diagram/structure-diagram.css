@@ -1,0 +1,626 @@
+/* Structure diagrams — offering detail (Mauritius / DIFC / Luxembourg) */
+
+.od-structure-diagram {
+  --sd-diagram-line: color-mix(in srgb, var(--ta-gold) 32%, transparent);
+  --sd-diagram-line-soft: color-mix(in srgb, var(--ta-white) 14%, transparent);
+  --sd-diagram-muted: var(--ta-grey-muted);
+  --sd-diagram-accent: var(--ta-gold);
+  --sd-diagram-core-bg: var(--ta-navy-card);
+  --sd-diagram-focal-bg: var(--ta-navy-deep);
+  overflow: visible;
+}
+
+.od-structure-diagram__marker {
+  margin: 0;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sd-diagram-muted);
+}
+
+.od-structure-diagram__marker--accent {
+  color: var(--sd-diagram-accent);
+}
+
+.od-structure-diagram__intro {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  overflow: visible;
+}
+
+.od-structure-diagram__intro .od-structure-diagram__marker {
+  margin-bottom: 0.75rem;
+}
+
+.od-structure-diagram__intro-aside {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.od-structure-diagram__scroll-body {
+  overflow: visible;
+}
+
+.od-structure-diagram__title--wide {
+  max-width: 36rem;
+}
+
+.od-structure-diagram__quote--wide {
+  max-width: 34ch;
+}
+
+.od-structure-diagram__title {
+  margin: 0;
+  font-family: var(--font-display), serif;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ta-white);
+  overflow: visible;
+  padding-block: 0.08em;
+}
+
+.od-structure-diagram__title em {
+  font-style: italic;
+  color: var(--sd-diagram-accent);
+}
+
+.od-structure-diagram__subtitle {
+  margin: 0;
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ta-white);
+  overflow: visible;
+  padding-block: 0.06em;
+}
+
+.od-structure-diagram__subtitle--cell {
+  margin-top: 0.5rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+.od-structure-diagram__lede--compact {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.od-structure-diagram__sleeve-index {
+  font-size: 0.625rem;
+  color: var(--sd-diagram-muted);
+}
+
+.od-structure-diagram__lede {
+  margin: 0;
+  max-width: 36ch;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--sd-diagram-muted);
+}
+
+.od-structure-diagram__quote {
+  margin: 0;
+  max-width: 32ch;
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--ta-white);
+  overflow: visible;
+  padding-block: 0.06em;
+}
+
+.od-structure-diagram__core {
+  background: var(--sd-diagram-focal-bg);
+  border: 1px solid var(--sd-diagram-line);
+  color: var(--ta-white);
+}
+
+.od-structure-diagram__core-meta {
+  color: var(--sd-diagram-accent);
+}
+
+.od-structure-diagram__core-divider {
+  border-top: 1px solid var(--sd-diagram-line-soft);
+}
+
+.od-structure-diagram__core-list {
+  color: color-mix(in srgb, var(--ta-white) 68%, transparent);
+}
+
+.od-structure-diagram__cell {
+  border-top: 1px solid var(--sd-diagram-line-soft);
+}
+
+.od-structure-diagram__cell-list {
+  color: var(--sd-diagram-muted);
+}
+
+.od-structure-diagram__chapter {
+  transition: color 0.3s ease;
+}
+
+.od-structure-diagram__chapter--active {
+  color: var(--sd-diagram-accent);
+}
+
+.od-structure-diagram__chapter--idle {
+  color: var(--sd-diagram-line-soft);
+}
+
+.od-structure-diagram__aside-rule {
+  border-top: 1px solid var(--sd-diagram-line-soft);
+}
+
+.od-structure-diagram__aside-list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--sd-diagram-muted);
+}
+
+.od-structure-diagram__aside-list li + li {
+  margin-top: 0.5rem;
+}
+
+.od-structure-diagram__aside-list,
+.od-structure-diagram__aside-list li {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.od-structure-diagram__pin-tree {
+  transform-origin: center top;
+  width: 100%;
+}
+
+@media (max-height: 900px) {
+  .od-structure-diagram__pin-tree {
+    transform: scale(0.92);
+  }
+}
+
+@media (max-height: 820px) {
+  .od-structure-diagram__pin-tree {
+    transform: scale(0.84);
+  }
+}
+
+@media (max-height: 720px) {
+  .od-structure-diagram__pin-tree {
+    transform: scale(0.76);
+  }
+}
+
+.od-sd-tree__branch-svg {
+  width: 100%;
+  height: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .od-sd-tree__branch-svg {
+    height: 6rem;
+  }
+}
+
+.od-sd-tree__trunk {
+  width: 100%;
+  height: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .od-sd-tree__trunk {
+    height: 3.5rem;
+  }
+}
+
+.od-sd-tree__dot {
+  position: absolute;
+  width: 0.375rem;
+  height: 0.375rem;
+  background: var(--sd-diagram-accent);
+}
+
+.od-structure-diagram__spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+}
+
+.od-structure-diagram__spine-label {
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  writing-mode: vertical-rl;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__spine-label {
+    display: block;
+  }
+}
+
+.od-structure-diagram__level-num {
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-display), serif;
+  font-size: clamp(5rem, 12vw, 9rem);
+  line-height: 1;
+  color: color-mix(in srgb, var(--ta-white) 6%, transparent);
+}
+
+.od-structure-diagram__level-focal {
+  display: inline-block;
+  background: var(--sd-diagram-focal-bg);
+  border: 1px solid var(--sd-diagram-line);
+  padding: 1.5rem 1.75rem;
+  color: var(--ta-white);
+}
+
+.od-structure-diagram__level-note {
+  color: var(--sd-diagram-muted);
+}
+
+.od-structure-diagram__level-note--on-dark {
+  color: color-mix(in srgb, var(--ta-white) 68%, transparent);
+}
+
+.od-structure-diagram__sleeve {
+  position: relative;
+  border-top: 1px solid var(--sd-diagram-line-soft);
+  padding-block: 1.75rem;
+}
+
+.od-structure-diagram__sleeve:first-of-type {
+  border-top: none;
+}
+
+.od-structure-diagram__sleeve-tick {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  width: 2rem;
+  transform-origin: left center;
+  background: var(--sd-diagram-line-soft);
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__sleeve-tick {
+    width: 3rem;
+  }
+}
+
+.od-structure-diagram__pin-scene {
+  height: auto;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__pin-scene {
+    height: 280vh;
+  }
+
+  .od-structure-diagram__pin-sticky {
+    position: sticky;
+    top: 0;
+    display: flex;
+    min-height: 100vh;
+    height: 100vh;
+    align-items: flex-start;
+    overflow: visible;
+    padding-block: clamp(1.5rem, 5vh, 3rem);
+    box-sizing: border-box;
+  }
+}
+
+.od-structure-diagram__intro-lede {
+  margin-top: 1rem;
+}
+
+.od-structure-diagram__tree-node {
+  position: relative;
+}
+
+.od-structure-diagram__tree-node--center {
+  margin-inline: auto;
+  max-width: 32rem;
+  text-align: center;
+}
+
+.od-structure-diagram__tree-node--center .od-structure-diagram__marker {
+  margin-bottom: 0.75rem;
+}
+
+.od-structure-diagram__tree-node--center .od-structure-diagram__subtitle {
+  margin-top: 0;
+}
+
+.od-structure-diagram__tree-node--center .od-structure-diagram__lede {
+  margin-top: 0.5rem;
+}
+
+.od-structure-diagram__tree-core {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 36rem;
+  padding: 2rem 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__tree-core {
+    padding: 2.5rem 3rem;
+  }
+}
+
+.od-structure-diagram__core-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.375rem 1.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  font-size: 0.75rem;
+}
+
+.od-structure-diagram__core-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+}
+
+.od-structure-diagram__branch-wrap {
+  position: relative;
+}
+
+.od-structure-diagram__branch-dot {
+  position: absolute;
+  top: 0;
+  translate: -50% 0;
+}
+
+.od-structure-diagram__branch-dot--a {
+  left: 16.667%;
+}
+
+.od-structure-diagram__branch-dot--b {
+  left: 50%;
+}
+
+.od-structure-diagram__branch-dot--c {
+  left: 83.333%;
+}
+
+.od-sd-tree__trunk--center {
+  margin-inline: auto;
+}
+
+.od-structure-diagram__cell-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.od-structure-diagram__cell-group:hover .od-structure-diagram__sleeve-index {
+  color: var(--sd-diagram-accent);
+}
+
+.od-structure-diagram__cell-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.od-structure-diagram__cell-list li + li {
+  margin-top: 0.25rem;
+}
+
+.od-structure-diagram__chapters {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__chapters {
+    display: flex;
+  }
+}
+
+.od-structure-diagram__pin-scene--cascade {
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__pin-scene--cascade {
+    height: 240vh;
+  }
+}
+
+.od-structure-diagram__cascade-tree {
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.od-structure-diagram__cascade-kicker {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.od-structure-diagram__cascade-step {
+  position: relative;
+}
+
+.od-structure-diagram__cascade-dot {
+  position: absolute;
+  left: 50%;
+  top: 0.35rem;
+  translate: -50% 0;
+}
+
+.od-structure-diagram__cascade-core {
+  margin-top: 0.75rem;
+}
+
+.od-structure-diagram__cascade-num {
+  position: absolute;
+  right: -0.5rem;
+  top: 0;
+  display: none;
+  font-family: var(--font-display), serif;
+  font-size: clamp(3.5rem, 10vw, 5.5rem);
+  line-height: 1;
+  color: color-mix(in srgb, var(--ta-white) 6%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__cascade-num {
+    display: block;
+    right: -4rem;
+  }
+}
+
+.od-sd-tree__trunk--cascade {
+  height: 2rem;
+}
+
+@media (min-width: 768px) {
+  .od-sd-tree__trunk--cascade {
+    height: 2.75rem;
+  }
+}
+
+.od-structure-diagram__chapters--cascade {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.od-structure-diagram__header-grid {
+  display: none;
+}
+
+.od-structure-diagram__difc-tree {
+  position: relative;
+  padding-left: 2rem;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__difc-tree {
+    padding-left: 3rem;
+    max-width: 42rem;
+    margin-inline-start: auto;
+  }
+}
+
+.od-structure-diagram__lux-rail {
+  position: relative;
+  margin-top: 0;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__lux-rail {
+    margin-inline: 8.333% 16.666%;
+  }
+}
+
+.od-structure-diagram__cells {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__cells {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+}
+
+.od-structure-diagram__cell-inner {
+  padding-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__cell-inner {
+    padding-inline: 1.25rem;
+    padding-top: 1.25rem;
+  }
+
+  .od-structure-diagram__cell-inner:first-child {
+    padding-inline-start: 0;
+  }
+
+  .od-structure-diagram__cell-inner:last-child {
+    padding-inline-end: 0;
+  }
+}
+
+.od-structure-diagram__lux-level {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding-block: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__lux-level {
+    padding-block: 3.5rem;
+  }
+}
+
+.od-structure-diagram__lux-body {
+  grid-column: span 10 / span 10;
+  padding-left: 2rem;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__lux-body {
+    grid-column: span 7 / span 7;
+    padding-left: 3rem;
+  }
+}
+
+.od-structure-diagram__lux-num-col {
+  display: none;
+  grid-column: span 2 / span 2;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__lux-num-col {
+    display: flex;
+  }
+}
+
+.od-structure-diagram__footer-quote {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: clamp(3rem, 8vw, 6rem);
+  overflow: visible;
+}
+
+.od-structure-diagram__footer-quote-inner {
+  grid-column: span 12 / span 12;
+}
+
+@media (min-width: 768px) {
+  .od-structure-diagram__footer-quote-inner {
+    grid-column: 5 / span 8;
+  }
+}

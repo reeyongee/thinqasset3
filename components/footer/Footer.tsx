@@ -5,7 +5,7 @@ import { FooterTopRow } from "./FooterTopRow";
 
 export function Footer() {
   return (
-    <footer className="footer-v2" aria-label="Site footer">
+    <footer id="site-footer" className="footer-v2" aria-label="Site footer">
       <div className="footer-wrapper">
         <div className="footer-container">
           <FooterTopRow />

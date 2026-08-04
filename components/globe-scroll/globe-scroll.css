@@ -69,12 +69,12 @@
     font-size: 5.5vw;
 
     /* fin.com mobile portrait — base layout (scale = 1) */
-    --globe-scroll-hero-min-height: 100dvh;
-    --globe-scroll-problem-min-height: 100vh;
+    --globe-scroll-hero-min-height: 100svh;
+    --globe-scroll-problem-min-height: 100svh;
     --globe-scroll-problem-spacer: 0;
     --globe-scroll-solution-lead-in: 0;
-    --globe-scroll-narrative-min-height: 100vh;
-    --globe-scroll-exit-padding-mobile: 50dvh;
+    --globe-scroll-narrative-min-height: 100svh;
+    --globe-scroll-exit-padding-mobile: 50svh;
     --globe-scroll-fade-sentinel: 55vh;
     /* fin hero padding-bottom is 0 — logos sit on the globe arc */
     --globe-scroll-logos-bottom: 0px;
@@ -114,8 +114,8 @@
   position: fixed;
   inset: 0;
   z-index: 1;
-  width: 100vw;
-  height: 100vh;
+  width: var(--app-vw, 100vw);
+  height: var(--app-vh, 100vh);
   pointer-events: none;
   will-change: opacity, transform;
 }
@@ -511,7 +511,7 @@
 
 @media (max-width: 780px) and (orientation: portrait) {
   .globe-scroll__hero {
-    padding: 18dvh calc(1 * var(--gs)) var(--globe-scroll-logos-bottom, 0px);
+    padding: 18svh calc(1 * var(--gs)) var(--globe-scroll-logos-bottom, 0px);
   }
 
   .globe-scroll__hero h1 {

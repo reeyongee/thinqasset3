@@ -7,6 +7,7 @@ import {
   getServicePillarImage,
   JOURNEY_IMAGE_HOLD_ITEMS,
   resolveOfferingCarouselImage,
+  resolveOfferingHeroImage,
   resolveOfferingScrollImage,
   resolveServiceRelatedCards,
   SERVICE_COLUMNS,
@@ -81,7 +82,7 @@ export function buildSlugPageData(
       0,
     );
     const copy = PILLAR_COPY[pillar.id];
-    const heroImage = resolveOfferingCarouselImage(pillar.id, offeringIndex);
+    const heroImage = resolveOfferingHeroImage(slug);
     const stackImage = resolveOfferingCarouselImage(
       pillar.id,
       offeringIndex + 2,

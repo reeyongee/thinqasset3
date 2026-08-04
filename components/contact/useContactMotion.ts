@@ -61,6 +61,7 @@ function buildWordSplitTimeline(words: gsap.TweenTarget) {
 export function useContactMotion(
   rootRef: React.RefObject<HTMLElement | null>,
   headlineRef: React.RefObject<HTMLParagraphElement | null>,
+  formRef: React.RefObject<HTMLElement | null>,
 ) {
   const { isNavigating } = useTransitionAnimation();
   const arrivedViaTransition = useRef(false);
@@ -91,20 +92,25 @@ export function useContactMotion(
             .add(buildWordSplitTimeline(words), 0.1)
             .add(fadeIn(".contact-hero__bottom__button", 0.1), ">-=0.4");
 
-      formTimeline.current = gsap
-        .timeline({ paused: true })
-        .add(setHidden(".contact-hero__form__top__button"))
-        .add(setOpacityHidden(".contact-hero__form__step", 0.1))
-        .add(setHidden(".contact-hero__form__close"))
-        .add(fadeIn(".contact-hero__form__top__button"), ">")
-        .add(fadeInOpacity(".contact-hero__form__step", 0.15), "<")
-        .add(fadeIn(".contact-hero__form__close"), "<+=0.2");
-
       if (!arrivedViaTransition.current) {
         heroTimeline.current?.play(0);
       }
     },
     { scope: rootRef, dependencies: [isNavigating] },
+  );
+
+  useGSAP(
+    () => {
+      if (!formRef.current || isNavigating) return;
+
+      formTimeline.current = gsap
+        .timeline({ paused: true })
+        .add(setOpacityHidden(".contact-hero__form__step", 0.1))
+        .add(setHidden(".contact-hero__form__close"))
+        .add(fadeInOpacity(".contact-hero__form__step", 0.15))
+        .add(fadeIn(".contact-hero__form__close"), "<+=0.2");
+    },
+    { scope: formRef, dependencies: [isNavigating] },
   );
 
   const playFormIntro = () => {
@@ -129,44 +135,75 @@ export function useContactMotion(
   };
 
   const animateSuccess = useCallback((descriptionEl: HTMLElement) => {
+    if (!formRef.current) return;
+
     splitWords(descriptionEl);
+    const root = formRef.current;
 
     gsap
       .timeline({ defaults: { immediateRender: true } })
-      .add(setHidden(".contact-hero__form__step__middle__success__top"))
       .add(
-        setHidden(".contact-hero__form__step__middle__success__middle__header"),
+        setHidden(
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__top",
+          ),
+        ),
+      )
+      .add(
+        setHidden(
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__middle__header",
+          ),
+        ),
       )
       .add(
         setOpacityHidden(
-          ".contact-hero__form__step__middle__success__middle .contact-form-action",
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__middle .contact-form-action",
+          ),
           0.1,
         ),
       )
       .add(
         setHidden(
-          ".contact-hero__form__step__middle__success__middle__description span",
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__middle__description span",
+          ),
         ),
       )
-      .add(fadeIn(".contact-hero__form__step__middle__success__top"))
       .add(
-        fadeIn(".contact-hero__form__step__middle__success__middle__header"),
+        fadeIn(
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__top",
+          ),
+        ),
+      )
+      .add(
+        fadeIn(
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__middle__header",
+          ),
+        ),
         "<",
       )
       .add(
         fadeIn(
-          ".contact-hero__form__step__middle__success__middle__description span",
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__middle__description span",
+          ),
           0.1,
         ),
         "<+=0.1",
       )
       .add(
         fadeInOpacity(
-          ".contact-hero__form__step__middle__success__middle .contact-form-action",
+          root.querySelectorAll(
+            ".contact-hero__form__step__middle__success__middle .contact-form-action",
+          ),
         ),
         ">-=0.5",
       );
-  }, []);
+  }, [formRef]);
 
   return { playFormIntro, playHeroIntro, animateSuccess };
 }

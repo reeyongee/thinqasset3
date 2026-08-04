@@ -1,7 +1,7 @@
 import { HeroBottomRow } from "@/components/hero/HeroBottomRow";
 import { HeroButton } from "@/components/hero/HeroButton";
 import { HeroHeadline } from "@/components/hero/HeroHeadline";
-import { CONSULTATION_TEST_HREF } from "@/lib/transition/constants";
+import { CONSULTATION_HREF } from "@/lib/transition/constants";
 import { STORY_BEATS } from "./constants";
 
 export function ScrollStoryCopy() {
@@ -14,7 +14,7 @@ export function ScrollStoryCopy() {
             animate
             animationDelay="0.2s"
             className="w-full min-[810px]:w-auto"
-            href={CONSULTATION_TEST_HREF}
+            href={CONSULTATION_HREF}
           />
         </div>
 

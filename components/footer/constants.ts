@@ -1,3 +1,5 @@
+import { CONSULTATION_HREF } from "@/lib/transition/constants";
+
 export const FOOTER_TAGLINE =
   "Connecting the Middle East with global investment opportunities through tailored strategies and institutional-grade service.";
 
@@ -6,15 +8,15 @@ export const FOOTER_EMAIL = "info@thinqasset.com";
 export const FOOTER_MENU_COLUMNS = [
   [
     { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+  ],
+  [
     { label: "Services", href: "/services" },
+    { label: "Our Structures", href: "/services/our-structures" },
   ],
   [
-    { label: "Why ThinqAsset", href: "/#why-thinqasset" },
-    { label: "Global Footprint", href: "/#global-footprint" },
-  ],
-  [
-    { label: "Consultation", href: "/contact" },
-    { label: "Contact", href: "mailto:info@thinqasset.com" },
+    { label: "Consultation", href: CONSULTATION_HREF },
+    { label: "Contact", href: "/contact" },
   ],
 ] as const;
 
@@ -56,7 +58,7 @@ export const FOOTER_OFFICES: FooterOffice[] = [
       "40+ double tax treaties across Asia, Europe, and Africa.",
       "Email: info@thinqasset.com",
     ],
-    href: "/#global-footprint",
+    href: "/services/mauritius-protected-cell-company",
     imageSrc: `${FOOTER_OFFICE_IMAGE_DIR}/mauritius.webp`,
     imageAlt: "Port Louis financial district skyline at dusk",
     isFirst: true,
@@ -69,7 +71,7 @@ export const FOOTER_OFFICES: FooterOffice[] = [
       "and institutional relationships.",
       "Email: info@thinqasset.com",
     ],
-    href: "/#global-footprint",
+    href: "/services/difc-structures",
     imageSrc: `${FOOTER_OFFICE_IMAGE_DIR}/uae.webp`,
     imageAlt: "Dubai International Financial Centre skyline",
   },
@@ -81,21 +83,9 @@ export const FOOTER_OFFICES: FooterOffice[] = [
       "across European markets.",
       "Email: info@thinqasset.com",
     ],
-    href: "/#global-footprint",
+    href: "/services/luxembourg-gp-lp",
     imageSrc: `${FOOTER_OFFICE_IMAGE_DIR}/luxembourg.webp`,
     imageAlt: "Luxembourg Kirchberg financial district architecture",
-  },
-  {
-    country: "Singapore",
-    company: "ThinqAsset\nAsia-Pacific Partnerships",
-    addressLines: [
-      "Fund administration, compliance, and portfolio",
-      "support across APAC ecosystems.",
-      "Email: info@thinqasset.com",
-    ],
-    href: "/#global-footprint",
-    imageSrc: `${FOOTER_OFFICE_IMAGE_DIR}/singapore.webp`,
-    imageAlt: "Singapore Marina Bay financial district skyline",
   },
 ];
 

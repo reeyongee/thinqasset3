@@ -104,11 +104,25 @@ const SERVICE_IMAGES = {
   corporate: "/thinqasset-assets/services/corporate.png",
 } as const;
 
-const JURISDICTION_IMAGES = {
-  mauritius: "/thinqasset-assets/footer/mauritius.webp",
-  singapore: "/thinqasset-assets/footer/singapore.webp",
-  luxembourg: "/thinqasset-assets/footer/luxembourg.webp",
-  uae: "/thinqasset-assets/footer/uae.webp",
+/** Unique pool images — no cross-pool reuse. */
+const POOL_IMAGES = {
+  structuresJourneyUae: "/thinqasset-assets/services/pools/structures-journey-uae.png",
+  structuresJourneyMauritius: "/thinqasset-assets/services/pools/structures-journey-mauritius.png",
+  structuresJourneyLuxembourg: "/thinqasset-assets/services/pools/structures-journey-luxembourg.png",
+  structuresCarouselDifc: "/thinqasset-assets/services/pools/structures-carousel-difc.png",
+  structuresCarouselPcc: "/thinqasset-assets/services/pools/structures-carousel-pcc.png",
+  structuresCarouselGplp: "/thinqasset-assets/services/pools/structures-carousel-gplp.png",
+  corporateJourneySingapore: "/thinqasset-assets/services/pools/corporate-journey-singapore.png",
+  corporateJourneyUae: "/thinqasset-assets/services/pools/corporate-journey-uae.png",
+  corporateJourneyLuxembourg: "/thinqasset-assets/services/pools/corporate-journey-luxembourg.png",
+  corporateCarouselSingapore: "/thinqasset-assets/services/pools/corporate-carousel-singapore.png",
+  corporateCarouselMauritius: "/thinqasset-assets/services/pools/corporate-carousel-mauritius.png",
+  corporateCarouselUae: "/thinqasset-assets/services/pools/corporate-carousel-uae.png",
+  structuresRationale: "/thinqasset-assets/services/pools/structures-rationale.png",
+  structuresOutcomes: "/thinqasset-assets/services/pools/structures-outcomes.png",
+  corporateRationale: "/thinqasset-assets/services/pools/corporate-rationale.png",
+  corporateSpotlightJurisdictions: "/thinqasset-assets/services/pools/corporate-spotlight-jurisdictions.png",
+  corporateSpotlightCompliance: "/thinqasset-assets/services/pools/corporate-spotlight-compliance.png",
 } as const;
 
 const FUND_PLATFORM_IMAGES = {
@@ -189,30 +203,30 @@ const STRUCTURES_JOURNEY_IMAGE_POOL: readonly OfferingScrollImage[] = [
     alt: "Investment structures across jurisdictions",
   },
   {
-    src: FUND_PLATFORM_IMAGES.uae,
+    src: POOL_IMAGES.structuresJourneyUae,
     alt: "DIFC and UAE structuring",
   },
   {
-    src: FUND_PLATFORM_IMAGES.mauritius,
+    src: POOL_IMAGES.structuresJourneyMauritius,
     alt: "Mauritius structuring hub",
   },
   {
-    src: FUND_PLATFORM_IMAGES.luxembourg,
+    src: POOL_IMAGES.structuresJourneyLuxembourg,
     alt: "Luxembourg GP–LP structures",
   },
 ];
 
 const STRUCTURES_CAROUSEL_IMAGE_POOL: readonly OfferingScrollImage[] = [
   {
-    src: FUND_PLATFORM_IMAGES.spotlightDifc,
+    src: POOL_IMAGES.structuresCarouselDifc,
     alt: "DIFC structures",
   },
   {
-    src: FUND_PLATFORM_IMAGES.mauritius,
+    src: POOL_IMAGES.structuresCarouselPcc,
     alt: "Mauritius Protected Cell Company",
   },
   {
-    src: FUND_PLATFORM_IMAGES.luxembourg,
+    src: POOL_IMAGES.structuresCarouselGplp,
     alt: "Luxembourg GP–LP",
   },
 ];
@@ -223,15 +237,15 @@ const CORPORATE_JOURNEY_IMAGE_POOL: readonly OfferingScrollImage[] = [
     alt: "Corporate and institutional services",
   },
   {
-    src: FUND_PLATFORM_IMAGES.singapore,
+    src: POOL_IMAGES.corporateJourneySingapore,
     alt: "Singapore corporate infrastructure",
   },
   {
-    src: JURISDICTION_IMAGES.uae,
+    src: POOL_IMAGES.corporateJourneyUae,
     alt: "UAE corporate presence",
   },
   {
-    src: JURISDICTION_IMAGES.luxembourg,
+    src: POOL_IMAGES.corporateJourneyLuxembourg,
     alt: "Luxembourg corporate services",
   },
 ];
@@ -242,22 +256,67 @@ const CORPORATE_CAROUSEL_IMAGE_POOL: readonly OfferingScrollImage[] = [
     alt: "Corporate capabilities",
   },
   {
-    src: FUND_PLATFORM_IMAGES.singapore,
+    src: POOL_IMAGES.corporateCarouselSingapore,
     alt: "International corporate infrastructure",
   },
   {
-    src: JURISDICTION_IMAGES.mauritius,
+    src: POOL_IMAGES.corporateCarouselMauritius,
     alt: "Mauritius corporate administration",
   },
   {
-    src: JURISDICTION_IMAGES.uae,
+    src: POOL_IMAGES.corporateCarouselUae,
     alt: "UAE corporate services",
   },
   {
-    src: FUND_PLATFORM_IMAGES.luxembourg,
+    src: POOL_IMAGES.corporateCarouselSingapore,
     alt: "European corporate infrastructure",
   },
 ];
+
+/** Unique per-offering hero images — every service detail page gets its own hero. */
+const HERO_IMAGES: Record<string, string> = {
+  // fund-platform
+  "fund-as-a-service": "/thinqasset-assets/services/pools/heroes/hero-fund-as-a-service.png",
+  "regulated-fund-hosting": "/thinqasset-assets/services/pools/heroes/hero-regulated-fund-hosting.png",
+  "regulatory-umbrella-platform": "/thinqasset-assets/services/pools/heroes/hero-regulatory-umbrella-platform.png",
+  "white-label-fund-solutions": "/thinqasset-assets/services/pools/heroes/hero-white-label-fund-solutions.png",
+  "management-company": "/thinqasset-assets/services/pools/heroes/hero-management-company.png",
+  "portfolio-management": "/thinqasset-assets/services/pools/heroes/hero-portfolio-management.png",
+  "fund-governance": "/thinqasset-assets/services/pools/heroes/hero-fund-governance.png",
+  "compliance-risk-management": "/thinqasset-assets/services/pools/heroes/hero-compliance-risk-management.png",
+  "aml-kyc-mlro": "/thinqasset-assets/services/pools/heroes/hero-aml-kyc-mlro.png",
+  "investor-onboarding": "/thinqasset-assets/services/pools/heroes/hero-investor-onboarding.png",
+  "cross-border-distribution": "/thinqasset-assets/services/pools/heroes/hero-cross-border-distribution.png",
+  "capital-markets-infrastructure": "/thinqasset-assets/services/pools/heroes/hero-capital-markets-infrastructure.png",
+  "custody-escrow": "/thinqasset-assets/services/pools/heroes/hero-custody-escrow.png",
+  "spvs": "/thinqasset-assets/services/pools/heroes/hero-spvs.png",
+  "structured-finance": "/thinqasset-assets/services/pools/heroes/hero-structured-finance.png",
+  "tokenisation-digital-assets": "/thinqasset-assets/services/pools/heroes/hero-tokenisation-digital-assets.png",
+  // corporate
+  "international-structuring": "/thinqasset-assets/services/pools/heroes/hero-international-structuring.png",
+  "incorporation": "/thinqasset-assets/services/pools/heroes/hero-incorporation.png",
+  "corporate-spvs": "/thinqasset-assets/services/pools/heroes/hero-corporate-spvs.png",
+  "domiciliation": "/thinqasset-assets/services/pools/heroes/hero-domiciliation.png",
+  "corporate-secretarial": "/thinqasset-assets/services/pools/heroes/hero-corporate-secretarial.png",
+  "directorship": "/thinqasset-assets/services/pools/heroes/hero-directorship.png",
+  "cfo-services": "/thinqasset-assets/services/pools/heroes/hero-cfo-services.png",
+  "accounting": "/thinqasset-assets/services/pools/heroes/hero-accounting.png",
+  "payroll": "/thinqasset-assets/services/pools/heroes/hero-payroll.png",
+  "audit-coordination": "/thinqasset-assets/services/pools/heroes/hero-audit-coordination.png",
+  "corporate-governance": "/thinqasset-assets/services/pools/heroes/hero-corporate-governance.png",
+  "corporate-compliance": "/thinqasset-assets/services/pools/heroes/hero-corporate-compliance.png",
+  "private-client-family-office": "/thinqasset-assets/services/pools/heroes/hero-private-client-family-office.png",
+  "trusts-foundations-estate": "/thinqasset-assets/services/pools/heroes/hero-trusts-foundations-estate.png",
+};
+
+/** Unique hero image for an offering detail page. */
+export function resolveOfferingHeroImage(slug: string): OfferingScrollImage {
+  const src = HERO_IMAGES[slug];
+  return {
+    src: src ?? FUND_PLATFORM_IMAGES.hero,
+    alt: "Offering overview",
+  };
+}
 
 const PILLAR_OFFERING_IMAGE_POOLS: Record<
   ServiceColumn["id"],
@@ -668,7 +727,7 @@ export const SERVICE_COLUMNS: readonly ServiceColumn[] = [
         "From QIF and protected cell companies to Luxembourg GP–LP, structures are matched to strategy and operated through our coordinated cross-border platform.",
       ],
       image: {
-        src: FUND_PLATFORM_IMAGES.uae,
+        src: POOL_IMAGES.structuresRationale,
         alt: "The right jurisdiction for the mandate",
       },
     },
@@ -683,7 +742,7 @@ export const SERVICE_COLUMNS: readonly ServiceColumn[] = [
         "Documentation and administration built for scale as the platform grows",
       ],
       image: {
-        src: FUND_PLATFORM_IMAGES.luxembourg,
+        src: POOL_IMAGES.structuresOutcomes,
         alt: "Structures that hold up under institutional review",
       },
     },
@@ -881,7 +940,7 @@ export const SERVICE_COLUMNS: readonly ServiceColumn[] = [
         "We deliver coordinated corporate, CFO, and compliance services across the financial centres our clients operate in — so leadership can focus on the business, not the back office.",
       ],
       image: {
-        src: FUND_PLATFORM_IMAGES.singapore,
+        src: POOL_IMAGES.corporateRationale,
         alt: "Corporate substance across the centres you use",
       },
     },
@@ -966,7 +1025,7 @@ export const SERVICE_COLUMNS: readonly ServiceColumn[] = [
           description:
             "Plus Malaysia, BVI, Cayman, Guernsey, and the United Kingdom — coordinated presence where your group actually operates.",
           image: {
-            src: FUND_PLATFORM_IMAGES.singapore,
+            src: POOL_IMAGES.corporateSpotlightJurisdictions,
             alt: "Global corporate infrastructure jurisdictions",
           },
         },
@@ -976,7 +1035,7 @@ export const SERVICE_COLUMNS: readonly ServiceColumn[] = [
           description:
             "Proactive compliance and legal coordination so obligations stay mapped — not discovered at year-end.",
           image: {
-            src: JURISDICTION_IMAGES.uae,
+            src: POOL_IMAGES.corporateSpotlightCompliance,
             alt: "Corporate compliance infrastructure",
           },
         },

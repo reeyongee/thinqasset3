@@ -1,3 +1,5 @@
+import { CONSULTATION_HREF } from "@/lib/transition/constants";
+
 export type HeaderVariant = "overlay" | "block";
 export type HeaderTheme = "light" | "dark";
 export type HeaderVisualMode =
@@ -18,35 +20,20 @@ export const SITE_NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Why ThinqAsset", href: "/#why-thinqasset" },
-  { label: "Global Footprint", href: "/#global-footprint" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export const HEADER_CTA = {
   label: "Consultation",
-  href: "/contact",
+  href: CONSULTATION_HREF,
 } as const;
 
-const DEFAULT_HEADER: HeaderConfig = {
-  variant: "block",
-  theme: "dark",
-};
-
-const ROUTE_HEADER: Record<string, HeaderConfig> = {
-  "/": { variant: "overlay", theme: "light" },
-  "/contact": { variant: "block", theme: "dark" },
-};
-
 export function getHeaderConfig(pathname: string): HeaderConfig {
-  if (ROUTE_HEADER[pathname]) {
-    return ROUTE_HEADER[pathname];
+  if (pathname === "/") {
+    return { variant: "overlay", theme: "light" };
   }
 
-  if (pathname.startsWith("/services")) {
-    return { variant: "block", theme: "dark" };
-  }
-
-  return DEFAULT_HEADER;
+  return { variant: "overlay", theme: "light" };
 }
 
 export function getHeaderVisualMode(

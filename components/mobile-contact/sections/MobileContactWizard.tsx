@@ -42,16 +42,15 @@ export function MobileContactWizard({
       aria-modal="true"
       aria-label="Consultation form"
     >
-      <div className="mobile-contact-wizard__top">
-        <button
-          type="button"
-          className="mobile-contact-wizard__back mobile-pressable"
-          onClick={onBack}
-        >
-          <span className="mobile-contact-wizard__back-arrow" aria-hidden />
-          Start a dialogue
-        </button>
-      </div>
+      <button
+        type="button"
+        className="mobile-contact-wizard__close mobile-pressable"
+        aria-label="Close form"
+        onClick={onClose}
+      >
+        <span className="mobile-contact-wizard__close-line" aria-hidden />
+        <span className="mobile-contact-wizard__close-line" aria-hidden />
+      </button>
 
       {!showSuccess ? (
         <div className="mobile-contact-wizard__progress">

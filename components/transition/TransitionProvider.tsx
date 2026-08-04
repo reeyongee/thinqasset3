@@ -22,6 +22,7 @@ import {
   shouldSkipColdEnter,
   syncIntroPlayedFromSession,
 } from "@/lib/transition/introControl";
+import { scrollPageToTop } from "@/lib/scroll/scrollPageToTop";
 import { patchTransitionState } from "@/lib/transition/transitionStore";
 import { waitForRouteReady } from "@/lib/transition/waitForRouteReady";
 
@@ -107,6 +108,8 @@ export function TransitionProvider({
 
     void waitForRouteReady().then(() => {
       if (cancelled || sequence !== enterSequence) return;
+
+      scrollPageToTop();
 
       tl = prefersReducedMotionRef.current
         ? softDissolveEnterReducedMotion()
