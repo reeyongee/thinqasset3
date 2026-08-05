@@ -4,21 +4,10 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
-  transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 html[data-mobile-menu-open] .site-header {
   z-index: 60;
-}
-
-.site-header--hidden {
-  transform: translateY(-100%);
-}
-
-@media (min-width: 1024px) {
-  .site-header--hidden {
-    transform: translateY(0);
-  }
 }
 
 .site-header--solid-light {

@@ -9,7 +9,6 @@ export type HeaderVisualMode =
   | "solid-dark";
 
 export const HEADER_SCROLL_SCROLLED_THRESHOLD = 70;
-export const HEADER_SCROLL_HIDE_THRESHOLD = 400;
 
 export type HeaderConfig = {
   variant: HeaderVariant;

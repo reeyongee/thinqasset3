@@ -18,6 +18,8 @@ import {
   NARRATIVE_TEXT_END_MOBILE,
   REVEAL_FADE_END,
   REVEAL_FADE_START,
+  STATS_EXIT_PROGRESS,
+  STATS_SECTION_EXIT_FADE_RATIO,
 } from "./constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -235,7 +237,9 @@ export function useGlobeScroll({
     const update = () => {
       frame = 0;
       const scrollY = window.scrollY;
-      const vh = window.innerHeight;
+      // Match fixed globe layer (--app-vh / visualViewport) so exit ride-out
+      // doesn't jump when mobile chrome shows/hides.
+      const vh = window.visualViewport?.height ?? window.innerHeight;
       const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
       const isMobilePortrait = window.matchMedia(MOBILE_PORTRAIT_QUERY).matches;
       const scrollingDown = scrollY >= lastScrollY;
@@ -245,7 +249,10 @@ export function useGlobeScroll({
       sectionInView = sectionRect.bottom > 0 && sectionRect.top < vh;
 
       // Ride fixed layers out with the section bottom (unlock scroll)
-      const exitY = sectionInView ? Math.min(0, sectionRect.bottom - vh) : -vh;
+      const exitTravel = sectionInView
+        ? Math.max(0, vh - sectionRect.bottom)
+        : vh;
+      const exitY = sectionInView ? -exitTravel : -vh;
       const exitTransform = `translate3d(0, ${exitY}px, 0)`;
       globeLayer.style.transform = exitTransform;
       veil.style.transform = exitTransform;
@@ -258,7 +265,7 @@ export function useGlobeScroll({
         const stats = statsRef.current;
         if (stats) {
           stats.style.opacity = "0";
-          stats.style.transform = exitTransform;
+          stats.style.transform = isMobilePortrait ? "" : exitTransform;
         }
         return;
       }
@@ -320,7 +327,7 @@ export function useGlobeScroll({
         clearNarrativeMask();
       }
 
-      // Stats — fade in with problem; ride out with section on unlock
+      // Stats — fade in with problem; fade out before/during section unlock
       const stats = statsRef.current;
       const problemHeadline = problemHeadlineRef.current;
       const solutionHeadline = solutionHeadlineRef.current;
@@ -339,9 +346,23 @@ export function useGlobeScroll({
           ? solutionHeadlineTop < vh / 2
           : solutionHeadlineBottom < vh / 2;
 
-        stats.style.opacity = String(enter);
+        // Fade as narrative unlocks, and as the section bottom leaves the viewport
+        const narrativeExitFade =
+          narrativeProgress < STATS_EXIT_PROGRESS
+            ? 1
+            : 1 - smoothstep(STATS_EXIT_PROGRESS, 1, narrativeProgress);
+        const sectionExitFade =
+          1 - smoothstep(0, vh * STATS_SECTION_EXIT_FADE_RATIO, exitTravel);
+        const statsOpacity = enter * Math.min(narrativeExitFade, sectionExitFade);
+
+        // Mobile: keep stats pinned to the bottom and fade — don't ride exitY
+        // (that produced the large negative translate mid-story).
+        const statsY = enterOffsetPx + (isMobilePortrait ? 0 : exitY);
+
+        stats.style.opacity = String(statsOpacity);
         stats.style.translate = "";
-        stats.style.transform = `translate3d(0, ${enterOffsetPx + exitY}px, 0)`;
+        stats.style.transform =
+          statsY === 0 ? "none" : `translate3d(0, ${statsY}px, 0)`;
         stats.style.transition = "none";
         stats.dataset.highlight = highlightValues ? "true" : "false";
 
@@ -349,7 +370,7 @@ export function useGlobeScroll({
           ".globe-scroll__stats-backdrop",
         );
         if (backdrop) {
-          backdrop.style.opacity = String((1 - maskProgress) * enter);
+          backdrop.style.opacity = String((1 - maskProgress) * statsOpacity);
         }
       }
     };
@@ -388,6 +409,8 @@ export function useGlobeScroll({
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize, { passive: true });
     window.addEventListener("load", onResize);
+    window.visualViewport?.addEventListener("resize", onResize);
+    window.visualViewport?.addEventListener("scroll", onScroll);
 
     setupTriggers();
     onResize();
@@ -414,6 +437,8 @@ export function useGlobeScroll({
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("load", onResize);
+      window.visualViewport?.removeEventListener("resize", onResize);
+      window.visualViewport?.removeEventListener("scroll", onScroll);
       if (frame) cancelAnimationFrame(frame);
       if (boundsPoll) cancelAnimationFrame(boundsPoll);
       narrativeObserver?.disconnect();

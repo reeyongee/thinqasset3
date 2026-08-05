@@ -34,20 +34,14 @@ function pillClass(mode: ReturnType<typeof getHeaderVisualMode>) {
 export function SiteNav() {
   const pathname = usePathname();
   const headerConfig = getHeaderConfig(pathname);
-  const { isScrolled, isHidden } = useHeaderScrollState();
+  const { isScrolled } = useHeaderScrollState();
   const visualMode = getHeaderVisualMode(isScrolled, headerConfig);
   const useDarkContent = isHeaderDarkContent(visualMode);
   const navTone = useDarkContent ? "light" : "dark";
 
   return (
     <header
-      className={[
-        "site-header",
-        headerShellClass(visualMode),
-        isHidden ? "site-header--hidden" : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={["site-header", headerShellClass(visualMode)].join(" ")}
       data-transition-nav
     >
       <div

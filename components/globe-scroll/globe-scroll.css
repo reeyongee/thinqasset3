@@ -11,6 +11,7 @@
   /* Desktop narrative layout (scaled) */
   --globe-scroll-hero-min-height: 150dvh;
   --globe-scroll-problem-min-height: 150vh;
+  --globe-scroll-problem-overlap: -60dvh;
   --globe-scroll-problem-spacer: 75vh;
   --globe-scroll-solution-lead-in: 37.5vh;
   --globe-scroll-narrative-min-height: 300vh;
@@ -68,14 +69,17 @@
   .globe-scroll {
     font-size: 5.5vw;
 
-    /* fin.com mobile portrait — base layout (scale = 1) */
+    /* Mobile portrait — enough runway for text scrub + camera unlock */
     --globe-scroll-hero-min-height: 100svh;
     --globe-scroll-problem-min-height: 100svh;
+    /* Gentler than desktop -60dvh so hero isn't crushed */
+    --globe-scroll-problem-overlap: -28svh;
     --globe-scroll-problem-spacer: 0;
     --globe-scroll-solution-lead-in: 0;
-    --globe-scroll-narrative-min-height: 100svh;
-    --globe-scroll-exit-padding-mobile: 50svh;
-    --globe-scroll-fade-sentinel: 55vh;
+    /* Content runway only; exit padding is added in min-height (border-box) */
+    --globe-scroll-narrative-min-height: 140svh;
+    --globe-scroll-exit-padding-mobile: 55svh;
+    --globe-scroll-fade-sentinel: 60svh;
     /* fin hero padding-bottom is 0 — logos sit on the globe arc */
     --globe-scroll-logos-bottom: 0px;
   }
@@ -322,7 +326,7 @@
 }
 
 .globe-scroll__problem {
-  margin-top: -60dvh;
+  margin-top: var(--globe-scroll-problem-overlap, -60dvh);
   min-height: var(--globe-scroll-problem-min-height, 150vh);
   padding-bottom: var(--globe-scroll-problem-spacer, 75vh);
 }
@@ -393,15 +397,17 @@
   margin: 0 auto;
   padding: calc(1.5 * var(--gs)) calc(2 * var(--gs));
   pointer-events: none;
+  /* Positioning context for absolute backdrop (transform on this node
+     would make a fixed child viewport-relative — avoid that). */
 }
 
 .globe-scroll__stats-backdrop {
-  position: fixed;
+  position: absolute;
   left: 50%;
-  bottom: 30%;
+  bottom: 0;
   width: min(90vw, 100%);
-  height: 30vw;
-  transform: translate(-50%, 50%);
+  height: calc(14 * var(--gs));
+  transform: translate(-50%, 45%);
   pointer-events: none;
   z-index: -1;
   transition: opacity 0.4s ease;
@@ -536,16 +542,21 @@
 
   .globe-scroll__solution {
     height: auto;
-    min-height: var(--globe-scroll-narrative-min-height, 100vh);
+    /* border-box: add exit padding on top of content runway so unlock isn't early */
+    min-height: calc(
+      var(--globe-scroll-narrative-min-height, 140svh) +
+        var(--globe-scroll-exit-padding-mobile, 55svh)
+    );
     max-height: none;
     padding-top: calc(5 * var(--gs));
     padding-right: calc(0.5 * var(--gs));
-    padding-bottom: var(--globe-scroll-exit-padding-mobile, 50dvh);
+    padding-bottom: var(--globe-scroll-exit-padding-mobile, 55svh);
     padding-left: calc(0.5 * var(--gs));
   }
 
   .globe-scroll__stats {
-    padding: calc(1.5 * var(--gs)) calc(1 * var(--gs));
+    padding: calc(1.5 * var(--gs)) calc(1 * var(--gs))
+      calc(1.5 * var(--gs) + env(safe-area-inset-bottom, 0px));
   }
 
   /* fin mobile stats: label 0.525 / value 1.0 / desc 0.575 */
@@ -571,9 +582,9 @@
   }
 
   .globe-scroll__stats-backdrop {
-    bottom: 30%;
-    height: calc(16 * var(--gs));
+    height: calc(18 * var(--gs));
     width: 250vw;
+    transform: translate(-50%, 50%);
   }
 
   .globe-scroll__stats-inner {

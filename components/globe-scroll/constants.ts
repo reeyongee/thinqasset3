@@ -122,11 +122,11 @@ export const SOLUTION_DESKTOP_EXIT_PADDING_BOTTOM = Math.round(
   891 * EXIT_RUNWAY_MULTIPLIER_DESKTOP,
 );
 
-/** Mobile solution exit padding (dvh) — runway for center zoom, then unlock */
-export const SOLUTION_MOBILE_EXIT_PADDING_BOTTOM_DVH = 50;
+/** Mobile solution exit padding (svh) — runway for center zoom, then unlock */
+export const SOLUTION_MOBILE_EXIT_PADDING_BOTTOM_DVH = 55;
 
-/** Center-unlock sentinel (vh) — ScrollTrigger end; no globe fade */
-export const FADE_SENTINEL_VH = 55;
+/** Center-unlock sentinel (svh) — ScrollTrigger end; no globe fade */
+export const FADE_SENTINEL_VH = 60;
 
 /** Fin mobile portrait layout query — matches globe-scroll.css breakpoints */
 export const MOBILE_PORTRAIT_QUERY = "(max-width: 780px) and (orientation: portrait)";
@@ -138,5 +138,8 @@ export const LOGOS_VIEWPORT_BOTTOM_OFFSET = "14vh";
 export const REVEAL_FADE_START = 0.75;
 export const REVEAL_FADE_END = 1;
 
-/** Narrative progress where stats begin fading with the globe exit */
+/** Narrative progress where stats begin fading with the camera unlock */
 export const STATS_EXIT_PROGRESS = 0.88;
+
+/** Section-exit fade distance as a fraction of viewport height */
+export const STATS_SECTION_EXIT_FADE_RATIO = 0.4;
