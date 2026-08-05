@@ -1,11 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import { AppBootstrap } from "@/components/bootstrap/AppBootstrap";
 import { SiteAtmosphere } from "@/components/background/SiteAtmosphere";
+import { SitePreloader } from "@/components/preloader/SitePreloader";
 import { ScrollOrchestratorProvider } from "@/components/scroll/ScrollOrchestratorProvider";
 import { TransitionProvider } from "@/components/transition/TransitionProvider";
 import { ViewportHeightSync } from "@/components/viewport/ViewportHeightSync";
+import { TBG_TAGLINE } from "@/lib/brand-assets";
 import { Albert_Sans, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
+
+const preloaderBootScript = `
+(function () {
+  try {
+    var path = location.pathname;
+    if (path !== "/" && path !== "") return;
+    if (sessionStorage.getItem("heroIntroPlayed") === "true") {
+      document.documentElement.setAttribute("data-intro-played", "");
+      return;
+    }
+    document.documentElement.setAttribute("data-preloader-pending", "");
+  } catch (e) {}
+})();
+`;
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -31,9 +47,8 @@ const albertSans = Albert_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "THINQASSET — Innovative Global Fund Management Solutions",
-  description:
-    "ThinqAsset Fund Management Ltd delivers tailored investment strategies and unparalleled client service, connecting the Middle East with global investment opportunities across Mauritius, DIFC, Luxembourg, and beyond.",
+  title: `THINQASSET — ${TBG_TAGLINE}`,
+  description: `${TBG_TAGLINE} ThinqAsset Fund Management Ltd delivers tailored investment strategies and unparalleled client service, connecting the Middle East with global investment opportunities across Mauritius, DIFC, Luxembourg, and beyond.`,
 };
 
 export const viewport: Viewport = {
@@ -53,12 +68,18 @@ export default function RootLayout({
       className={`${geistMono.variable} ${geistSans.variable} ${inter.variable} ${albertSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: preloaderBootScript }} />
+      </head>
       <body className="min-h-full">
         <AppBootstrap />
         <ViewportHeightSync />
         <ScrollOrchestratorProvider>
           <SiteAtmosphere />
-          <TransitionProvider>{children}</TransitionProvider>
+          <TransitionProvider>
+            <SitePreloader />
+            {children}
+          </TransitionProvider>
         </ScrollOrchestratorProvider>
       </body>
     </html>

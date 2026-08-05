@@ -2,17 +2,18 @@
 
 This document describes how to add new routes to thinqasset2 so they work with the **soft-dissolve** page transition system. Read this before building any new page.
 
-## Architecture (three separate layers)
+## Architecture (four separate layers)
 
 Do not merge these concerns on new pages.
 
 | Layer | Scope | Owner |
 |-------|--------|--------|
+| **Site preloader** | Home (`/`) cold load only, once per session | `SitePreloader`, `lib/preloader/*`, `data-preloader-pending` |
+| **Hero intro** | Home (`/`) cold load only (after preloader) | `HeroIntro`, `introControl`, CSS in `globals.css` |
 | **Page transitions** | All internal navigation | `TransitionProvider`, `softDissolve`, `data-transition-*` |
-| **Hero intro** | Home (`/`) cold load only | `HeroIntro`, `introControl`, CSS in `globals.css` |
 | **Scroll deferral** | Home scroll story only | `waitForScrollStoryReady` in `useScrollStoryTimeline` |
 
-Inner/marketing pages only need the **page transition** layer. They must **not** wrap content in `HeroIntro` or add intro CSS classes (`hero-word`, `hero-fade-up`, etc.) unless you are deliberately animating the home hero.
+Cold-load home order: **preloader → hero CSS intro → scroll story may init**. Inner/marketing pages only need the **page transition** layer. They must **not** wrap content in `HeroIntro` or add intro CSS classes (`hero-word`, `hero-fade-up`, etc.) unless you are deliberately animating the home hero.
 
 ---
 
@@ -20,9 +21,10 @@ Inner/marketing pages only need the **page transition** layer. They must **not**
 
 **Root layout** (`app/layout.tsx`) + **`(site)` route group** (`app/(site)/layout.tsx`):
 
+- `SitePreloader` mounted inside `TransitionProvider` (home cold-load overlay)
+- Inline `<head>` script sets `data-preloader-pending` on `/` when intro has not played this session
 - `TransitionProvider` wraps all `{children}` (root)
 - `.transition-veil` overlay for dissolve
-- Inline `<head>` script for intro session on hard refresh
 - `data-transitioning` / `aria-busy` toggled during nav
 - Cold-load enter is skipped (no veil on first paint)
 - ScrollTrigger pause/resume during transitions
@@ -142,15 +144,46 @@ Add `export const metadata` (or `generateMetadata`) as usual. Transitions do not
 
 Home does **not** use `data-transition-page`. Instead:
 
-- `Hero` wraps nav + scroll story in `HeroIntro` (cold-load CSS intro only)
+- Cold load plays `SitePreloader` first (once per session), then `HeroIntro` CSS intro
+- `Hero` wraps nav + scroll story in `HeroIntro`
 - Leave/enter targets `.scroll-story-hero-content` for the hero block
 - Below-fold sections (`NumbersSection`, `FeaturesSection`, etc.) trail in on **return to home** via `getHomeShellSections()` in `softDissolve.ts`
 
 When editing home:
 
+- Keep `SitePreloader` only in root `app/layout.tsx` (do not duplicate)
 - Keep `HeroIntro` only in `components/hero/Hero.tsx`
 - Do not add `data-transition-page` to home
 - GSAP scroll story must keep calling `waitForScrollStoryReady()` before creating ScrollTriggers
+
+---
+
+## Site preloader (home only)
+
+**Do not add preloader machinery to inner pages.**
+
+On cold load of `/`, a branded overlay (`SitePreloader`) runs once per session before the CSS hero intro:
+
+1. Boot script sets `data-preloader-pending` (covers first paint via `html::before` in `globals.css`)
+2. Overlay shows the compact logo mark (pulse ease-in-out spin) + bottom progress bar
+3. Hybrid wait: fonts + hero poster + min brand duration (~2.8s), hard-capped (~9s) — whichever is longer within the cap
+4. Exit wipe → `completePreloaderAndArmIntro()` removes pending and sets `data-intro-ready`
+5. Existing hero CSS intro plays; `HeroIntro` waits on the preloader gate before listening for completion
+
+Spin pivot uses `THINQASSET_LOGO_MARK_ORIGIN` (triangle centroid in the crop, not CSS box center).
+
+| Attribute | Meaning |
+|-----------|---------|
+| `data-preloader-pending` | Preloader owns the cold-load gate; hero intro must not arm yet |
+
+Key APIs (`lib/preloader/preloaderControl.ts`, `lib/preloader/readiness.ts`):
+
+- `shouldRunSitePreloader(pathname)` — home + session not played + not already completed
+- `waitForPreloaderReady()` — hybrid asset/min/max wait with progress callback
+- `completePreloaderAndArmIntro()` — clear pending, set `data-intro-ready`
+- `skipPreloaderGate()` — non-home / already played
+
+Reduced motion: overlay settles immediately and still arms the hero intro gate.
 
 ---
 
@@ -162,16 +195,17 @@ Cold-load intro is gated by `<html>` attributes:
 
 | Attribute | Meaning |
 |-----------|---------|
-| `data-intro-ready` | CSS intro may run |
+| `data-intro-ready` | CSS intro may run (set by preloader exit, or by `guardHeroIntroReplay` when no preloader) |
 | `data-intro-played` | Intro finished; CSS animations disabled |
 | `data-skip-intro` | Intro frozen mid-flight (during page transition) |
 | `data-transitioning` | Page transition active; intro CSS disabled |
+| `data-preloader-pending` | Preloader still running; `guardHeroIntroReplay` must not arm intro |
 
-Session: `sessionStorage.heroIntroPlayed` + inline reload script in `app/layout.tsx`.
+Session: `sessionStorage.heroIntroPlayed` + boot script / `AppBootstrap` reload reset in `app/layout.tsx`.
 
 Key APIs (`lib/transition/introControl.ts`):
 
-- `guardHeroIntroReplay()` — called from `HeroIntro` layout effect; arms intro once via DOM attrs
+- `guardHeroIntroReplay()` — called from `HeroIntro` layout effect; arms intro once via DOM attrs **unless** preloader is pending
 - `settleIntroDom()` — sets `data-intro-played` + session when intro completes
 - `markIntroPlayed()` — called after transition enter completes
 

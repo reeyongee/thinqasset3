@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, MotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import Kicker from "@/components/primitives/Kicker";
 import { ThinqAssetLogoMark } from "@/components/brand/ThinqAssetLogoMark";
+import { FOUNDER } from "@/components/founder-letter/constants";
 import { SCENE_SPRING, useAmplitude } from "@/hooks/useScrollScene";
 
 /**
@@ -13,7 +14,7 @@ import { SCENE_SPRING, useAmplitude } from "@/hooks/useScrollScene";
  */
 export function FounderPortrait({
   src,
-  alt = "Founder & Chief Executive Officer, TBG Group Holding Ltd.",
+  alt = `${FOUNDER.name}, ${FOUNDER.title}, ${FOUNDER.org}.`,
   drift,
 }: {
   src?: string;
@@ -48,7 +49,7 @@ export function FounderPortrait({
         </motion.div>
         {/* caption plate */}
         <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-line bg-ink/90 px-4 py-3 font-tmono text-[9px] uppercase tracking-[0.26em] text-paper/60">
-          <span>Plate 01 — The Founder</span>
+          <span>Plate 01 — {FOUNDER.name}</span>
           <span>Office of the CEO</span>
         </figcaption>
       </div>
@@ -85,7 +86,7 @@ export default function Portrait({ sectionRef }: { sectionRef: RefObject<HTMLEle
         <motion.figure style={{ clipPath, opacity: frameO }} className="md:col-span-5 md:col-start-1">
           <FounderPortrait
             src="/images/tbg-founder-portrait.webp"
-            alt="Founder & Chief Executive Officer, TBG Group Holding Ltd."
+            alt={`${FOUNDER.name}, ${FOUNDER.title}, ${FOUNDER.org}.`}
             drift={drift}
           />
         </motion.figure>
@@ -102,8 +103,9 @@ export default function Portrait({ sectionRef }: { sectionRef: RefObject<HTMLEle
           <div className="mt-10 flex items-center gap-6">
             <ThinqAssetLogoMark height={56} className="shrink-0" />
             <div className="font-tmono text-[10px] uppercase leading-relaxed tracking-[0.26em] text-paper/55">
-              <p>Founder &amp; Chief Executive Officer</p>
-              <p>TBG Group Holding Ltd. — DIFC, Dubai</p>
+              <p>{FOUNDER.name}</p>
+              <p>{FOUNDER.title}</p>
+              <p>{FOUNDER.org} — {FOUNDER.place}</p>
             </div>
           </div>
         </motion.div>

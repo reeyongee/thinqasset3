@@ -2,6 +2,7 @@
 
 import { RefObject } from "react";
 import { motion, useTransform } from "framer-motion";
+import { FOUNDER } from "@/components/founder-letter/constants";
 import { useAmplitude, usePinnedScene } from "@/hooks/useScrollScene";
 
 function enter(progress: number, start: number, end: number) {
@@ -79,13 +80,16 @@ export default function Signature({ sectionRef }: { sectionRef: RefObject<HTMLEl
                     className="mb-5 h-px w-24 origin-left bg-gradient-to-r from-brass to-transparent md:origin-right md:bg-gradient-to-l"
                   />
                   <p className="font-display text-[clamp(1.4rem,2.4vw,1.9rem)] italic text-paper">
-                    The Founder
+                    {FOUNDER.name}
                   </p>
                   <p className="mt-2 font-tmono text-[10px] uppercase tracking-[0.28em] text-paper/55">
-                    TBG Group Holding Ltd.
+                    {FOUNDER.title}
                   </p>
                   <p className="mt-1 font-tmono text-[10px] uppercase tracking-[0.22em] text-paper/40">
-                    Dubai International Financial Centre
+                    {FOUNDER.org}
+                  </p>
+                  <p className="mt-1 font-tmono text-[10px] uppercase tracking-[0.22em] text-paper/40">
+                    {FOUNDER.fullPlace}
                   </p>
                 </div>
               </div>

@@ -118,6 +118,24 @@ html {
   background-color: var(--ta-navy-deep);
 }
 
+html[data-preloader-pending] {
+  overflow: hidden;
+}
+
+html[data-preloader-pending] body {
+  overflow: hidden;
+}
+
+/* Cover first paint before the client preloader hydrates. */
+html[data-preloader-pending]:not(:has(.site-preloader))::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 69;
+  background: var(--ta-navy-deep);
+  pointer-events: auto;
+}
+
 body {
   background: transparent;
   color: var(--foreground);

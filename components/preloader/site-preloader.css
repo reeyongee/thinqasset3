@@ -1,0 +1,71 @@
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: var(--ta-navy-deep);
+  pointer-events: auto;
+}
+
+.site-preloader__cluster {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+}
+
+/* Positioning row only — do not spin this (it is full viewport width). */
+.site-preloader__mark {
+  position: absolute;
+  top: 42vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-preloader__mark-pulse {
+  display: inline-flex;
+  line-height: 0;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* Shrink-wraps the logo crop; transform-origin % is relative to the mark itself. */
+.site-preloader__mark-spin {
+  display: inline-flex;
+  line-height: 0;
+  transform-origin: 52.06% 64.28%;
+  will-change: transform;
+}
+
+.site-preloader__track {
+  position: absolute;
+  top: 78vh;
+  left: 0;
+  right: 0;
+  width: min(320px, 56vw);
+  height: 2px;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--ta-grey-muted) 28%, transparent);
+}
+
+.site-preloader__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: color-mix(in srgb, var(--ta-gold) 78%, var(--ta-grey-light) 22%);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-preloader__mark-spin,
+  .site-preloader__mark-pulse,
+  .site-preloader__cluster,
+  .site-preloader__fill {
+    will-change: auto;
+  }
+}

@@ -1,3 +1,5 @@
+import { FOUNDER } from "@/components/founder-letter/constants";
+
 export const FOUNDER_LETTER = {
   brand: "TBG Group",
   brandSub: "Holding Ltd.",
@@ -81,15 +83,15 @@ export const FOUNDER_LETTER = {
       "Together, we are building more than a financial institution — we are creating an enduring legacy founded on excellence, integrity, responsible stewardship, and lasting relationships.",
     thanks:
       "On behalf of our Board and the entire TBG family, I sincerely thank you for your continued trust and support. We look forward to shaping the future together — with ambition, purpose, and an unwavering commitment to excellence.",
-    sign: "The Founder",
-    org: "TBG Group Holding Ltd.",
-    place: "Dubai International Financial Centre",
+    sign: FOUNDER.name,
+    org: FOUNDER.org,
+    place: FOUNDER.fullPlace,
   },
 } as const;
 
-/** Founder portrait — PLACEHOLDER. Swap `src` with the founder's real portrait. */
+/** Founder portrait — lab placeholder; production uses /images/tbg-founder-portrait.webp */
 export const PORTRAIT = {
   src: "/thinqasset-assets/team/akash-baboolall.jpg",
-  alt: "Portrait of the Founder & Chief Executive Officer",
-  note: "Office of the Founder",
+  alt: `Portrait of ${FOUNDER.name}, ${FOUNDER.title}`,
+  note: FOUNDER.name,
 } as const;

@@ -23,6 +23,9 @@ function settleIntroWithoutReplay(): void {
  * Arm CSS hero intro once per session. Uses <html> attributes as the single
  * source of truth so duplicate module instances (dev chunks) and Strict Mode
  * remounts cannot re-arm after the first pass.
+ *
+ * When `data-preloader-pending` is set, the site preloader owns the gate and
+ * will set `data-intro-ready` after its exit — do not arm here.
  */
 export function guardHeroIntroReplay(): void {
   if (typeof window === "undefined") return;
@@ -36,6 +39,11 @@ export function guardHeroIntroReplay(): void {
   }
 
   if (html.hasAttribute("data-skip-intro") || html.hasAttribute("data-transitioning")) {
+    return;
+  }
+
+  // Site preloader still running — HeroIntro waits until it arms intro-ready.
+  if (html.hasAttribute("data-preloader-pending")) {
     return;
   }
 
@@ -69,6 +77,12 @@ export function resetIntroSessionForReload(): void {
   const html = document.documentElement;
   html.removeAttribute("data-intro-played");
   html.removeAttribute("data-intro-ready");
+  // Allow preloader to run again on reload (inline script + SitePreloader).
+  if (window.location.pathname === "/" || window.location.pathname === "") {
+    html.setAttribute("data-preloader-pending", "");
+  } else {
+    html.removeAttribute("data-preloader-pending");
+  }
   patchTransitionState({ skipIntro: false, introComplete: false });
 }
 

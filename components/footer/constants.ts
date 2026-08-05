@@ -1,7 +1,7 @@
+import { TBG_TAGLINE } from "@/lib/brand-assets";
 import { CONSULTATION_HREF } from "@/lib/transition/constants";
 
-export const FOOTER_TAGLINE =
-  "Connecting the Middle East with global investment opportunities through tailored strategies and institutional-grade service.";
+export const FOOTER_TAGLINE = TBG_TAGLINE;
 
 export const FOOTER_EMAIL = "info@thinqasset.com";
 

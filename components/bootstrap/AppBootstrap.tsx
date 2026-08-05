@@ -3,6 +3,10 @@
 import { useLayoutEffect } from "react";
 import { syncAppViewportHeight } from "@/lib/viewport/syncAppViewportHeight";
 import { resetIntroSessionForReload, syncIntroPlayedFromSession } from "@/lib/transition/introControl";
+import {
+  resetPreloaderSessionForReload,
+  syncPreloaderFromSession,
+} from "@/lib/preloader/preloaderControl";
 
 export function AppBootstrap() {
   useLayoutEffect(() => {
@@ -14,10 +18,12 @@ export function AppBootstrap() {
 
     if (navigation?.type === "reload") {
       resetIntroSessionForReload();
+      resetPreloaderSessionForReload();
       return;
     }
 
     syncIntroPlayedFromSession();
+    syncPreloaderFromSession();
   }, []);
 
   return null;

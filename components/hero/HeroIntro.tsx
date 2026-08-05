@@ -12,6 +12,26 @@ type HeroIntroProps = {
   children: React.ReactNode;
 };
 
+function waitForPreloaderGate(): Promise<void> {
+  if (!document.documentElement.hasAttribute("data-preloader-pending")) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    const html = document.documentElement;
+    const observer = new MutationObserver(() => {
+      if (!html.hasAttribute("data-preloader-pending")) {
+        observer.disconnect();
+        resolve();
+      }
+    });
+    observer.observe(html, {
+      attributes: true,
+      attributeFilter: ["data-preloader-pending"],
+    });
+  });
+}
+
 export function HeroIntro({ children }: HeroIntroProps) {
   const { skipIntro, introComplete } = useTransitionAnimation();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -24,31 +44,11 @@ export function HeroIntro({ children }: HeroIntroProps) {
   useEffect(() => {
     if (finishedRef.current || introComplete) return;
 
-    if (
-      skipIntro ||
-      hasIntroPlayed() ||
-      document.documentElement.hasAttribute("data-intro-played")
-    ) {
-      finishedRef.current = true;
-      signalIntroCompleteOnce();
-      return;
-    }
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) {
-      finishedRef.current = true;
-      signalIntroCompleteOnce();
-      return;
-    }
-
-    const root = rootRef.current;
-    if (!root) return;
+    let cancelled = false;
+    let root: HTMLDivElement | null = null;
 
     const finish = () => {
-      if (finishedRef.current) return;
+      if (finishedRef.current || cancelled) return;
       finishedRef.current = true;
       signalIntroCompleteOnce();
     };
@@ -59,10 +59,50 @@ export function HeroIntro({ children }: HeroIntroProps) {
       }
     };
 
-    root.addEventListener("animationend", onAnimationEnd);
+    const start = async () => {
+      await waitForPreloaderGate();
+      if (cancelled || finishedRef.current) return;
+
+      // Arm only when nothing has set ready yet (e.g. preloader skipped).
+      // Do not call guard when intro-ready is already set — that path settles
+      // the intro and would kill the CSS sequence mid-flight.
+      const html = document.documentElement;
+      if (
+        !html.hasAttribute("data-intro-ready") &&
+        !html.hasAttribute("data-intro-played")
+      ) {
+        guardHeroIntroReplay();
+      }
+
+      if (
+        skipIntro ||
+        hasIntroPlayed() ||
+        html.hasAttribute("data-intro-played")
+      ) {
+        finish();
+        return;
+      }
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (prefersReducedMotion) {
+        finish();
+        return;
+      }
+
+      root = rootRef.current;
+      if (!root) return;
+
+      root.addEventListener("animationend", onAnimationEnd);
+    };
+
+    void start();
 
     return () => {
-      root.removeEventListener("animationend", onAnimationEnd);
+      cancelled = true;
+      root?.removeEventListener("animationend", onAnimationEnd);
     };
   }, [skipIntro, introComplete]);
 

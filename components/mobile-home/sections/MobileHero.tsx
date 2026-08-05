@@ -8,6 +8,7 @@ import {
   HERO_BG_VIDEO_MP4,
   HERO_BG_VIDEO_WEBM,
 } from "@/components/hero/constants";
+import { TBG_TAGLINE } from "@/lib/brand-assets";
 import { CONSULTATION_HREF } from "@/lib/transition/constants";
 
 function subscribeReducedMotion(onStoreChange: () => void) {
@@ -60,6 +61,12 @@ export function MobileHero() {
       </div>
 
       <div className="mobile-hero__content">
+        <p
+          className="m-0 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase leading-none tracking-[0.22em] text-ta-gold"
+          data-transition-text="body"
+        >
+          {TBG_TAGLINE}
+        </p>
         <h1 className="mobile-hero__headline" data-transition-text="headline">
           Innovative Global Fund Management.
         </h1>
