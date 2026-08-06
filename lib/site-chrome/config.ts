@@ -25,6 +25,7 @@ const ROUTE_OVERRIDES: Record<string, SiteChromeConfig> = {
   "/services": { chrome: true, progressiveBlur: false },
   "/lab/fund-flow": { chrome: false },
   "/lab/investment-structuring": { chrome: false },
+  "/invoice": { chrome: true, progressiveBlur: false },
 };
 
 /** Pixels scrolled before inner-page progressive blur activates. */

@@ -28,6 +28,10 @@
 # misc
 .DS_Store
 *.pem
+
+# python
+__pycache__/
+*.pyc
 *.tif
 
 # debug
