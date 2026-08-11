@@ -28,7 +28,7 @@ export function MobileServicesPage() {
       <ScrollSection chapter={{ num: "01", label: "Platforms" }}>
         <MobileServicesPillars />
       </ScrollSection>
-      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+      <ScrollSection chapter={{ num: "02", label: "Contact" }}>
         <MobileFinalCta />
       </ScrollSection>
     </div>

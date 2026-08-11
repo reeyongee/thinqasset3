@@ -33,22 +33,19 @@ export function ScrollSectionsProvider({
   children: ReactNode;
   dockAboveFooter?: boolean;
 }) {
-  const entriesRef = useRef<SectionEntry[]>([]);
-  const [, bump] = useState(0);
+  const [entries, setEntries] = useState<SectionEntry[]>([]);
 
   const mount = useCallback((ref: RefObject<HTMLElement | null>, chapter: ScrollChapter) => {
-    entriesRef.current = [...entriesRef.current, { ref, chapter }];
-    bump((n) => n + 1);
+    setEntries((prev) => [...prev, { ref, chapter }]);
 
     return () => {
-      entriesRef.current = entriesRef.current.filter((entry) => entry.ref !== ref);
-      bump((n) => n + 1);
+      setEntries((prev) => prev.filter((entry) => entry.ref !== ref));
     };
   }, []);
 
   const value = useMemo(() => ({ mount }), [mount]);
-  const sections = entriesRef.current.map((entry) => entry.ref);
-  const chapters = entriesRef.current.map((entry) => entry.chapter);
+  const sections = entries.map((entry) => entry.ref);
+  const chapters = entries.map((entry) => entry.chapter);
 
   return (
     <ScrollSectionsContext.Provider value={value}>

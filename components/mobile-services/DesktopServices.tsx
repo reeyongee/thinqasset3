@@ -27,7 +27,7 @@ export function DesktopServices() {
       <ScrollSection chapter={{ num: "01", label: "Platforms" }}>
         <ServicesColumns />
       </ScrollSection>
-      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+      <ScrollSection chapter={{ num: "02", label: "Contact" }}>
         <FinalCtaSection />
       </ScrollSection>
     </div>

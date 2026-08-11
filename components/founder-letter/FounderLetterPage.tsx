@@ -6,7 +6,6 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 import Hero from "@/components/scenes/Hero";
 import Purpose from "@/components/scenes/Purpose";
 import Jurisdictions from "@/components/scenes/Jurisdictions";
-import Capabilities from "@/components/scenes/Capabilities";
 import Portrait from "@/components/scenes/Portrait";
 import Expansion from "@/components/scenes/Expansion";
 import Trust from "@/components/scenes/Trust";
@@ -16,7 +15,6 @@ export function FounderLetterPage() {
   const hero = useRef<HTMLElement>(null);
   const purpose = useRef<HTMLElement>(null);
   const jurisdictions = useRef<HTMLElement>(null);
-  const capabilities = useRef<HTMLElement>(null);
   const portrait = useRef<HTMLElement>(null);
   const expansion = useRef<HTMLElement>(null);
   const trust = useRef<HTMLElement>(null);
@@ -26,7 +24,6 @@ export function FounderLetterPage() {
     hero,
     purpose,
     jurisdictions,
-    capabilities,
     portrait,
     expansion,
     trust,
@@ -41,7 +38,6 @@ export function FounderLetterPage() {
         <Hero sectionRef={hero} />
         <Purpose sectionRef={purpose} />
         <Jurisdictions sectionRef={jurisdictions} />
-        <Capabilities sectionRef={capabilities} />
         <Portrait sectionRef={portrait} />
         <Expansion sectionRef={expansion} />
         <Trust sectionRef={trust} />

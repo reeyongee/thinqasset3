@@ -1,5 +1,4 @@
-import { TBG_TAGLINE } from "@/lib/brand-assets";
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { MAURITIUS_DTA_LINE, TBG_TAGLINE } from "@/lib/brand-assets";
 
 export const FOOTER_TAGLINE = TBG_TAGLINE;
 
@@ -14,10 +13,7 @@ export const FOOTER_MENU_COLUMNS = [
     { label: "Services", href: "/services" },
     { label: "Our Structures", href: "/services/our-structures" },
   ],
-  [
-    { label: "Consultation", href: CONSULTATION_HREF },
-    { label: "Contact", href: "/contact" },
-  ],
+  [{ label: "Contact", href: "/contact" }],
 ] as const;
 
 export const FOOTER_SOCIAL_HEADING = "Follow ThinqAsset";
@@ -54,8 +50,8 @@ export const FOOTER_OFFICES: FooterOffice[] = [
     country: "Mauritius",
     company: "ThinqAsset Fund Management Ltd\nOperational Headquarters",
     addressLines: [
-      "Direct fund management and VCC structuring.",
-      "40+ double tax treaties across Asia, Europe, and Africa.",
+      "Direct Fund Management and structuring.",
+      `${MAURITIUS_DTA_LINE}.`,
       "Email: info@thinqasset.com",
     ],
     href: "/services/mauritius-protected-cell-company",
@@ -65,7 +61,7 @@ export const FOOTER_OFFICES: FooterOffice[] = [
   },
   {
     country: "UAE",
-    company: "ThinqAsset\nDIFC & ADGM",
+    company: "ThinqAsset\nDIFC",
     addressLines: [
       "Gateway to the Gulf for capital formation",
       "and institutional relationships.",

@@ -53,7 +53,7 @@ export const FUND_PLATFORM_OFFERING_DETAILS: Record<
     ],
     journey: [
       {
-        title: "Strategy & consultation",
+        title: "Strategy session",
         detail:
           "Clarify objectives, investor base, asset class, and preferred jurisdictions before recommending a path.",
       },

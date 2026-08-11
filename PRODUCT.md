@@ -10,7 +10,7 @@ Investment managers, private equity and venture capital sponsors, financial inst
 
 ## Product Purpose
 
-ThinqAsset’s public marketing site explains the regulated fund platform, structures, and corporate infrastructure so sponsors can understand the operating model, choose a path, and book a consultation. Success is confidence: the site should feel as precise as the platform it sells.
+ThinqAsset’s public marketing site explains the regulated fund platform, structures, and corporate infrastructure so sponsors can understand the operating model, choose a path, and get in touch. Success is confidence: the site should feel as precise as the platform it sells.
 
 ## Brand Personality
 

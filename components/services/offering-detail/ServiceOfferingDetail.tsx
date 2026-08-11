@@ -174,7 +174,7 @@ export function ServiceOfferingDetail({
         </article>
       </ScrollSection>
 
-      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+      <ScrollSection chapter={{ num: "02", label: "Contact" }}>
         <FinalCtaSection />
       </ScrollSection>
     </div>

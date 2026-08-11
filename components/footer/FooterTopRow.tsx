@@ -117,13 +117,13 @@ export function FooterTopRow() {
     <div className="inner-footer">
       <div className="inner-footer-left">
         <div className="div-block-28">
-          <a
+          <TransitionLink
             href="/"
             className="footer-logo-link"
             aria-label={`${THINQASSET_LOGO_ALT} home`}
           >
             <ThinqAssetNavLogo className="footer-logo-mark" />
-          </a>
+          </TransitionLink>
           <div className="text-title-footer">{FOOTER_TAGLINE}</div>
         </div>
 

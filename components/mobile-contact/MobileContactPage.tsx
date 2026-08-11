@@ -50,7 +50,7 @@ export function MobileContactPage({ startWithForm = false }: { startWithForm?: b
     <div className="mobile-contact" data-transition-page>
       <PageHero
         lines={[
-          "Consultation",
+          "Contact",
           <>
             The right structure starts with a{" "}
             <em className="italic text-brass">conversation.</em>

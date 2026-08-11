@@ -23,7 +23,7 @@
   },
   "intentionalDeltas": {
     "fontFamily": "Inter (ThinqAsset) vs Geist (McShannock)",
-    "ctaLabel": "Consultation → /consultation vs Start a project → /contact",
+    "ctaLabel": "Contact → /contact vs Start a project → /contact",
     "ctaWidth": "~181px vs ~202px (label length)",
     "itemCount": "16 pillar offerings on hub vs 5 UX items on reference",
     "subOfferingPages": "3 highlight bullets (name-only) vs 5 full name+desc rows",
@@ -34,7 +34,7 @@
   },
   "fixedDuringPass": {
     "subPageItemMapping": "Sub-offering pages now use page.highlights (3 items) instead of full 16-item pillar catalog",
-    "ctaLabelShortened": "Consultation for closer button proportions",
+    "ctaLabelShortened": "Contact for closer button proportions",
     "flairScale": "Scale on .button__flair wrapper with gsap.set initial scale 0 (matches McShannock DOM)",
     "leading15": "lg:leading-15 on headline per class manifest"
   },

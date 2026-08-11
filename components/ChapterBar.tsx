@@ -9,11 +9,10 @@ export const FOUNDER_CHAPTERS: ScrollChapter[] = [
   { num: null, label: "Intro" },
   { num: "01", label: "Purpose" },
   { num: "02", label: "Foundation" },
-  { num: "03", label: "Platform" },
-  { num: "05", label: "Founder" },
-  { num: "06", label: "Expansion" },
-  { num: "07", label: "Trust" },
-  { num: "08", label: "Gratitude" },
+  { num: "03", label: "Founder" },
+  { num: "04", label: "Expansion" },
+  { num: "05", label: "Trust" },
+  { num: "06", label: "Gratitude" },
 ];
 
 function ChapterDot({ target }: { target: RefObject<HTMLElement | null> }) {

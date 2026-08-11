@@ -2,8 +2,15 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { APPROACH_BODY, APPROACH_STEPS } from "@/components/our-approach/constants";
 import { HeroButton } from "@/components/hero/HeroButton";
+import {
+  APPROACH_BODY,
+  APPROACH_CTA,
+  APPROACH_HEADLINE_LINE1,
+  APPROACH_HEADLINE_LINE2,
+  APPROACH_STEPS,
+} from "@/components/our-approach/constants";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 import { MobileReveal } from "../MobileReveal";
 
 export function MobileApproach() {
@@ -11,14 +18,14 @@ export function MobileApproach() {
 
   return (
     <section
-      id="use-cases"
+      id="services"
       className="mobile-section"
-      aria-labelledby="mobile-approach-heading"
+      aria-labelledby="mobile-services-heading"
     >
       <MobileReveal>
-        <h2 id="mobile-approach-heading" className="mobile-section__headline">
-          Built on expertise,{" "}
-          <span className="text-ta-gold">deployed with discipline</span>
+        <h2 id="mobile-services-heading" className="mobile-section__headline">
+          {APPROACH_HEADLINE_LINE1}
+          <span className="block text-ta-gold">{APPROACH_HEADLINE_LINE2}</span>
         </h2>
         <p className="mobile-section__body mt-3 max-w-[38ch]">{APPROACH_BODY}</p>
       </MobileReveal>
@@ -38,7 +45,15 @@ export function MobileApproach() {
                     setOpenId((current) => (current === step.id ? null : step.id))
                   }
                 >
-                  <span>{step.title}</span>
+                  <span className="flex items-center gap-3">
+                    <span
+                      className="font-[family-name:var(--font-geist-mono)] text-xs text-token-muted"
+                      aria-hidden
+                    >
+                      {step.number}
+                    </span>
+                    <span>{step.title}</span>
+                  </span>
                   <span aria-hidden className="text-ta-gold">
                     {open ? "−" : "+"}
                   </span>
@@ -58,9 +73,17 @@ export function MobileApproach() {
                         className="object-cover"
                       />
                     </div>
-                    <p className="mobile-section__body p-4 text-sm">
-                      {step.description}
-                    </p>
+                    <div className="flex flex-col gap-4 px-4 pb-4 pt-4">
+                      <p className="mobile-section__body m-0 text-sm">
+                        {step.description}
+                      </p>
+                      <TransitionLink
+                        href={step.href}
+                        className="inline-flex py-2 font-[family-name:var(--font-inter)] text-sm font-medium text-ta-gold"
+                      >
+                        {step.linkLabel} →
+                      </TransitionLink>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -70,7 +93,11 @@ export function MobileApproach() {
       </div>
 
       <MobileReveal className="mt-6">
-        <HeroButton className="w-full" />
+        <HeroButton
+          className="w-full"
+          label={APPROACH_CTA.label}
+          href={APPROACH_CTA.href}
+        />
       </MobileReveal>
     </section>
   );

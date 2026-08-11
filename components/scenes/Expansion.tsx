@@ -67,7 +67,7 @@ function RouteMapDesktop({
 }) {
   return (
     <motion.div style={{ scale, x }} className="mx-auto w-full max-w-[1400px] -translate-y-10 will-change-transform">
-      <svg viewBox="0 35 1200 395" className="h-auto w-full" role="img" aria-label="TBG expansion route: Dubai, India, Singapore, London">
+      <svg viewBox="0 35 1200 395" className="h-auto w-full" role="img" aria-label="ThinqAsset expansion route: Dubai, India, Singapore, London">
         <RoutePaths draw={draw} />
         {NODES.map((n) => (
           <Node key={n.name} p={progress} n={n} />
@@ -95,7 +95,7 @@ function RouteMapMobile({ progress, draw }: { progress: MotionValue<number>; dra
         preserveAspectRatio="xMidYMid meet"
         className="h-full min-h-[44dvh] w-full"
         role="img"
-        aria-label="TBG expansion route: Dubai, India, Singapore, London"
+        aria-label="ThinqAsset expansion route: Dubai, India, Singapore, London"
       >
         <RoutePaths draw={draw} />
         {NODES.map((n) => (

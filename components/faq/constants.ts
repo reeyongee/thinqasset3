@@ -15,7 +15,7 @@ export const FAQ_ITEMS: FaqItemData[] = [
     id: "jurisdictions",
     question: "Which jurisdictions are available for our funds?",
     answer:
-      "Mauritius VCC, DIFC, ADGM, and Luxembourg directly, with partner access in Cayman, Singapore, and Bermuda for cross-border strategies.",
+      "Mauritius VCC, DIFC, and Luxembourg directly, with partner access in Cayman, Singapore, and Bermuda for cross-border strategies.",
   },
   {
     id: "structure-selection",

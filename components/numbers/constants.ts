@@ -12,6 +12,8 @@ export type StatData = {
   suffix: string;
   label: string;
   image: string;
+  /** When set, shown instead of an animated numeric counter. */
+  display?: string;
 };
 
 export const TRUST_ITEMS: TrustItemData[] = [
@@ -52,19 +54,20 @@ export const STATS: StatData[] = [
   },
   {
     id: "dtas",
-    end: 40,
+    end: 150,
     prefix: "",
-    suffix: "+",
-    label: "Double tax agreements via Mauritius",
+    suffix: "",
+    label: "Double tax agreements throughout the world",
     image: "/assets/stats/dtas.jpg",
   },
   {
     id: "jurisdictions",
-    end: 6,
+    end: 0,
     prefix: "",
     suffix: "",
     label: "Jurisdictions",
     image: "/assets/stats/jurisdictions.jpg",
+    display: "Multiple",
   },
   {
     id: "continents",

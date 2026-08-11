@@ -121,7 +121,7 @@ Use `TransitionLink` for all in-app routes:
 ```tsx
 import { TransitionLink } from "@/components/transition/TransitionLink";
 
-<TransitionLink href="/consultation">Consultation</TransitionLink>
+<TransitionLink href="/contact">Contact</TransitionLink>
 ```
 
 `TransitionLink` delegates to `next-transition-router` and prefetches on hover/focus.
@@ -132,7 +132,7 @@ import { TransitionLink } from "@/components/transition/TransitionLink";
 - External `http(s):` URLs
 - Hash-only links on the same page (`/#section`)
 
-Nav consultation button may still be `mailto:` — only hero CTAs that should animate routes need `TransitionLink`.
+Nav contact button may still be `mailto:` — only hero CTAs that should animate routes need `TransitionLink`.
 
 ### 5. Metadata
 

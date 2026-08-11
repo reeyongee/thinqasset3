@@ -3,6 +3,7 @@ import { Fraunces, Archivo, Spline_Sans_Mono } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import Grain from "@/components/primitives/Grain";
 import { FOUNDER } from "@/components/founder-letter/constants";
+import { createPageMetadata, noIndexRobots } from "@/lib/site-metadata";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -12,10 +13,11 @@ const fraunces = Fraunces({
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo" });
 const tbgmono = Spline_Sans_Mono({ subsets: ["latin"], variable: "--font-tbgmono" });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: `TBG Group Holding — A Message from ${FOUNDER.name}`,
   description: `A letter from ${FOUNDER.name}, Founder & CEO of ${FOUNDER.org}, ${FOUNDER.place}.`,
-};
+  robots: noIndexRobots,
+});
 
 export default function TbgLetterLayout({ children }: { children: React.ReactNode }) {
   return (

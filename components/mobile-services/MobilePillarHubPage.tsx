@@ -77,7 +77,7 @@ export function MobilePillarHubPage({ data }: MobilePillarHubPageProps) {
           />
         ) : null}
       </ScrollSection>
-      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+      <ScrollSection chapter={{ num: "02", label: "Contact" }}>
         <MobileFinalCta />
       </ScrollSection>
     </div>

@@ -38,7 +38,7 @@ Home sells capabilities, jurisdictions, philosophy, and stats. **About is the hu
 | SplitText | DIY line-mask markup only |
 | Pin budget | 2 major pins (story + jurisdictions) + 1 short values formation pin |
 | Eyebrows | **One** on page (`About us` in hero only) |
-| CTA | “Talk to us” → `/consultation` (only contact intent on page) |
+| CTA | “Talk to us” → `/contact` (only contact intent on page) |
 
 ---
 
@@ -165,7 +165,7 @@ We didn’t pick domiciles from a brochure. Mauritius and Dubai are where we liv
 | Location | Role | Copy |
 |----------|------|------|
 | **Mauritius** | Direct · operational HQ | This is where ThinqAsset runs day to day. VCC work, fund management, and the treaty network that connects Asia, Europe, and Africa all sit here. Alvin’s been building structures in Mauritius since 2009; it’s the jurisdiction we know from the inside. |
-| **UAE (DIFC & ADGM)** | Direct · Gulf-facing | Dubai is our window to the Gulf: capital formation, institutional relationships, and mandates that need DIFC or ADGM clarity. When a client asks “does this work for GCC investors?”, this is usually where the conversation starts. |
+| **UAE (DIFC)** | Direct · Gulf-facing | Dubai is our window to the Gulf: capital formation, institutional relationships, and mandates that need DIFC clarity. When a client asks “does this work for GCC investors?”, this is usually where the conversation starts. |
 | **Luxembourg** | Direct · European anchor | For European investor bases and UCITS-style thinking, Luxembourg is our continental base. Same team, same reporting discipline; different regulatory context. |
 | **Singapore** | Partnership | APAC mandates often need a local administrator or partner on the ground. We’ve worked through Singapore for years rather than pretending one domicile fits every Asia-Pacific story. |
 | **Cayman / Bermuda** | Partnership | Offshore vehicles still matter for certain strategies. We access Cayman and Bermuda through relationships we trust, when the mandate actually calls for it, not as a menu item. |
@@ -177,7 +177,7 @@ We didn’t pick domiciles from a brochure. Mauritius and Dubai are where we liv
 ### 7.6 CTA
 
 - **Line:** Curious if we’re the right fit? We’d rather have a straight conversation than send a deck into the void.
-- **Button:** Talk to us → `/consultation`
+- **Button:** Talk to us → `/contact`
 
 ---
 

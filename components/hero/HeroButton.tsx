@@ -17,7 +17,7 @@ export function HeroButton({
   className = "",
   animate = false,
   animationDelay = "0.2s",
-  label = "Consultation",
+  label = "Contact",
   href = CTA_HREF,
   onClick,
   transitionItem = false,

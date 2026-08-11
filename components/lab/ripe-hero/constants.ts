@@ -13,7 +13,7 @@ export const LAB_HERO_VIDEO_MP4 = HERO_BG_VIDEO_MP4;
 /** Lab copy — line breaks tuned for RIPE motion geometry (2-line headline, ~2-line body). */
 export const LAB_COPY = {
   headlineLines: ["Innovative Global", "Fund Management."],
-  body: "Connecting the Middle East with global investment opportunities through tailored strategies.",
+  body: "Connecting the world.",
   marqueeTag: "Institutional fund solutions",
   followEyebrow: "Global reach",
   followHeading: "Mauritius and Dubai teams serving fund managers worldwide.",

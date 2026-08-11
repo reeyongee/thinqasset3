@@ -41,7 +41,7 @@
     {
       "area": "Desktop CTA label & href",
       "reference": "Start a project → /contact",
-      "implementation": "Consultation → /consultation",
+      "implementation": "Contact → /contact",
       "severity": "intentional-content"
     },
     {

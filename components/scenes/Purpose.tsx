@@ -2,10 +2,11 @@
 
 import { RefObject } from "react";
 import { motion, MotionValue, useTransform } from "framer-motion";
+import { LETTER_PURPOSE_SUPPORTING } from "@/components/founder-letter/constants";
 import { useAmplitude, usePinnedScene } from "@/hooks/useScrollScene";
 
 const SEGMENTS: React.ReactNode[] = [
-  <>At TBG Group Holding Ltd.,</>,
+  <>At ThinqAsset,</>,
   <>we are driven by</>,
   <em key="1" className="italic text-brass">
     a singular purpose —
@@ -49,6 +50,7 @@ export default function Purpose({ sectionRef }: { sectionRef: RefObject<HTMLElem
     smooth: true,
   });
   const glow = useTransform(progress, [0.15, 0.8], [0, 0.85], { clamp: true });
+  const supportingOpacity = useTransform(progress, [0.55, 0.72], [0, 1], { clamp: true });
 
   return (
     <section ref={sectionRef} style={style} className="relative bg-ink">
@@ -67,7 +69,7 @@ export default function Purpose({ sectionRef }: { sectionRef: RefObject<HTMLElem
           className="absolute right-10 top-[20vh] hidden h-[60vh] w-px origin-top bg-brass/50 md:block"
         />
 
-        <div className="mx-auto flex w-full max-w-[1600px] justify-center px-5 md:px-14">
+        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center justify-center px-5 md:px-14">
           <p className="mx-auto max-w-[38ch] text-balance text-center font-display text-[clamp(1.45rem,5vw,2.35rem)] font-light leading-[1.32] text-paper/90 sm:max-w-[42ch] md:max-w-[48ch] md:leading-[1.3]">
             {SEGMENTS.map((s, i) => (
               <span key={i}>
@@ -77,6 +79,12 @@ export default function Purpose({ sectionRef }: { sectionRef: RefObject<HTMLElem
               </span>
             ))}
           </p>
+          <motion.p
+            style={{ opacity: supportingOpacity }}
+            className="mx-auto mt-8 max-w-[40ch] text-balance text-center text-[0.9375rem] leading-relaxed text-paper/55 sm:max-w-[48ch] md:mt-10 md:text-base"
+          >
+            {LETTER_PURPOSE_SUPPORTING}
+          </motion.p>
         </div>
       </div>
     </section>

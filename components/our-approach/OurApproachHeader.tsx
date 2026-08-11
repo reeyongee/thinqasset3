@@ -1,5 +1,5 @@
 import { HeroButton } from "@/components/hero/HeroButton";
-import { APPROACH_BODY } from "./constants";
+import { APPROACH_BODY, APPROACH_CTA } from "./constants";
 import { OurApproachHeadline } from "./OurApproachHeadline";
 
 export function OurApproachHeader() {
@@ -13,7 +13,11 @@ export function OurApproachHeader() {
       </div>
 
       <div className="approach-cta w-full shrink-0 will-change-transform min-[810px]:w-auto">
-        <HeroButton className="w-full min-[810px]:w-auto" />
+        <HeroButton
+          className="w-full min-[810px]:w-auto"
+          label={APPROACH_CTA.label}
+          href={APPROACH_CTA.href}
+        />
       </div>
     </div>
   );

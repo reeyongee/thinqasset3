@@ -50,8 +50,8 @@ export function Globe({
   const startLoopRef = useRef<(() => void) | null>(null);
   const flyInRef = useRef(flyIn);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const targetPhiRef = useRef(phiRef.current);
-  const targetThetaRef = useRef(thetaRef.current);
+  const targetPhiRef = useRef(flyIn ? flyInStartPhi : 4.2);
+  const targetThetaRef = useRef(flyIn ? flyInStartTheta : 0.3);
 
   useEffect(() => {
     const root = rootRef.current;

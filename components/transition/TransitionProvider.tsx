@@ -47,7 +47,10 @@ export function TransitionProvider({
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const prefersReducedMotionRef = useRef(prefersReducedMotion);
-  prefersReducedMotionRef.current = prefersReducedMotion;
+
+  useEffect(() => {
+    prefersReducedMotionRef.current = prefersReducedMotion;
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     gsap.set(".transition-veil", { autoAlpha: 0 });

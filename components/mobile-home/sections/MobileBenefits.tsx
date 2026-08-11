@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { BENEFIT_ROWS } from "@/components/benefits/constants";
+import {
+  BENEFIT_ROWS,
+  BENEFITS_HEADLINE_LINE1,
+  BENEFITS_HEADLINE_LINE2,
+} from "@/components/benefits/constants";
 import { MobileReveal } from "../MobileReveal";
 
 const ALL_BENEFITS = BENEFIT_ROWS.flat();
@@ -13,8 +17,8 @@ export function MobileBenefits() {
     >
       <MobileReveal>
         <h2 id="mobile-benefits-heading" className="mobile-section__headline">
-          Built on expertise,{" "}
-          <span className="text-ta-gold">deployed with discipline</span>
+          {BENEFITS_HEADLINE_LINE1}
+          <span className="block text-ta-gold">{BENEFITS_HEADLINE_LINE2}</span>
         </h2>
       </MobileReveal>
 

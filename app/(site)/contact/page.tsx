@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { ContactViewportGate } from "@/components/mobile-contact/ContactViewportGate";
+import { createPageMetadata } from "@/lib/site-metadata";
 
-export const metadata: Metadata = {
-  title: "Contact — THINQASSET",
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact",
   description:
-    "Start a consultation with ThinqAsset Fund Management — fund platform, structures, and corporate infrastructure.",
-};
+    "Contact ThinqAsset Fund Management — fund platform, structures, and corporate infrastructure.",
+  path: "/contact",
+});
 
 type ContactPageProps = {
   searchParams: Promise<{ form?: string | string[] }>;

@@ -44,15 +44,12 @@ function setupOrionVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
 
 function setupExposureVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
   const fill = wrapper.querySelector<SVGPathElement>(".feature-gauge-fill");
-  const needle = wrapper.querySelector<HTMLElement>(".feature-gauge-needle");
+  const needle = wrapper.querySelector<SVGGElement>(".feature-gauge-needle");
   if (!fill || !needle) return;
 
   const gauge = { value: 0 };
 
-  gsap.set(needle, {
-    rotation: -45,
-    transformOrigin: "50% 50%",
-  });
+  gsap.set(needle, { rotation: -45, svgOrigin: "120 120" });
   fill.setAttribute("d", gaugeArcPath(0));
 
   tl.to(
@@ -83,7 +80,7 @@ function setupExposureVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
 
   tl.to(
     needle,
-    { rotation: 45, duration: 1, ease: VISUAL_EASE },
+    { rotation: 45, duration: 1, ease: VISUAL_EASE, svgOrigin: "120 120" },
     VISUAL_START + 2,
   );
 }
@@ -119,9 +116,9 @@ function setFinalVisualState(wrapper: HTMLElement, index: number) {
 
   if (index === 2) {
     const fill = wrapper.querySelector<SVGPathElement>(".feature-gauge-fill");
-    const needle = wrapper.querySelector<HTMLElement>(".feature-gauge-needle");
+    const needle = wrapper.querySelector<SVGGElement>(".feature-gauge-needle");
     fill?.setAttribute("d", gaugeArcPath(75));
-    if (needle) gsap.set(needle, { rotation: 45 });
+    if (needle) gsap.set(needle, { rotation: 45, svgOrigin: "120 120" });
   }
 }
 

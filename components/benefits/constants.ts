@@ -16,6 +16,9 @@ export type BenefitData = {
   enterX: number;
 };
 
+export const BENEFITS_HEADLINE_LINE1 = "How we operate,";
+export const BENEFITS_HEADLINE_LINE2 = "with rigor and reach.";
+
 export const BENEFIT_ROWS: BenefitData[][] = [
   [
     {

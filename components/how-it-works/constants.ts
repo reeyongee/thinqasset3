@@ -1,6 +1,6 @@
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { CONTACT_FORM_HREF } from "@/lib/transition/constants";
 
-export const CTA_HREF = CONSULTATION_HREF;
+export const CTA_HREF = CONTACT_FORM_HREF;
 export type StepData = {
   id: string;
   number: string;

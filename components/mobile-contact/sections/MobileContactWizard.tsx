@@ -40,7 +40,7 @@ export function MobileContactWizard({
       className="mobile-contact-wizard"
       role="dialog"
       aria-modal="true"
-      aria-label="Consultation form"
+      aria-label="Contact form"
     >
       <button
         type="button"

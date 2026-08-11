@@ -12,8 +12,8 @@ export function MobileNumbers() {
     >
       <MobileReveal>
         <h2 id="mobile-numbers-heading" className="mobile-section__headline">
-          Why ThinqAsset{" "}
-          <span className="text-ta-gold">
+          Why ThinqAsset
+          <span className="block text-ta-gold">
             built on expertise, deployed with discipline
           </span>
         </h2>
@@ -34,9 +34,7 @@ export function MobileNumbers() {
             </div>
             <div className="p-4">
               <p className="m-0 font-display text-3xl leading-none text-white">
-                {stat.prefix}
-                {stat.end}
-                {stat.suffix}
+                {stat.display ?? `${stat.prefix}${stat.end}${stat.suffix}`}
               </p>
               <p className="mobile-section__body mt-2 text-sm">{stat.label}</p>
             </div>

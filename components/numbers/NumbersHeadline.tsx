@@ -5,8 +5,10 @@ export function NumbersHeadline() {
         id="numbers-heading"
         className="font-display m-0 text-left text-[40px] leading-[1.1] tracking-[-2px] text-white"
       >
-        Why ThinqAsset{" "}
-        <span className="text-ta-gold">built on expertise, deployed with discipline</span>
+        Why ThinqAsset
+        <span className="block text-ta-gold">
+          built on expertise, deployed with discipline
+        </span>
       </h2>
     </div>
   );

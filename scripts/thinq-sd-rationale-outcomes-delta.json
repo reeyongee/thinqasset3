@@ -30,7 +30,7 @@
   },
   "intentionalDeltas": {
     "fontFamily": "Inter vs Geist",
-    "ctaLabel": "Consultation → /consultation vs Start a project → /contact",
+    "ctaLabel": "Contact → /contact vs Start a project → /contact",
     "ctaWidth": "~183px vs ~202px",
     "outcomesSectionH": "~994px vs 961px (longer ThinqAsset benefit copy wraps)",
     "benefitItemH": "~106px vs ~80px item 0 (content length)",

@@ -15,7 +15,7 @@ export function ApproachStepStack({ steps }: ApproachStepStackProps) {
     <div
       className="approach-accordion flex w-full flex-1 flex-col gap-4 will-change-transform"
       role="tablist"
-      aria-label="Investing journey steps"
+      aria-label="Service platforms"
     >
       {steps.map((step, index) => (
         <ApproachStepCard

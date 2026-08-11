@@ -109,30 +109,31 @@ const POOL_IMAGES = {
   structuresJourneyUae: "/thinqasset-assets/services/pools/structures-journey-uae.png",
   structuresJourneyMauritius: "/thinqasset-assets/services/pools/structures-journey-mauritius.png",
   structuresJourneyLuxembourg: "/thinqasset-assets/services/pools/structures-journey-luxembourg.png",
-  structuresCarouselDifc: "/thinqasset-assets/services/pools/structures-carousel-difc.png",
-  structuresCarouselPcc: "/thinqasset-assets/services/pools/structures-carousel-pcc.png",
-  structuresCarouselGplp: "/thinqasset-assets/services/pools/structures-carousel-gplp.png",
+  structuresCarouselDifc: "/thinqasset-assets/services/pools/carousels/carousel-difc.png",
+  structuresCarouselPcc: "/thinqasset-assets/services/pools/carousels/carousel-mauritius-pcc.png",
+  structuresCarouselGplp: "/thinqasset-assets/services/pools/carousels/carousel-lux-gplp.png",
   corporateJourneySingapore: "/thinqasset-assets/services/pools/corporate-journey-singapore.png",
   corporateJourneyUae: "/thinqasset-assets/services/pools/corporate-journey-uae.png",
   corporateJourneyLuxembourg: "/thinqasset-assets/services/pools/corporate-journey-luxembourg.png",
-  corporateCarouselSingapore: "/thinqasset-assets/services/pools/corporate-carousel-singapore.png",
-  corporateCarouselMauritius: "/thinqasset-assets/services/pools/corporate-carousel-mauritius.png",
-  corporateCarouselUae: "/thinqasset-assets/services/pools/corporate-carousel-uae.png",
-  structuresRationale: "/thinqasset-assets/services/pools/structures-rationale.png",
-  structuresOutcomes: "/thinqasset-assets/services/pools/structures-outcomes.png",
-  corporateRationale: "/thinqasset-assets/services/pools/corporate-rationale.png",
-  corporateSpotlightJurisdictions: "/thinqasset-assets/services/pools/corporate-spotlight-jurisdictions.png",
-  corporateSpotlightCompliance: "/thinqasset-assets/services/pools/corporate-spotlight-compliance.png",
+  corporateCarouselSingapore: "/thinqasset-assets/services/pools/carousels/carousel-intl-structuring.png",
+  corporateCarouselMauritius: "/thinqasset-assets/services/pools/carousels/carousel-incorporation.png",
+  corporateCarouselUae: "/thinqasset-assets/services/pools/carousels/carousel-corp-spvs.png",
+  structuresRationale: "/thinqasset-assets/services/pools/rationale-structures.png",
+  structuresOutcomes: "/thinqasset-assets/services/pools/outcomes-structures.png",
+  corporateRationale: "/thinqasset-assets/services/pools/rationale-corporate.png",
+  corporateSpotlightJurisdictions: "/thinqasset-assets/services/pools/spotlight-jurisdictions.png",
+  corporateSpotlightCompliance: "/thinqasset-assets/services/pools/spotlight-compliance.png",
+  structuresPillar: "/thinqasset-assets/services/pools/structures-pillar.png",
 } as const;
 
 const FUND_PLATFORM_IMAGES = {
   hero: "/thinqasset-assets/services/fund-platform/hero.png",
-  rationale: "/thinqasset-assets/services/fund-platform/rationale.png",
-  outcomes: "/thinqasset-assets/services/fund-platform/outcomes.png",
+  rationale: "/thinqasset-assets/services/pools/rationale-fund.png",
+  outcomes: "/thinqasset-assets/services/pools/outcomes-fund.png",
   journeyDiscovery: "/thinqasset-assets/services/fund-platform/journey-discovery.png",
-  journeyLaunch: "/thinqasset-assets/services/fund-platform/journey-launch.png",
-  journeyGrowth: "/thinqasset-assets/services/fund-platform/journey-growth.png",
-  journeyLegacy: "/thinqasset-assets/services/fund-platform/journey-legacy.png",
+  journeyLaunch: "/thinqasset-assets/services/pools/journey-launch.png",
+  journeyGrowth: "/thinqasset-assets/services/pools/journey-growth.png",
+  journeyLegacy: "/thinqasset-assets/services/pools/journey-legacy.png",
   spotlightDifc: "/thinqasset-assets/services/fund-platform/spotlight-difc.png",
   spotlightMauritius: "/thinqasset-assets/services/fund-platform/spotlight-mauritius.png",
   carouselFaas: "/thinqasset-assets/services/fund-platform/carousel-faas.png",
@@ -307,11 +308,111 @@ const HERO_IMAGES: Record<string, string> = {
   "corporate-compliance": "/thinqasset-assets/services/pools/heroes/hero-corporate-compliance.png",
   "private-client-family-office": "/thinqasset-assets/services/pools/heroes/hero-private-client-family-office.png",
   "trusts-foundations-estate": "/thinqasset-assets/services/pools/heroes/hero-trusts-foundations-estate.png",
+  // structures
+  "difc-structures": "/thinqasset-assets/services/pools/heroes/hero-difc-structures.png",
+  "mauritius-protected-cell-company": "/thinqasset-assets/services/pools/heroes/hero-mauritius-protected-cell-company.png",
+  "luxembourg-gp-lp": "/thinqasset-assets/services/pools/heroes/hero-luxembourg-gp-lp.png",
 };
 
 /** Unique hero image for an offering detail page. */
 export function resolveOfferingHeroImage(slug: string): OfferingScrollImage {
   const src = HERO_IMAGES[slug];
+  return {
+    src: src ?? FUND_PLATFORM_IMAGES.hero,
+    alt: "Offering overview",
+  };
+}
+
+/** Unique per-offering carousel/stack image — one image per offering, no cycling. */
+const OFFERING_CAROUSEL_IMAGES: Record<string, string> = {
+  // fund-platform
+  "fund-as-a-service": "/thinqasset-assets/services/pools/carousels/carousel-faas.png",
+  "regulated-fund-hosting": "/thinqasset-assets/services/pools/carousels/carousel-hosting.png",
+  "regulatory-umbrella-platform": "/thinqasset-assets/services/pools/carousels/carousel-umbrella.png",
+  "white-label-fund-solutions": "/thinqasset-assets/services/pools/carousels/carousel-white-label.png",
+  "management-company": "/thinqasset-assets/services/pools/carousels/carousel-manco.png",
+  "portfolio-management": "/thinqasset-assets/services/pools/carousels/carousel-portfolio.png",
+  "fund-governance": "/thinqasset-assets/services/pools/carousels/carousel-governance.png",
+  "compliance-risk-management": "/thinqasset-assets/services/pools/carousels/carousel-risk.png",
+  "aml-kyc-mlro": "/thinqasset-assets/services/pools/carousels/carousel-kyc.png",
+  "investor-onboarding": "/thinqasset-assets/services/pools/carousels/carousel-onboarding.png",
+  "cross-border-distribution": "/thinqasset-assets/services/pools/carousels/carousel-distribution.png",
+  "capital-markets-infrastructure": "/thinqasset-assets/services/pools/carousels/carousel-capital-markets.png",
+  "custody-escrow": "/thinqasset-assets/services/pools/carousels/carousel-custody.png",
+  spvs: "/thinqasset-assets/services/pools/carousels/carousel-spvs.png",
+  "structured-finance": "/thinqasset-assets/services/pools/carousels/carousel-structured-finance.png",
+  "tokenisation-digital-assets": "/thinqasset-assets/services/pools/carousels/carousel-tokenisation.png",
+  // structures
+  "difc-structures": "/thinqasset-assets/services/pools/carousels/carousel-difc.png",
+  "mauritius-protected-cell-company": "/thinqasset-assets/services/pools/carousels/carousel-mauritius-pcc.png",
+  "luxembourg-gp-lp": "/thinqasset-assets/services/pools/carousels/carousel-lux-gplp.png",
+  // corporate
+  "international-structuring": "/thinqasset-assets/services/pools/carousels/carousel-intl-structuring.png",
+  incorporation: "/thinqasset-assets/services/pools/carousels/carousel-incorporation.png",
+  "corporate-spvs": "/thinqasset-assets/services/pools/carousels/carousel-corp-spvs.png",
+  domiciliation: "/thinqasset-assets/services/pools/carousels/carousel-domiciliation.png",
+  "corporate-secretarial": "/thinqasset-assets/services/pools/carousels/carousel-secretarial.png",
+  directorship: "/thinqasset-assets/services/pools/carousels/carousel-directorship.png",
+  "cfo-services": "/thinqasset-assets/services/pools/carousels/carousel-cfo.png",
+  accounting: "/thinqasset-assets/services/pools/carousels/carousel-accounting.png",
+  payroll: "/thinqasset-assets/services/pools/carousels/carousel-payroll.png",
+  "audit-coordination": "/thinqasset-assets/services/pools/carousels/carousel-audit.png",
+  "corporate-governance": "/thinqasset-assets/services/pools/carousels/carousel-governance-corp.png",
+  "corporate-compliance": "/thinqasset-assets/services/pools/carousels/carousel-compliance-corp.png",
+  "private-client-family-office": "/thinqasset-assets/services/pools/carousels/carousel-family-office.png",
+  "trusts-foundations-estate": "/thinqasset-assets/services/pools/carousels/carousel-trusts.png",
+};
+
+const OFFERING_INDEX_TO_SLUG: Record<ServiceColumn["id"], readonly string[]> = {
+  "fund-platform": [
+    "fund-as-a-service",
+    "regulated-fund-hosting",
+    "regulatory-umbrella-platform",
+    "white-label-fund-solutions",
+    "management-company",
+    "portfolio-management",
+    "fund-governance",
+    "compliance-risk-management",
+    "aml-kyc-mlro",
+    "investor-onboarding",
+    "cross-border-distribution",
+    "capital-markets-infrastructure",
+    "custody-escrow",
+    "spvs",
+    "structured-finance",
+    "tokenisation-digital-assets",
+  ],
+  structures: [
+    "difc-structures",
+    "mauritius-protected-cell-company",
+    "luxembourg-gp-lp",
+  ],
+  corporate: [
+    "international-structuring",
+    "incorporation",
+    "corporate-spvs",
+    "domiciliation",
+    "corporate-secretarial",
+    "directorship",
+    "cfo-services",
+    "accounting",
+    "payroll",
+    "audit-coordination",
+    "corporate-governance",
+    "corporate-compliance",
+    "private-client-family-office",
+    "trusts-foundations-estate",
+  ],
+};
+
+/** Unique carousel image for an offering (by slug) — no cycling. */
+export function resolveOfferingCarouselImage(
+  pillarId: ServiceColumn["id"],
+  index: number,
+): OfferingScrollImage {
+  const slugs = OFFERING_INDEX_TO_SLUG[pillarId];
+  const slug = slugs[index % slugs.length]!;
+  const src = OFFERING_CAROUSEL_IMAGES[slug];
   return {
     src: src ?? FUND_PLATFORM_IMAGES.hero,
     alt: "Offering overview",
@@ -345,33 +446,6 @@ export function resolveOfferingScrollImage(
   const pool = PILLAR_OFFERING_IMAGE_POOLS[pillarId];
   const slot = Math.floor(index / holdItems);
   return pool[slot % pool.length]!;
-}
-
-/** Carousel slide image — cycles pillar art across offerings. */
-export function resolveOfferingCarouselImage(
-  pillarId: ServiceColumn["id"],
-  index: number,
-): OfferingScrollImage {
-  if (pillarId === "fund-platform") {
-    return FUND_PLATFORM_CAROUSEL_IMAGE_POOL[
-      index % FUND_PLATFORM_CAROUSEL_IMAGE_POOL.length
-    ]!;
-  }
-
-  if (pillarId === "structures") {
-    return STRUCTURES_CAROUSEL_IMAGE_POOL[
-      index % STRUCTURES_CAROUSEL_IMAGE_POOL.length
-    ]!;
-  }
-
-  if (pillarId === "corporate") {
-    return CORPORATE_CAROUSEL_IMAGE_POOL[
-      index % CORPORATE_CAROUSEL_IMAGE_POOL.length
-    ]!;
-  }
-
-  const pool = PILLAR_OFFERING_IMAGE_POOLS[pillarId];
-  return pool[index % pool.length]!;
 }
 
 export const SERVICE_COLUMNS: readonly ServiceColumn[] = [
@@ -494,7 +568,7 @@ export const SERVICE_COLUMNS: readonly ServiceColumn[] = [
         {
           question: "How long does a typical launch take?",
           answer:
-            "Timelines depend on structure, jurisdiction, and regulatory path. Hosting through an established platform is materially faster than greenfield licensing — we scope realistic milestones during consultation.",
+            "Timelines depend on structure, jurisdiction, and regulatory path. Hosting through an established platform is materially faster than greenfield licensing — we scope realistic milestones during initial contact.",
         },
         {
           question: "What makes this different from a traditional fund administrator?",

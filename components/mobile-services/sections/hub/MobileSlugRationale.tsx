@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { HeroButton } from "@/components/hero/HeroButton";
 import { MobileReveal } from "@/components/mobile-home/MobileReveal";
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { CONTACT_FORM_HREF } from "@/lib/transition/constants";
 import type { SlugImage } from "../../types";
 
 type MobileSlugRationaleProps = {
@@ -52,7 +52,7 @@ export function MobileSlugRationale({
 
       <MobileReveal delay={0.16}>
         <div className="mobile-slug-rationale__cta">
-          <HeroButton className="w-full" label="Consultation" href={CONSULTATION_HREF} />
+          <HeroButton className="w-full" label="Contact" href={CONTACT_FORM_HREF} />
         </div>
       </MobileReveal>
     </section>

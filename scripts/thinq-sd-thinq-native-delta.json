@@ -211,7 +211,7 @@
     "h2Unified": "40px display (.sd-h2) across offerings, rationale, FAQs, related, carousel",
     "h1": "clamp(2.5rem, 5vw, 3.75rem) display on landing",
     "body": "16px Inter on descriptions and FAQ answers",
-    "cta": "hero-btn 16px / 40px height → /consultation",
+    "cta": "hero-btn 16px / 40px height → /contact",
     "container": "max-width 1200px (.sd-container)",
     "accent": "var(--ta-gold) on icons, links, carousel hover",
     "canvas": "navy mesh + glass cards (no white/gray-50 bands)",
@@ -224,7 +224,7 @@
     "relatedCards": "2 sibling offerings vs McShannock project grid",
     "carouselSlides": "2 other pillars vs 6 McShannock services",
     "copyAndImagery": "ThinqAsset pillar PNGs and copy",
-    "ctaDestination": "/consultation vs McShannock contact",
+    "ctaDestination": "/contact vs McShannock contact",
     "noFinalCta": "No closing CTA band per product decision"
   }
 }

@@ -1,5 +1,7 @@
+const LOGO_BASE = "/thinqasset-assets";
+
 export const THINQASSET_LOGO_MASK_SRC =
-  "/thinqasset-assets/thinqasset-logo-reversed.png";
+  `${LOGO_BASE}/thinqasset-logo-reversed.png`;
 
 export const THINQASSET_LOGO_MASK_DIMENSIONS = {
   width: 1360,
@@ -26,3 +28,17 @@ export const THINQASSET_LOGO_ALT = "THINQASSET";
 
 /** Sitewide tagline — also expands the TBG acronym. */
 export const TBG_TAGLINE = "Think. Build. Grow.";
+
+/** Mauritius double tax agreement network — sitewide copy. */
+export const MAURITIUS_DTA_LINE = "150 Double tax agreements throughout the world";
+
+/** Favicon + PWA tile set — regenerated from header-mark with ~80% fill. */
+export const THINQASSET_FAVICON = {
+  icon32: `${LOGO_BASE}/favicon-32.png`,
+  icon192: `${LOGO_BASE}/favicon-192.png`,
+  apple180: `${LOGO_BASE}/apple-touch-icon-180.png`,
+  msTile270: `${LOGO_BASE}/ms-tile-270.png`,
+} as const;
+
+/** Default Open Graph / Twitter share image (1200×630). */
+export const THINQASSET_OG_IMAGE = `${LOGO_BASE}/og-image.png`;

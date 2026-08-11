@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+import { noIndexRobots } from "@/lib/site-metadata";
+
+export const metadata: Metadata = {
+  robots: noIndexRobots,
+};
+
 export default function TestLayout({
   children,
 }: Readonly<{

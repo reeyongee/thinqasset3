@@ -8,10 +8,7 @@ export function HeroBottomRow() {
         style={{ animationDelay: "0.4s" }}
       >
         <p className="m-0 font-[family-name:var(--font-inter)] text-base font-normal leading-[1.4] tracking-[-0.32px] text-token-muted">
-          <span className="text-ta-gold">
-            Connecting the Middle East with global investment opportunities
-          </span>{" "}
-          through tailored strategies and unparalleled service.
+          <span className="text-ta-gold">Connecting the world.</span>
         </p>
       </div>
 

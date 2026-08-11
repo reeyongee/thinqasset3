@@ -6,10 +6,10 @@ import { STATS } from "@/components/numbers/constants";
 export const GLOBE_SCROLL_HERO = {
   title: "Innovative Global",
   titleAccent: "Fund Management.",
-  bodyLead: "Connecting the Middle East with global investment opportunities",
-  bodyRest: "through tailored strategies and unparalleled service.",
+  bodyLead: "Connecting the world.",
+  bodyRest: "",
   ctaHref: CTA_HREF,
-  ctaLabel: "Consultation",
+  ctaLabel: "Contact",
 } as const;
 
 export const GLOBE_SCROLL_JURISDICTIONS = GLOBE_LOCATIONS.filter(
@@ -25,12 +25,12 @@ export const GLOBE_SCROLL_EYEBROW =
 
 export const GLOBE_SCROLL_STATS = STATS.map((stat) => ({
   label: stat.label.replace(" via Mauritius", "").replace(" Launched", ""),
-  value: `${stat.prefix}${stat.end}${stat.suffix}`,
+  value: stat.display ?? `${stat.prefix}${stat.end}${stat.suffix}`,
   desc:
     stat.id === "subfunds"
-      ? "Via single VCC structure"
+      ? "Structures."
       : stat.id === "dtas"
-        ? "Mauritius treaty network"
+        ? "Throughout the world"
         : stat.id === "jurisdictions"
           ? "One operating standard"
           : "Global investor reach",

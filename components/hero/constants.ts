@@ -1,4 +1,4 @@
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { CONTACT_FORM_HREF } from "@/lib/transition/constants";
 
 export const HERO_BG_IMAGE = "/assets/hero-bg.png";
 
@@ -7,7 +7,7 @@ export const HERO_BG_VIDEO_MP4 = "/thinqasset-assets/hero/prism-hero.mp4";
 export const HERO_BG_VIDEO_WEBM = "/thinqasset-assets/hero/prism-hero.webm";
 export const HERO_BG_CRUISE_RATE = 0.85;
 
-export const CTA_HREF = CONSULTATION_HREF;
+export const CTA_HREF = CONTACT_FORM_HREF;
 export const HEADLINE_WORDS = [
   "Innovative",
   "Global",

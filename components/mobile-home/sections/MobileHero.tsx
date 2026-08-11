@@ -9,7 +9,7 @@ import {
   HERO_BG_VIDEO_WEBM,
 } from "@/components/hero/constants";
 import { TBG_TAGLINE } from "@/lib/brand-assets";
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { CONTACT_FORM_HREF } from "@/lib/transition/constants";
 
 function subscribeReducedMotion(onStoreChange: () => void) {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -75,15 +75,12 @@ export function MobileHero() {
           className="mobile-section__body max-w-[34ch]"
           data-transition-text="body"
         >
-          <span className="text-ta-gold">
-            Connecting the Middle East with global investment opportunities
-          </span>{" "}
-          through tailored strategies and unparalleled service.
+          <span className="text-ta-gold">Connecting the world.</span>
         </p>
 
         <HeroButton
           className="w-full"
-          href={CONSULTATION_HREF}
+          href={CONTACT_FORM_HREF}
           transitionItem
         />
       </div>

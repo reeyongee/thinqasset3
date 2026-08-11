@@ -4,7 +4,6 @@ import { RefObject } from "react";
 import Image from "next/image";
 import { motion, MotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import Kicker from "@/components/primitives/Kicker";
-import { ThinqAssetLogoMark } from "@/components/brand/ThinqAssetLogoMark";
 import { FOUNDER } from "@/components/founder-letter/constants";
 import { SCENE_SPRING, useAmplitude } from "@/hooks/useScrollScene";
 
@@ -100,13 +99,10 @@ export default function Portrait({ sectionRef }: { sectionRef: RefObject<HTMLEle
             stewardship.&rdquo;
           </blockquote>
 
-          <div className="mt-10 flex items-center gap-6">
-            <ThinqAssetLogoMark height={56} className="shrink-0" />
-            <div className="font-tmono text-[10px] uppercase leading-relaxed tracking-[0.26em] text-paper/55">
-              <p>{FOUNDER.name}</p>
-              <p>{FOUNDER.title}</p>
-              <p>{FOUNDER.org} — {FOUNDER.place}</p>
-            </div>
+          <div className="mt-10 font-tmono text-[10px] uppercase leading-relaxed tracking-[0.26em] text-paper/55">
+            <p>{FOUNDER.name}</p>
+            <p>{FOUNDER.title}</p>
+            <p>{FOUNDER.org} — {FOUNDER.place}</p>
           </div>
         </motion.div>
       </div>

@@ -1,4 +1,4 @@
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { CONTACT_FORM_HREF } from "@/lib/transition/constants";
 
 export type HeaderVariant = "overlay" | "block";
 export type HeaderTheme = "light" | "dark";
@@ -23,8 +23,8 @@ export const SITE_NAV_LINKS = [
 ] as const;
 
 export const HEADER_CTA = {
-  label: "Consultation",
-  href: CONSULTATION_HREF,
+  label: "Contact",
+  href: CONTACT_FORM_HREF,
 } as const;
 
 export function getHeaderConfig(pathname: string): HeaderConfig {

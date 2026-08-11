@@ -209,7 +209,7 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
     <>
       <PageHero
         lines={[
-          "Consultation",
+          "Contact",
           <>
             The right structure starts with a{" "}
             <em className="italic text-brass">conversation.</em>
@@ -234,7 +234,7 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
             </p>
 
             <div className="contact-hero__top contact-hero__top--hidden">
-              <h1 data-transition-text="headline">Consultation</h1>
+              <h1 data-transition-text="headline">Contact</h1>
             </div>
 
             <div className="contact-hero__middle contact-hero__middle--hidden">

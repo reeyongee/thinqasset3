@@ -1,5 +1,5 @@
-/** Consultation form — contact page with the form overlay open. */
-export const CONSULTATION_HREF = "/contact?form=1";
+/** Contact form — contact page with the form overlay open. */
+export const CONTACT_FORM_HREF = "/contact?form=1";
 
 export const TRANSITION_SELECTORS = {
   page: "[data-transition-page]",

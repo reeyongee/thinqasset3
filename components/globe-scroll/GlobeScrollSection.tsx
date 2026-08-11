@@ -91,8 +91,10 @@ export function GlobeScrollSection() {
             <p className="globe-scroll__hero-body" data-transition-text="body">
               <span className="globe-scroll__hero-body-accent">
                 {GLOBE_SCROLL_HERO.bodyLead}
-              </span>{" "}
-              {GLOBE_SCROLL_HERO.bodyRest}
+              </span>
+              {GLOBE_SCROLL_HERO.bodyRest ? (
+                <> {GLOBE_SCROLL_HERO.bodyRest}</>
+              ) : null}
             </p>
             <div className="globe-scroll__ctas">
               <GlowButton

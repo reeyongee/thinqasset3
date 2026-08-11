@@ -69,7 +69,7 @@ export function MobileOfferingDetailPage({ data }: MobileOfferingDetailPageProps
           next={next}
         />
       </ScrollSection>
-      <ScrollSection chapter={{ num: "02", label: "Consultation" }}>
+      <ScrollSection chapter={{ num: "02", label: "Contact" }}>
         <MobileFinalCta variant="slug" />
       </ScrollSection>
     </div>

@@ -1,11 +1,11 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 import { AppBootstrap } from "@/components/bootstrap/AppBootstrap";
 import { SiteAtmosphere } from "@/components/background/SiteAtmosphere";
 import { SitePreloader } from "@/components/preloader/SitePreloader";
 import { ScrollOrchestratorProvider } from "@/components/scroll/ScrollOrchestratorProvider";
 import { TransitionProvider } from "@/components/transition/TransitionProvider";
 import { ViewportHeightSync } from "@/components/viewport/ViewportHeightSync";
-import { TBG_TAGLINE } from "@/lib/brand-assets";
+import { rootMetadata } from "@/lib/site-metadata";
 import { Albert_Sans, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -46,10 +46,7 @@ const albertSans = Albert_Sans({
   weight: ["500"],
 });
 
-export const metadata: Metadata = {
-  title: `THINQASSET — ${TBG_TAGLINE}`,
-  description: `${TBG_TAGLINE} ThinqAsset Fund Management Ltd delivers tailored investment strategies and unparalleled client service, connecting the Middle East with global investment opportunities across Mauritius, DIFC, Luxembourg, and beyond.`,
-};
+export const metadata = rootMetadata;
 
 export const viewport: Viewport = {
   width: "device-width",

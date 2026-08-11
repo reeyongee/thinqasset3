@@ -54,15 +54,21 @@ export function useNumbersAnimations({ sectionRef }: UseNumbersAnimationsProps) 
           y: 0,
         });
         statCards.forEach((card) => {
-          const end = Number(card.dataset.statEnd ?? 0);
-          const prefix = card.dataset.statPrefix ?? "";
-          const suffix = card.dataset.statSuffix ?? "";
+          const textDisplay = card.dataset.statDisplay;
           const counter = card.querySelector<HTMLElement>(
             ".numbers-counter-value",
           );
-          if (counter) {
-            counter.textContent = formatStatValue(end, prefix, suffix);
+          if (!counter) return;
+
+          if (textDisplay) {
+            counter.textContent = textDisplay;
+            return;
           }
+
+          const end = Number(card.dataset.statEnd ?? 0);
+          const prefix = card.dataset.statPrefix ?? "";
+          const suffix = card.dataset.statSuffix ?? "";
+          counter.textContent = formatStatValue(end, prefix, suffix);
         });
         return;
       }
@@ -101,13 +107,26 @@ export function useNumbersAnimations({ sectionRef }: UseNumbersAnimationsProps) 
           0.2 + index * 0.2,
         );
 
-        const end = Number(card.dataset.statEnd ?? 0);
-        const prefix = card.dataset.statPrefix ?? "";
-        const suffix = card.dataset.statSuffix ?? "";
+        const textDisplay = card.dataset.statDisplay;
         const counter = card.querySelector<HTMLElement>(
           ".numbers-counter-value",
         );
         if (!counter) return;
+
+        if (textDisplay) {
+          tl.fromTo(
+            counter,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.8, ease: APPEAR_EASE },
+            0.2 + index * 0.2,
+          );
+          counter.textContent = textDisplay;
+          return;
+        }
+
+        const end = Number(card.dataset.statEnd ?? 0);
+        const prefix = card.dataset.statPrefix ?? "";
+        const suffix = card.dataset.statSuffix ?? "";
 
         const state = { value: 0 };
         tl.to(

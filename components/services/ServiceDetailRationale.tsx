@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { CONTACT_FORM_HREF } from "@/lib/transition/constants";
 import { ServiceDetailPrimaryCta } from "./ServiceDetailPrimaryCta";
 import { useServiceDetailRationaleAnimation } from "./useServiceDetailRationaleAnimation";
 
@@ -21,8 +21,8 @@ export function ServiceDetailRationale({
   headline,
   paragraphs,
   image,
-  ctaHref = CONSULTATION_HREF,
-  ctaLabel = "Consultation",
+  ctaHref = CONTACT_FORM_HREF,
+  ctaLabel = "Contact",
 }: ServiceDetailRationaleProps) {
   const sectionRef = useRef<HTMLElement>(null);
 

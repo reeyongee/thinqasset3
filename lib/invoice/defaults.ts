@@ -33,7 +33,7 @@ export function createDefaultInvoice(): InvoiceData {
     docTitle: "Invoice",
 
     issuerName: "ThinqAsset Global Ltd.",
-    issuerAddress: "DIFC & ADGM\nDubai, United Arab Emirates",
+    issuerAddress: "DIFC\nDubai, United Arab Emirates",
 
     contactPhone: "+971 XX XXX XXXX",
     contactEmail: "info@thinqasset.com",

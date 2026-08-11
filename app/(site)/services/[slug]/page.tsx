@@ -7,6 +7,7 @@ import {
 } from "@/components/services/constants";
 import { buildSlugPageData } from "@/components/mobile-services/buildSlugPageData";
 import { ServiceSlugViewportGate } from "@/components/mobile-services/ServiceSlugViewportGate";
+import { createPageMetadata } from "@/lib/site-metadata";
 import "@/components/services/services.css";
 
 type ServiceDetailPageProps = {
@@ -25,14 +26,17 @@ export async function generateMetadata({ params }: ServiceDetailPageProps) {
   const { slug } = await params;
   const canonicalSlug = DEPRECATED_SERVICE_SLUGS[slug] ?? slug;
   const page = getServicePage(canonicalSlug);
-  if (!page) return { title: "Services | THINQASSET" };
+  if (!page) {
+    return createPageMetadata({ title: "Services", path: "/services" });
+  }
 
   const offeringDetail = getOfferingDetail(canonicalSlug);
 
-  return {
-    title: `${page.title} | THINQASSET`,
+  return createPageMetadata({
+    title: page.title,
     description: offeringDetail?.lede ?? page.summary,
-  };
+    path: `/services/${canonicalSlug}`,
+  });
 }
 
 export default async function ServiceDetailPage({

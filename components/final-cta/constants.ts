@@ -1,6 +1,6 @@
-import { CONSULTATION_HREF } from "@/lib/transition/constants";
+import { CONTACT_FORM_HREF } from "@/lib/transition/constants";
 
-export const FINAL_CTA_HREF = CONSULTATION_HREF;
+export const FINAL_CTA_HREF = CONTACT_FORM_HREF;
 export const FINAL_CTA_COPY = {
   title: "Speak with our team",
   subtitle:

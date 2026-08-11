@@ -1,3 +1,5 @@
+import { MAURITIUS_DTA_LINE } from "@/lib/brand-assets";
+
 export type GlobeLocation = {
   id: string;
   lat: number;
@@ -12,14 +14,14 @@ export const GLOBE_LOCATIONS: GlobeLocation[] = [
     lat: -20.24,
     lng: 57.5,
     name: "Mauritius",
-    desc: "Our operational headquarters. From here we manage 15+ sub-funds through a single VCC structure, leveraging 40+ double tax treaties and Asia-Europe-Africa connectivity to deliver institutional-grade fund management.",
+    desc: `Our operational headquarters. From here we manage 15+ sub-funds through a single VCC structure, leveraging ${MAURITIUS_DTA_LINE.toLowerCase()} and Asia-Europe-Africa connectivity to deliver institutional-grade fund management.`,
   },
   {
     id: "uae",
     lat: 25.21,
     lng: 55.28,
-    name: "UAE (DIFC & ADGM)",
-    desc: "Our gateway to the Gulf. Capital formation, institutional relationships, and fund management across Dubai\u2019s DIFC and Abu Dhabi\u2019s ADGM\u2014where regulatory clarity meets ambition in one of the world\u2019s most dynamic financial corridors.",
+    name: "UAE (DIFC)",
+    desc: "Our gateway to the Gulf. Capital formation, institutional relationships, and fund management from Dubai\u2019s DIFC\u2014where regulatory clarity meets ambition in one of the world\u2019s most dynamic financial corridors.",
   },
   {
     id: "luxembourg",

@@ -9,7 +9,7 @@ export const CONTACT_HEADLINE = {
 export const CONTACT_CTA_CARDS = [
   {
     id: "form",
-    label: "Consultation form",
+    label: "Contact form",
     title: "Start a dialogue.",
     href: null as string | null,
   },
