@@ -62,12 +62,11 @@ export const STATS: StatData[] = [
   },
   {
     id: "jurisdictions",
-    end: 0,
+    end: 3,
     prefix: "",
-    suffix: "",
-    label: "Jurisdictions",
+    suffix: "+",
+    label: "Core jurisdictions",
     image: "/assets/stats/jurisdictions.jpg",
-    display: "Multiple",
   },
   {
     id: "continents",

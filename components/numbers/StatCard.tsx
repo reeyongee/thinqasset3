@@ -40,19 +40,19 @@ export function StatCard({ stat }: StatCardProps) {
 
       <div className="numbers-stat-scrim" aria-hidden />
 
-      <div className="numbers-stat-content relative z-[2] flex w-full flex-col gap-2.5">
-        <div className="relative">
+      <div className="numbers-stat-content relative z-[2] flex w-full flex-col gap-1.5">
+        <div className="relative w-fit">
           <p
-            className="numbers-counter-placeholder m-0 select-none text-center font-[family-name:var(--font-geist-mono)] text-[40px] font-light leading-[1.1] tracking-[-0.02em] text-transparent [font-feature-settings:'tnum','zero']"
+            className="numbers-counter-placeholder m-0 select-none text-left font-[family-name:var(--font-geist-mono)] text-[40px] font-light leading-[1.05] tracking-[-0.03em] text-transparent [font-feature-settings:'tnum','zero']"
             aria-hidden
           >
             {display}
           </p>
-          <p className="numbers-counter-value absolute inset-0 m-0 text-center font-[family-name:var(--font-geist-mono)] text-[40px] font-light leading-[1.1] tracking-[-0.02em] text-white [font-feature-settings:'tnum','zero']">
+          <p className="numbers-counter-value absolute inset-0 m-0 text-left font-[family-name:var(--font-geist-mono)] text-[40px] font-light leading-[1.05] tracking-[-0.03em] text-white [font-feature-settings:'tnum','zero']">
             {stat.display ?? `${stat.prefix}0${stat.suffix}`}
           </p>
         </div>
-        <p className="m-0 w-full max-w-[600px] font-[family-name:var(--font-inter)] text-base leading-[1.4] tracking-[-0.02em] text-token-muted">
+        <p className="m-0 w-full max-w-[28ch] font-[family-name:var(--font-inter)] text-[0.9375rem] leading-[1.35] tracking-[-0.01em] text-token-muted">
           {stat.label}
         </p>
       </div>

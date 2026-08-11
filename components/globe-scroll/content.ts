@@ -24,7 +24,7 @@ export const GLOBE_SCROLL_EYEBROW =
   "Cross-border. Six jurisdictions, one operating standard.";
 
 export const GLOBE_SCROLL_STATS = STATS.map((stat) => ({
-  label: stat.label.replace(" via Mauritius", "").replace(" Launched", ""),
+  label: stat.label.replace("Core ", "").replace(" Launched", ""),
   value: stat.display ?? `${stat.prefix}${stat.end}${stat.suffix}`,
   desc:
     stat.id === "subfunds"
@@ -32,6 +32,6 @@ export const GLOBE_SCROLL_STATS = STATS.map((stat) => ({
       : stat.id === "dtas"
         ? "Throughout the world"
         : stat.id === "jurisdictions"
-          ? "One operating standard"
+          ? "DIFC · Mauritius · Luxembourg"
           : "Global investor reach",
 }));
