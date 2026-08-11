@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { scheduleScrollRefresh } from "@/lib/scroll/scrollOrchestrator";
-import { gaugeArcPath } from "./featureVisualUtils";
+import { gaugeArcPath, gaugeNeedleRotation } from "./featureVisualUtils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +24,17 @@ type UseFeaturesAnimationsProps = {
 function activateVisuals(wrapper: HTMLElement) {
   const visual = wrapper.querySelector<HTMLElement>(".feature-card-visual");
   visual?.classList.add("feature-visuals-active");
+}
+
+function applyGauge(fill: SVGPathElement, needle: SVGGElement, percent: number) {
+  fill.setAttribute("d", gaugeArcPath(percent));
+  // Drive the SVG transform attribute directly so GSAP CSS transforms
+  // cannot fight the pivot (previous svgOrigin rotation was inverted vs fill).
+  needle.setAttribute(
+    "transform",
+    `rotate(${gaugeNeedleRotation(percent)}, 120, 120)`,
+  );
+  gsap.set(needle, { clearProps: "transform" });
 }
 
 function setupPortfolioVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
@@ -48,9 +59,7 @@ function setupExposureVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
   if (!fill || !needle) return;
 
   const gauge = { value: 0 };
-
-  gsap.set(needle, { rotation: -45, svgOrigin: "120 120" });
-  fill.setAttribute("d", gaugeArcPath(0));
+  applyGauge(fill, needle, 0);
 
   tl.to(
     gauge,
@@ -58,9 +67,7 @@ function setupExposureVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
       value: 25,
       duration: 1,
       ease: VISUAL_EASE,
-      onUpdate: () => {
-        fill.setAttribute("d", gaugeArcPath(gauge.value));
-      },
+      onUpdate: () => applyGauge(fill, needle, gauge.value),
     },
     VISUAL_START,
   );
@@ -71,16 +78,8 @@ function setupExposureVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
       value: 75,
       duration: 1,
       ease: VISUAL_EASE,
-      onUpdate: () => {
-        fill.setAttribute("d", gaugeArcPath(gauge.value));
-      },
+      onUpdate: () => applyGauge(fill, needle, gauge.value),
     },
-    VISUAL_START + 2,
-  );
-
-  tl.to(
-    needle,
-    { rotation: 45, duration: 1, ease: VISUAL_EASE, svgOrigin: "120 120" },
     VISUAL_START + 2,
   );
 }
@@ -117,8 +116,7 @@ function setFinalVisualState(wrapper: HTMLElement, index: number) {
   if (index === 2) {
     const fill = wrapper.querySelector<SVGPathElement>(".feature-gauge-fill");
     const needle = wrapper.querySelector<SVGGElement>(".feature-gauge-needle");
-    fill?.setAttribute("d", gaugeArcPath(75));
-    if (needle) gsap.set(needle, { rotation: 45, svgOrigin: "120 120" });
+    if (fill && needle) applyGauge(fill, needle, 75);
   }
 }
 
