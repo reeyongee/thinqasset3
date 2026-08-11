@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import "@/components/mobile-home/mobile-home.css";
 import { PageHero } from "@/components/page-hero/PageHero";
 import { ScrollSection } from "@/components/scroll/ScrollSection";
+import { PAGE_HERO_IMAGES } from "@/lib/brand-assets";
 import "./mobile-contact.css";
 import { MobileContactHero } from "./sections/MobileContactHero";
 import { MobileContactWizard } from "./sections/MobileContactWizard";
@@ -49,6 +50,7 @@ export function MobileContactPage({ startWithForm = false }: { startWithForm?: b
   return (
     <div className="mobile-contact" data-transition-page>
       <PageHero
+        imageSrc={PAGE_HERO_IMAGES.contact}
         lines={[
           "Contact",
           <>

@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page-hero/PageHero";
 import { ScrollSection } from "@/components/scroll/ScrollSection";
 import { SERVICES_HERO } from "@/components/services/constants";
 import { ServicesColumns } from "@/components/services/ServicesColumns";
+import { PAGE_HERO_IMAGES } from "@/lib/brand-assets";
 import "@/components/services/services.css";
 
 export function DesktopServices() {
@@ -12,6 +13,7 @@ export function DesktopServices() {
     <div className="services-page" data-transition-page>
       <PageHero
         priority
+        imageSrc={PAGE_HERO_IMAGES.services}
         lines={[
           SERVICES_HERO.headlineLines[0],
           <>

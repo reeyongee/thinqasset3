@@ -12,6 +12,7 @@ import { createPortal } from "react-dom";
 import { PageHero } from "@/components/page-hero/PageHero";
 import { ScrollSection } from "@/components/scroll/ScrollSection";
 import { TransitionLink } from "@/components/transition/TransitionLink";
+import { PAGE_HERO_IMAGES } from "@/lib/brand-assets";
 import { splitWords } from "@/lib/contact/splitWords";
 import {
   lockPageScroll,
@@ -208,6 +209,7 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
   return (
     <>
       <PageHero
+        imageSrc={PAGE_HERO_IMAGES.contact}
         lines={[
           "Contact",
           <>

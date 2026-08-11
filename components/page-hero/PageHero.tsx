@@ -6,10 +6,10 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useOptionalScrollSection } from "@/components/scroll/ScrollSection";
 import type { ScrollChapter } from "@/lib/scroll/types";
 import { useAmplitude } from "@/hooks/useScrollScene";
+import { PAGE_HERO_IMAGES } from "@/lib/brand-assets";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const DEFAULT_BG =
-  "https://picsum.photos/seed/tbg-difc-towers/1800/2200";
+const DEFAULT_BG = PAGE_HERO_IMAGES.services;
 
 export type PageHeroProps = {
   sectionRef?: RefObject<HTMLElement | null>;

@@ -42,3 +42,10 @@ export const THINQASSET_FAVICON = {
 
 /** Default Open Graph / Twitter share image (1200×630). */
 export const THINQASSET_OG_IMAGE = `${LOGO_BASE}/og-image.png`;
+
+/** Full-bleed PageHero backgrounds for major inner pages. */
+export const PAGE_HERO_IMAGES = {
+  about: `${LOGO_BASE}/footer/uae.webp`,
+  services: `${LOGO_BASE}/services/fund-platform/hero.png`,
+  contact: `${LOGO_BASE}/footer/luxembourg.webp`,
+} as const;

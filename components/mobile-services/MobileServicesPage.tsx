@@ -5,6 +5,7 @@ import { MobileFinalCta } from "@/components/mobile-home/sections/MobileFinalCta
 import { PageHero } from "@/components/page-hero/PageHero";
 import { ScrollSection } from "@/components/scroll/ScrollSection";
 import { SERVICES_HERO } from "@/components/services/constants";
+import { PAGE_HERO_IMAGES } from "@/lib/brand-assets";
 import "./mobile-services.css";
 import { MobileServicesPillars } from "./sections/MobileServicesPillars";
 
@@ -13,6 +14,7 @@ export function MobileServicesPage() {
     <div className="mobile-services" data-transition-page>
       <PageHero
         priority
+        imageSrc={PAGE_HERO_IMAGES.services}
         lines={[
           SERVICES_HERO.headlineLines[0],
           <>
