@@ -53,9 +53,16 @@ export function createGlassPrismScene(host: HTMLElement): GlassPrismScene {
 
   const floor = createFloor(renderer);
   const reflectPass = floor.mesh.onBeforeRender.bind(floor.mesh);
-  floor.mesh.onBeforeRender = (renderer, scene, camera) => {
+  floor.mesh.onBeforeRender = (
+    renderer,
+    scene,
+    camera,
+    geometry,
+    material,
+    group,
+  ) => {
     lighting.spark.visible = false;
-    reflectPass(renderer, scene, camera);
+    reflectPass(renderer, scene, camera, geometry, material, group);
     lighting.spark.visible = true;
   };
   scene.add(floor.mesh);
