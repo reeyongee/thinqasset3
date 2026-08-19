@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useIsPhoneViewport } from "@/components/mobile-home/useIsPhoneViewport";
 import { usePrefersReducedMotion } from "@/components/progressive-blur/usePrefersReducedMotion";
 import { SiteBackground } from "./SiteBackground";
 
 export function SiteAtmosphere() {
+  const pathname = usePathname();
   const prefersReducedMotion = usePrefersReducedMotion();
   const isPhone = useIsPhoneViewport();
   const [useWebGL, setUseWebGL] = useState(true);
@@ -16,7 +18,14 @@ export function SiteAtmosphere() {
     setUseWebGL(supported);
   }, []);
 
-  const enableWebGL = useWebGL && !isPhone;
+  const isPrismLab =
+    pathname === "/test10" ||
+    pathname.startsWith("/test10/") ||
+    pathname === "/test13" ||
+    pathname.startsWith("/test13/") ||
+    pathname === "/test14" ||
+    pathname.startsWith("/test14/");
+  const enableWebGL = useWebGL && !isPhone && !isPrismLab;
 
   return (
     <SiteBackground

@@ -1,0 +1,20 @@
+.prism-video-bg {
+  --prism-edge: #000105;
+
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--prism-edge);
+  pointer-events: none;
+}
+
+.prism-video-bg__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  display: block;
+}
