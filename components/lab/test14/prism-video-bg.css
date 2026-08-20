@@ -9,6 +9,10 @@
   pointer-events: none;
 }
 
+.prism-video-bg--contained {
+  position: absolute;
+}
+
 .prism-video-bg__media {
   position: absolute;
   top: 0;

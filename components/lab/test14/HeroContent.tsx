@@ -72,7 +72,11 @@ export function HeroContent() {
       `}</style>
 
       <div className="prism-hero__content">
-        <h1 className="prism-hero__headline" data-transition-text="headline">
+        <h1
+          id="prism-hero-heading"
+          className="prism-hero__headline"
+          data-transition-text="headline"
+        >
           {GLOBE_SCROLL_HERO.title}
           <span className="prism-hero__title-accent">
             {GLOBE_SCROLL_HERO.titleAccent}

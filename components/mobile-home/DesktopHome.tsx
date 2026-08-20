@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { GlobeScrollSection } from "@/components/globe-scroll";
+import { PrismHero } from "@/components/lab/test14/PrismHero";
 import { NumbersSection } from "@/components/numbers/NumbersSection";
 
 const FeaturesSection = dynamic(() =>
@@ -38,7 +38,7 @@ const FinalCtaSection = dynamic(() =>
 export function DesktopHome() {
   return (
     <>
-      <GlobeScrollSection />
+      <PrismHero />
       <NumbersSection />
       <FeaturesSection />
       <OurApproachSection />

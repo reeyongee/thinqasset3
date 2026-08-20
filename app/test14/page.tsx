@@ -18,7 +18,7 @@ export default function Test14Page() {
       className="relative h-dvh w-full overflow-hidden"
       style={{ background: "#000105" }}
     >
-      <PrismVideoBackground />
+      <PrismVideoBackground contained />
       <HeroContent />
     </section>
   );

@@ -25,7 +25,10 @@ function subscribeToHomeBlur(listener: () => void) {
 }
 
 function getHomeBlurSnapshot(): boolean {
-  if (document.querySelector(".globe-scroll")) {
+  if (
+    document.querySelector(".globe-scroll") ||
+    document.querySelector("[data-prism-hero]")
+  ) {
     return true;
   }
 
@@ -46,7 +49,7 @@ function getInnerPageBlurSnapshot(): boolean {
 
 /**
  * Progressive blur activation:
- * - Home with globe scroll: always on (matches inner sections)
+ * - Home with globe scroll or prism hero: always on (matches inner sections)
  * - Home with scroll story: on during graph phase and below
  * - Inner pages: on after scrolling past the top
  * - Off during page transitions

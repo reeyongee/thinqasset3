@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import "./mobile-home.css";
-import { GlobeScrollSection } from "@/components/globe-scroll";
+import { PrismHero } from "@/components/lab/test14/PrismHero";
 import { MobileNumbers } from "./sections/MobileNumbers";
 
 const MobileFeatures = dynamic(() =>
@@ -31,7 +31,7 @@ const MobileFinalCta = dynamic(() =>
 export function MobileHomePage() {
   return (
     <div className="mobile-home" data-transition-page>
-      <GlobeScrollSection />
+      <PrismHero />
       <MobileNumbers />
       <MobileFeatures />
       <MobileApproach />
