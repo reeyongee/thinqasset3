@@ -952,6 +952,21 @@ html[data-intro-played] .hero-bg-scale {
   }
 }
 
+@keyframes feature-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.feature-card-logo-spin {
+  display: inline-flex;
+  line-height: 0;
+  animation: feature-logo-spin 2.6s ease-in-out infinite;
+}
+
 .feature-pie-spin {
   transform-origin: center;
   will-change: transform;
@@ -1096,7 +1111,8 @@ html[data-intro-played] .hero-bg-scale {
   }
 
   .feature-pie-spin,
-  .feature-pulsing-orb {
+  .feature-pulsing-orb,
+  .feature-card-logo-spin {
     animation: none;
   }
 

@@ -40,7 +40,7 @@ export function ServiceOfferingHero({
         meta={[kicker, `Services / ${breadcrumb.pillarTitle}`, index]}
         imageSrc={image.src}
       />
-      <div className="border-b border-line/20 bg-ink">
+      <div className="border-b border-line/20">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-5 py-3 font-tmono text-[9px] uppercase tracking-[0.22em] text-paper/55 sm:px-6 md:px-14">
           <nav className="flex flex-wrap items-center gap-2" aria-label="Breadcrumb">
             <TransitionLink href="/services">Services</TransitionLink>

@@ -57,7 +57,7 @@ export default function Trust({ sectionRef }: { sectionRef: RefObject<HTMLElemen
   const closingParts = LETTER_CLOSING.split(" — ");
 
   return (
-    <section ref={sectionRef} style={style} className="relative bg-ink">
+    <section ref={sectionRef} style={style} className="relative">
       <div className="sticky top-0 flex h-[100dvh] flex-col overflow-hidden md:h-screen">
         <motion.div
           aria-hidden

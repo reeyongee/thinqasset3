@@ -211,10 +211,9 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
       <PageHero
         imageSrc={PAGE_HERO_IMAGES.contact}
         lines={[
-          "Contact",
+          "The right structure",
           <>
-            The right structure starts with a{" "}
-            <em className="italic text-brass">conversation.</em>
+            starts with a <em className="italic text-brass">conversation.</em>
           </>,
         ]}
         meta={["Contact", "ThinqAsset", "Global advisory"]}

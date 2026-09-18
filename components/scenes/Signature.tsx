@@ -33,7 +33,7 @@ export default function Signature({ sectionRef }: { sectionRef: RefObject<HTMLEl
   const ruleScale = useTransform(progress, (v) => enter(v, 0.52, 0.68));
 
   return (
-    <section ref={sectionRef} style={style} className="relative bg-ink">
+    <section ref={sectionRef} style={style} className="relative">
       <div className="sticky top-0 flex h-[100dvh] flex-col pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:h-screen">
 
         <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 pt-8 sm:px-6 md:px-14 md:pt-0">

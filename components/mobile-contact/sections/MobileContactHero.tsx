@@ -11,10 +11,6 @@ export function MobileContactHero({ onOpenForm }: MobileContactHeroProps) {
       className="mobile-contact-hero"
       aria-labelledby="mobile-contact-hero-heading"
     >
-      <p className="mobile-contact-eyebrow" data-transition-text="body">
-        Contact
-      </p>
-
       <h1
         id="mobile-contact-hero-heading"
         className="mobile-contact-hero__headline"

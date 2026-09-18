@@ -1,6 +1,5 @@
 "use client";
 
-import { ABOUT_HISTORY_IMAGE } from "@/components/about/constants";
 import { QT_EASE } from "@/components/about/motionConstants";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { TransitionLink } from "@/components/transition/TransitionLink";
@@ -17,6 +16,12 @@ import "./not-found.css";
 
 const SPRING = { stiffness: 120, damping: 22, mass: 0.6 };
 
+const ASTRONAUT = {
+  src: "/thinqasset-assets/not-found/astronaut.webp",
+  width: 1350,
+  height: 1040,
+} as const;
+
 export function NotFoundExperience() {
   const reduceMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
@@ -26,8 +31,7 @@ export function NotFoundExperience() {
 
   const blobGoldX = useTransform(springX, (v) => v * 28);
   const blobGoldY = useTransform(springY, (v) => v * 22);
-  const astronautX = useTransform(springX, (v) => v * 14);
-  const astronautY = useTransform(springY, (v) => v * 12);
+  const astronautY = useTransform(springY, (v) => v * 10);
   const sheenX = useTransform(springX, (v) => v * 36);
   const sheenY = useTransform(springY, (v) => v * 30);
 
@@ -119,21 +123,20 @@ export function NotFoundExperience() {
         </div>
 
         <div className="nf-visual-panel" aria-hidden>
-          <div className="nf-visual-panel__glass" />
           <motion.div
             className="nf-astronaut-wrap"
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease: QT_EASE, delay: 0.28 }}
-            style={reduceMotion ? undefined : { x: astronautX, y: astronautY }}
+            style={reduceMotion ? undefined : { y: astronautY }}
           >
             <Image
-              src={ABOUT_HISTORY_IMAGE.src}
+              src={ASTRONAUT.src}
               alt=""
-              width={900}
-              height={900}
+              width={ASTRONAUT.width}
+              height={ASTRONAUT.height}
               className="nf-astronaut"
-              sizes="(min-width: 768px) 320px, 72vw"
+              sizes="(min-width: 768px) 50vw, 100vw"
               priority
             />
           </motion.div>

@@ -11,6 +11,9 @@ export const THINQASSET_LOGO_MASK_DIMENSIONS = {
 /** Last source pixel column of the mark before the wordmark gap (mask analysis). */
 export const THINQASSET_LOGO_SYMBOL_END_X = 316;
 
+/** First opaque column of the THINQASSET wordmark after the mark gap. */
+export const THINQASSET_LOGO_WORDMARK_START_X = 345;
+
 export const THINQASSET_LOGO_SYMBOL_WIDTH_RATIO =
   THINQASSET_LOGO_SYMBOL_END_X / THINQASSET_LOGO_MASK_DIMENSIONS.width;
 

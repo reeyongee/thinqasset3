@@ -78,7 +78,7 @@ export default function Portrait({ sectionRef }: { sectionRef: RefObject<HTMLEle
   const textY = useTransform(smooth, [0.3, 0.9], [28 * amp, 0], { clamp: true });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-ink py-[12vh] pb-[calc(14vh+3.5rem+env(safe-area-inset-bottom))] text-paper md:py-[16vh]">
+    <section ref={sectionRef} className="relative overflow-hidden py-[12vh] pb-[calc(14vh+3.5rem+env(safe-area-inset-bottom))] text-paper md:py-[16vh]">
       <div className="mx-auto grid max-w-[1600px] gap-10 px-5 sm:gap-14 sm:px-6 md:grid-cols-12 md:px-14">
         {/* 5 columns, hard left — portrait plate */}
         <motion.figure style={{ clipPath, opacity: frameO }} className="md:col-span-5 md:col-start-1">

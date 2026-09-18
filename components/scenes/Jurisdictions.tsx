@@ -112,7 +112,7 @@ export default function Jurisdictions({ sectionRef }: { sectionRef: RefObject<HT
   const lineScale = useTransform(progress, [0, 0.95], [0, 1], { clamp: true });
 
   return (
-    <section ref={sectionRef} style={style} className="relative bg-ink">
+    <section ref={sectionRef} style={style} className="relative">
       <div className="sticky top-0 h-[100dvh] overflow-hidden pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:h-screen">
         <div aria-hidden className="bg-columns absolute inset-0 opacity-60" />
 

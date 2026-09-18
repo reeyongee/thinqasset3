@@ -146,7 +146,7 @@ export default function Capabilities({ sectionRef }: { sectionRef: RefObject<HTM
     <section
       ref={sectionRef}
       style={{ height: `${sectionUnits * (isPhone ? 82 : 100)}vh` }}
-      className="relative bg-ink text-paper"
+      className="relative text-paper"
     >
       <div className="sticky top-0 h-[100dvh] overflow-hidden pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:h-screen">
 

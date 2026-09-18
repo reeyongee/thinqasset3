@@ -18,7 +18,7 @@ export function OurApproachSection() {
       aria-labelledby="services-heading"
     >
       <div className="flex w-full flex-col gap-6 min-[1200px]:flex-row min-[1200px]:items-start min-[1200px]:gap-8">
-        <div className="approach-header-col z-[1] flex w-full flex-col min-[1200px]:sticky min-[1200px]:top-6 min-[1200px]:max-w-[480px] min-[1200px]:flex-[1_0_0]">
+        <div className="approach-header-col z-[1] flex w-full flex-col min-[1200px]:sticky min-[1200px]:top-[calc(var(--site-header-height-floating)+1.5rem)] min-[1200px]:max-w-[480px] min-[1200px]:flex-[1_0_0]">
           <OurApproachHeader />
         </div>
 

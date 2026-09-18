@@ -61,7 +61,7 @@ export function PageHero({
       };
 
   return (
-    <section ref={sectionRef} className="relative h-[100dvh] overflow-hidden bg-ink md:h-screen">
+    <section ref={sectionRef} className="relative h-[100dvh] overflow-hidden md:h-screen">
       <motion.div style={{ y: bgY }} className="absolute inset-[-10%] will-change-transform" {...bgMotion}>
         <Image
           src={imageSrc}
@@ -69,12 +69,12 @@ export function PageHero({
           fill
           priority={priority}
           sizes="100vw"
-          className="object-cover opacity-[0.32] grayscale contrast-125"
+          className="object-cover opacity-[0.2] grayscale contrast-125"
         />
       </motion.div>
       <motion.div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_srgb,var(--color-ink)_62%,transparent),color-mix(in_srgb,var(--color-ink)_18%,transparent)_45%,color-mix(in_srgb,var(--color-ink)_97%,transparent))]"
+        className="absolute inset-0 bg-[radial-gradient(90%_80%_at_18%_48%,color-mix(in_srgb,var(--color-ink)_52%,transparent),transparent_68%),linear-gradient(180deg,color-mix(in_srgb,var(--color-ink)_28%,transparent),color-mix(in_srgb,var(--color-ink)_6%,transparent)_45%,color-mix(in_srgb,var(--color-ink)_18%,transparent))]"
         {...bgMotion}
       />
 

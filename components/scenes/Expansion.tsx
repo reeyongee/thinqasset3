@@ -241,7 +241,7 @@ export default function Expansion({ sectionRef }: { sectionRef: RefObject<HTMLEl
   const cameraX = useTransform(draw, (t) => cameraXFromDraw(t));
 
   return (
-    <section ref={sectionRef} style={style} className="relative bg-ink">
+    <section ref={sectionRef} style={style} className="relative">
       <div className="sticky top-0 flex h-[100dvh] flex-col overflow-hidden px-5 pt-[calc(var(--site-header-height-floating)+0.5rem)] pb-[calc(3.5rem+env(safe-area-inset-bottom))] sm:px-6 md:h-screen md:px-14">
         <div className="mx-auto grid w-full max-w-[1600px] shrink-0 gap-3 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7">

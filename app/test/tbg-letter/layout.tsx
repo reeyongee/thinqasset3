@@ -26,7 +26,8 @@ export default function TbgLetterLayout({ children }: { children: React.ReactNod
         dangerouslySetInnerHTML={{
           __html: `
             .site-bg { display: block !important; }
-            html, body { background: var(--ta-navy) !important; }
+            html { background: var(--ta-navy-deep) !important; }
+            body { background: transparent !important; }
           `,
         }}
       />

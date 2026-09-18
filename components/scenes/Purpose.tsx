@@ -53,7 +53,7 @@ export default function Purpose({ sectionRef }: { sectionRef: RefObject<HTMLElem
   const supportingOpacity = useTransform(progress, [0.55, 0.72], [0, 1], { clamp: true });
 
   return (
-    <section ref={sectionRef} style={style} className="relative bg-ink">
+    <section ref={sectionRef} style={style} className="relative">
       <div className="sticky top-0 flex h-[100dvh] items-center overflow-hidden pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:h-screen">
 
         {/* LIGHTING — brass glow builds with conviction */}

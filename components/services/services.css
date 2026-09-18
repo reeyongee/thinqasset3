@@ -452,13 +452,6 @@
   --sd-surface: var(--token-surface);
   --sd-border: var(--token-btn-border);
   --sd-radius-card: 16px;
-  padding-top: 4.375rem;
-}
-
-@media (min-width: 1024px) {
-  .sd-landing-page {
-    padding-top: 2.5rem;
-  }
 }
 
 .sd-container {
