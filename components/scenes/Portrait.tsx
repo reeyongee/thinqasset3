@@ -3,7 +3,6 @@
 import { RefObject } from "react";
 import Image from "next/image";
 import { motion, MotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import Kicker from "@/components/primitives/Kicker";
 import { FOUNDER } from "@/components/founder-letter/constants";
 import { SCENE_SPRING, useAmplitude } from "@/hooks/useScrollScene";
 
@@ -92,8 +91,7 @@ export default function Portrait({ sectionRef }: { sectionRef: RefObject<HTMLEle
 
         {/* 6 columns, offset down — the pull quote */}
         <motion.div style={{ opacity: textO, y: textY }} className="md:col-span-6 md:col-start-7 md:pt-[13vh]">
-          <Kicker>05 — The Founder</Kicker>
-          <blockquote className="mt-6 font-display text-[clamp(1.55rem,7vw,3.2rem)] font-light leading-[1.18] md:mt-9 md:leading-[1.16]">
+          <blockquote className="font-display text-[clamp(1.55rem,7vw,3.2rem)] font-light leading-[1.18] md:leading-[1.16]">
             &ldquo;We are building more than a financial institution —{" "}
             <em className="italic text-brass">an enduring legacy</em> of excellence, integrity and responsible
             stewardship.&rdquo;

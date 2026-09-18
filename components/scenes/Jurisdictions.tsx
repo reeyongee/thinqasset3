@@ -3,7 +3,6 @@
 import { RefObject } from "react";
 import { motion, MotionValue, useTransform } from "framer-motion";
 import CardGhostNumber from "@/components/primitives/CardGhostNumber";
-import Kicker from "@/components/primitives/Kicker";
 import { useAmplitude, usePinnedScene } from "@/hooks/useScrollScene";
 
 const J = [
@@ -120,7 +119,6 @@ export default function Jurisdictions({ sectionRef }: { sectionRef: RefObject<HT
         <div className="mx-auto grid h-full max-w-[1600px] grid-rows-[auto_1fr] items-stretch gap-6 px-5 pt-[6rem] md:grid-cols-12 md:grid-rows-none md:items-center md:gap-12 md:px-14 md:pt-16">
           {/* LEFT — index (desktop only) */}
           <div className="hidden space-y-9 md:col-span-5 md:block">
-            <Kicker>Established in DIFC — Dubai</Kicker>
             <p className="max-w-[38ch] text-sm leading-relaxed text-paper/55">
               A strategic holding company for a diversified portfolio of regulated financial
               services and investment businesses spanning three jurisdictions.
@@ -130,11 +128,6 @@ export default function Jurisdictions({ sectionRef }: { sectionRef: RefObject<HT
                 <IndexRow key={j.n} p={progress} i={i} j={j} />
               ))}
             </div>
-          </div>
-
-          {/* mobile kicker */}
-          <div className="md:hidden">
-            <Kicker>Established in DIFC — Dubai</Kicker>
           </div>
 
           {/* plates */}
