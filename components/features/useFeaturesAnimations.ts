@@ -5,16 +5,22 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { scheduleScrollRefresh } from "@/lib/scroll/scrollOrchestrator";
-import { gaugeArcPath, gaugeNeedleRotation } from "./featureVisualUtils";
+import { FLIP_EASE } from "./constants";
+import {
+  GAUGE_ARC_LENGTH,
+  GAUGE_CX,
+  GAUGE_CY,
+  gaugeNeedleRotation,
+} from "./featureVisualUtils";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CARD_EASE = "cubic-bezier(0.12, 0.23, 0.17, 0.99)";
-const FLIP_EASE = "cubic-bezier(0.55, 0, 0.21, 1)";
 const VISUAL_EASE = "cubic-bezier(0.12, 0.23, 0.21, 0.99)";
-const STAGGER_OFFSETS = [32, 64, 96];
-const FLIP_AT = 0.8;
-const VISUAL_START = FLIP_AT;
+const CARD_ENTER_Y = 28;
+const CARD_STAGGER = 0.1;
+const FLIP_DURATION = 0.9;
+const FLIP_AT = 0.55;
 
 type UseFeaturesAnimationsProps = {
   sectionRef: RefObject<HTMLElement | null>;
@@ -22,101 +28,73 @@ type UseFeaturesAnimationsProps = {
 };
 
 function activateVisuals(wrapper: HTMLElement) {
-  const visual = wrapper.querySelector<HTMLElement>(".feature-card-visual");
-  visual?.classList.add("feature-visuals-active");
+  wrapper
+    .querySelector<HTMLElement>(".feature-card-visual")
+    ?.classList.add("feature-visuals-active");
 }
 
-function applyGauge(fill: SVGPathElement, needle: SVGGElement, percent: number) {
-  fill.setAttribute("d", gaugeArcPath(percent));
-  // Drive the SVG transform attribute directly so GSAP CSS transforms
-  // cannot fight the pivot (previous svgOrigin rotation was inverted vs fill).
+function applyGauge(
+  fill: SVGPathElement,
+  needle: SVGGElement,
+  percent: number,
+  arcLength: number,
+) {
+  const clamped = Math.max(0, Math.min(100, percent));
+  fill.setAttribute("stroke-dasharray", String(arcLength));
+  fill.setAttribute(
+    "stroke-dashoffset",
+    String(arcLength * (1 - clamped / 100)),
+  );
   needle.setAttribute(
     "transform",
-    `rotate(${gaugeNeedleRotation(percent)}, 120, 120)`,
-  );
-  gsap.set(needle, { clearProps: "transform" });
-}
-
-function setupPortfolioVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
-  const pie = wrapper.querySelector<HTMLElement>(".feature-pie-spin");
-  if (!pie) return;
-
-  gsap.set(pie, { rotation: 0, transformOrigin: "50% 50%" });
-  tl.to(
-    pie,
-    { rotation: 360, duration: 20, ease: "none", repeat: -1 },
-    VISUAL_START,
+    `rotate(${gaugeNeedleRotation(clamped)}, ${GAUGE_CX}, ${GAUGE_CY})`,
   );
 }
 
-function setupOrionVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
-  tl.add(() => activateVisuals(wrapper), VISUAL_START);
-}
-
-function setupExposureVisual(tl: gsap.core.Timeline, wrapper: HTMLElement) {
+function startExposureGauge(wrapper: HTMLElement) {
   const fill = wrapper.querySelector<SVGPathElement>(".feature-gauge-fill");
   const needle = wrapper.querySelector<SVGGElement>(".feature-gauge-needle");
   if (!fill || !needle) return;
 
+  activateVisuals(wrapper);
+
+  const arcLength = fill.getTotalLength() || GAUGE_ARC_LENGTH;
   const gauge = { value: 0 };
-  applyGauge(fill, needle, 0);
+  applyGauge(fill, needle, 0, arcLength);
 
-  tl.to(
-    gauge,
-    {
-      value: 25,
-      duration: 1,
-      ease: VISUAL_EASE,
-      onUpdate: () => applyGauge(fill, needle, gauge.value),
-    },
-    VISUAL_START,
-  );
-
-  tl.to(
-    gauge,
-    {
-      value: 75,
-      duration: 1,
-      ease: VISUAL_EASE,
-      onUpdate: () => applyGauge(fill, needle, gauge.value),
-    },
-    VISUAL_START + 2,
-  );
+  const gaugeTl = gsap.timeline();
+  gaugeTl.to(gauge, {
+    value: 25,
+    duration: 0.8,
+    ease: VISUAL_EASE,
+    onUpdate: () => applyGauge(fill, needle, gauge.value, arcLength),
+  });
+  gaugeTl.to(gauge, {
+    value: 75,
+    duration: 1,
+    ease: VISUAL_EASE,
+    delay: 0.28,
+    onUpdate: () => applyGauge(fill, needle, gauge.value, arcLength),
+  });
 }
 
-function setupVisualAnimation(
-  tl: gsap.core.Timeline,
-  wrapper: HTMLElement,
-  index: number,
-) {
-  switch (index) {
-    case 0:
-      setupPortfolioVisual(tl, wrapper);
-      tl.add(() => activateVisuals(wrapper), VISUAL_START);
-      break;
-    case 1:
-      setupOrionVisual(tl, wrapper);
-      break;
-    case 2:
-      setupExposureVisual(tl, wrapper);
-      tl.add(() => activateVisuals(wrapper), VISUAL_START);
-      break;
+function startVisuals(wrapper: HTMLElement, index: number) {
+  if (index === 2) {
+    startExposureGauge(wrapper);
+    return;
   }
+  activateVisuals(wrapper);
 }
 
 function setFinalVisualState(wrapper: HTMLElement, index: number) {
   activateVisuals(wrapper);
 
-  if (index === 0) {
-    const pie = wrapper.querySelector<HTMLElement>(".feature-pie-spin");
-    if (pie) gsap.set(pie, { rotation: 0 });
-    return;
-  }
+  if (index !== 2) return;
 
-  if (index === 2) {
-    const fill = wrapper.querySelector<SVGPathElement>(".feature-gauge-fill");
-    const needle = wrapper.querySelector<SVGGElement>(".feature-gauge-needle");
-    if (fill && needle) applyGauge(fill, needle, 75);
+  const fill = wrapper.querySelector<SVGPathElement>(".feature-gauge-fill");
+  const needle = wrapper.querySelector<SVGGElement>(".feature-gauge-needle");
+  if (fill && needle) {
+    applyGauge(fill, needle, 75, fill.getTotalLength() || GAUGE_ARC_LENGTH);
   }
 }
 
@@ -137,8 +115,9 @@ export function useFeaturesAnimations({
 
       const cardsEl = section.querySelector("#cards");
       const headline = section.querySelector(".features-headline");
-      const cardWrappers = section.querySelectorAll<HTMLElement>(
+      const cardWrappers = gsap.utils.toArray<HTMLElement>(
         ".feature-card-wrapper",
+        section,
       );
 
       if (!cardsEl) return;
@@ -146,35 +125,34 @@ export function useFeaturesAnimations({
       if (reducedMotion) {
         gsap.set(headline, { opacity: 1, y: 0 });
         cardWrappers.forEach((wrapper, index) => {
+          const inner =
+            wrapper.querySelector<HTMLElement>(".feature-flip-inner");
           gsap.set(wrapper, { opacity: 1, y: 0 });
-          const back = wrapper.querySelector<HTMLElement>(".feature-flip-back");
-          const front =
-            wrapper.querySelector<HTMLElement>(".feature-flip-front");
-          if (back) gsap.set(back, { rotateY: 180 });
-          if (front) gsap.set(front, { rotateY: 0 });
+          if (inner) gsap.set(inner, { rotateY: 180, force3D: false });
           setFinalVisualState(wrapper, index);
         });
         return;
       }
 
-      gsap.set(headline, { opacity: 0, y: 40 });
+      gsap.set(headline, { opacity: 0, y: 32 });
 
-      cardWrappers.forEach((wrapper, index) => {
-        const offset = STAGGER_OFFSETS[index] ?? 32;
-        const back = wrapper.querySelector<HTMLElement>(".feature-flip-back");
-        const front = wrapper.querySelector<HTMLElement>(".feature-flip-front");
-
-        gsap.set(wrapper, { y: offset, opacity: 1 });
-        if (back) gsap.set(back, { rotateY: 0, transformPerspective: 1000 });
-        if (front) gsap.set(front, { rotateY: 180, transformPerspective: 1000 });
+      cardWrappers.forEach((wrapper) => {
+        const inner = wrapper.querySelector<HTMLElement>(".feature-flip-inner");
+        gsap.set(wrapper, { y: CARD_ENTER_Y, opacity: 1 });
+        if (inner) {
+          gsap.set(inner, {
+            rotateY: 0,
+            transformOrigin: "50% 50%",
+            force3D: false,
+          });
+        }
       });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: cardsEl,
-          start: "top 50%",
+          start: "top 80%",
           once: true,
-          invalidateOnRefresh: true,
         },
       });
 
@@ -183,27 +161,37 @@ export function useFeaturesAnimations({
       if (headline) {
         tl.fromTo(
           headline,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 1, ease: CARD_EASE },
-          0.2,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.85, ease: CARD_EASE },
+          0,
         );
       }
 
       cardWrappers.forEach((wrapper, index) => {
-        const back = wrapper.querySelector<HTMLElement>(".feature-flip-back");
-        const front = wrapper.querySelector<HTMLElement>(".feature-flip-front");
+        const inner = wrapper.querySelector<HTMLElement>(".feature-flip-inner");
+        const enterAt = index * CARD_STAGGER;
+        const flipAt = FLIP_AT + index * CARD_STAGGER;
 
-        tl.to(wrapper, { y: 0, duration: 1, ease: CARD_EASE }, 0);
+        tl.to(wrapper, { y: 0, duration: 0.85, ease: CARD_EASE }, enterAt);
 
-        if (back) {
-          tl.to(back, { rotateY: 180, duration: 1, ease: FLIP_EASE }, FLIP_AT);
+        if (inner) {
+          tl.to(
+            inner,
+            {
+              rotateY: 180,
+              duration: FLIP_DURATION,
+              ease: FLIP_EASE,
+              force3D: false,
+            },
+            flipAt,
+          );
         }
 
-        if (front) {
-          tl.to(front, { rotateY: 0, duration: 1, ease: FLIP_EASE }, FLIP_AT);
-        }
-
-        setupVisualAnimation(tl, wrapper, index);
+        tl.call(
+          () => startVisuals(wrapper, index),
+          undefined,
+          flipAt + FLIP_DURATION,
+        );
       });
     },
     { scope: sectionRef, dependencies: [enabled] },

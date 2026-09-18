@@ -16,6 +16,10 @@ export type StatData = {
   display?: string;
 };
 
+/** Sitewide assets-under-management figure (stats cards, feature donut, etc.). */
+export const ASSETS_MANAGED_DISPLAY = "$1B+";
+export const ASSETS_MANAGED_LABEL = "Assets under management";
+
 export const TRUST_ITEMS: TrustItemData[] = [
   {
     id: "research",
@@ -45,6 +49,15 @@ export const TRUST_ITEMS: TrustItemData[] = [
 
 export const STATS: StatData[] = [
   {
+    id: "aum",
+    end: 0,
+    prefix: "",
+    suffix: "",
+    label: ASSETS_MANAGED_LABEL,
+    display: ASSETS_MANAGED_DISPLAY,
+    image: "/assets/stats/subfunds-approach.jpg",
+  },
+  {
     id: "subfunds",
     end: 15,
     prefix: "",
@@ -67,14 +80,6 @@ export const STATS: StatData[] = [
     suffix: "+",
     label: "Core jurisdictions",
     image: "/assets/stats/jurisdictions.jpg",
-  },
-  {
-    id: "continents",
-    end: 4,
-    prefix: "",
-    suffix: "",
-    label: "Continents",
-    image: "/assets/stats/continents.jpg",
   },
 ];
 

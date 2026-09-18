@@ -28,6 +28,9 @@ const ENTER_END = 0.28;
 const EXIT_START = 0.76;
 const EXIT_END = 0.92;
 
+const FRAME_PAD =
+  "pt-[calc(var(--site-header-height-floating)+0.5rem)] pb-[calc(3.5rem+env(safe-area-inset-bottom))]";
+
 export default function Trust({ sectionRef }: { sectionRef: RefObject<HTMLElement | null> }) {
   const amp = useAmplitude();
   const reduced = useReducedMotion() ?? false;
@@ -44,45 +47,48 @@ export default function Trust({ sectionRef }: { sectionRef: RefObject<HTMLElemen
   );
   const contentY = useTransform(progress, (v) => {
     const o = sceneOpacity(v, ENTER_START, ENTER_END, EXIT_START, EXIT_END);
-    return (1 - o) * 36 * amp;
+    return reduced ? 0 : (1 - o) * 16 * amp;
   });
   const contentBlur = useTransform(progress, (v) => {
     const o = sceneOpacity(v, ENTER_START, ENTER_END, EXIT_START, EXIT_END);
     return reduced ? "none" : `blur(${12 * (1 - o)}px)`;
   });
 
+  const closingParts = LETTER_CLOSING.split(" — ");
+
   return (
     <section ref={sectionRef} style={style} className="relative bg-ink">
-      <div className="sticky top-0 h-[100dvh] pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:h-screen">
-
+      <div className="sticky top-0 flex h-[100dvh] flex-col overflow-hidden md:h-screen">
         <motion.div
           aria-hidden
           style={{ opacity: glow }}
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_40%_at_50%_50%,color-mix(in_srgb,var(--color-brass)_16%,transparent),transparent_70%)] md:bg-[radial-gradient(50%_40%_at_50%_38%,color-mix(in_srgb,var(--color-brass)_16%,transparent),transparent_70%)]"
         />
 
-        <div className="relative flex h-full flex-col items-center justify-center px-5 sm:px-6 md:justify-start md:pb-[8vh] md:pt-[14vh]">
+        <div
+          className={`relative mx-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col overflow-hidden px-5 sm:px-6 md:px-14 ${FRAME_PAD}`}
+        >
           <motion.div
             style={{
               opacity: contentO,
               y: contentY,
               filter: contentBlur,
             }}
-            className="flex w-full flex-col items-center"
+            className="flex min-h-0 w-full min-w-0 flex-1 flex-col items-center justify-center gap-4 sm:gap-5 md:grid md:grid-cols-12 md:content-center md:items-start md:gap-x-8 md:gap-y-0 lg:gap-x-12"
           >
-            <h2 className="w-full text-center font-display text-[clamp(3.6rem,22vw,16rem)] font-light leading-none tracking-[-0.02em] md:text-[clamp(5rem,19vw,16rem)]">
+            <h2 className="w-full shrink-0 text-center font-display text-[clamp(2.35rem,min(12vw,9.5dvh),3.6rem)] font-light leading-none tracking-[-0.03em] sm:text-[clamp(2.75rem,min(10vw,11dvh),4.25rem)] md:col-span-5 md:self-center md:text-left md:text-[clamp(3.4rem,min(7.2vw,13dvh),6.75rem)] lg:col-span-5">
               Trust<span className="italic text-brass">.</span>
             </h2>
 
-            <div className="mt-8 flex max-w-[34ch] flex-col gap-5 text-center sm:mt-10 sm:max-w-[58ch]">
-              <p className="font-display text-[clamp(1.1rem,3.2vw,1.45rem)] font-light leading-snug text-paper/85">
+            <div className="flex min-h-0 w-full min-w-0 max-w-[40rem] flex-col justify-center gap-3 overflow-y-auto overscroll-contain text-center sm:gap-3.5 md:col-span-7 md:max-w-none md:self-center md:gap-4 md:text-left lg:col-span-6 lg:col-start-7">
+              <p className="text-pretty font-display text-[clamp(1rem,min(3.2vw,2.6dvh),1.2rem)] font-light leading-snug text-paper/85 md:text-[clamp(1.05rem,min(1.45vw,2.8dvh),1.28rem)] md:leading-[1.35]">
                 {LETTER_TRUST_STATEMENT}
               </p>
-              <p className="text-[0.9375rem] leading-relaxed text-paper/65 sm:text-[clamp(0.95rem,1.35vw,1.05rem)]">
+              <p className="text-pretty text-[0.8125rem] leading-relaxed text-paper/65 sm:text-[0.875rem] md:text-[clamp(0.875rem,min(1.05vw,1.7dvh),1rem)] md:leading-[1.65]">
                 {LETTER_TRUST_BODY}
               </p>
-              <p className="text-[0.9375rem] leading-relaxed text-paper/65 sm:text-[clamp(0.95rem,1.35vw,1.05rem)]">
-                {LETTER_CLOSING.split(" — ").map((part, i, arr) =>
+              <p className="text-pretty text-[0.8125rem] leading-relaxed text-paper/65 sm:text-[0.875rem] md:text-[clamp(0.875rem,min(1.05vw,1.7dvh),1rem)] md:leading-[1.65]">
+                {closingParts.map((part, i, arr) =>
                   i < arr.length - 1 ? (
                     <span key={i}>
                       {part} —{" "}

@@ -24,14 +24,19 @@ export const GLOBE_SCROLL_EYEBROW =
   "Cross-border. Six jurisdictions, one operating standard.";
 
 export const GLOBE_SCROLL_STATS = STATS.map((stat) => ({
-  label: stat.label.replace("Core ", "").replace(" Launched", ""),
+  label:
+    stat.id === "aum"
+      ? "Assets managed"
+      : stat.label.replace("Core ", "").replace(" Launched", ""),
   value: stat.display ?? `${stat.prefix}${stat.end}${stat.suffix}`,
   desc:
-    stat.id === "subfunds"
-      ? "Structures."
-      : stat.id === "dtas"
-        ? "Throughout the world"
-        : stat.id === "jurisdictions"
-          ? "DIFC · Mauritius · Luxembourg"
-          : "Global investor reach",
+    stat.id === "aum"
+      ? "Institutional scale"
+      : stat.id === "subfunds"
+        ? "Structures."
+        : stat.id === "dtas"
+          ? "Throughout the world"
+          : stat.id === "jurisdictions"
+            ? "DIFC · Mauritius · Luxembourg"
+            : "Global investor reach",
 }));

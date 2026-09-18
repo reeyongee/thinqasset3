@@ -17,9 +17,11 @@ import { SiteNav } from "./SiteNav";
 
 type SiteShellProps = {
   children: React.ReactNode;
+  /** Skips scroll dock + scroll indicator (e.g. 404). */
+  disableScrollChrome?: boolean;
 };
 
-export function SiteShell({ children }: SiteShellProps) {
+export function SiteShell({ children, disableScrollChrome = false }: SiteShellProps) {
   const pathname = usePathname();
   const prevPathnameRef = useRef<string | null>(null);
   const chromeConfig = getSiteChromeConfig(pathname);
@@ -40,7 +42,8 @@ export function SiteShell({ children }: SiteShellProps) {
   }
 
   const useInnerFrame = shouldUseInnerSiteFrame(pathname, chromeConfig);
-  const useScrollChrome = shouldUseSharedScrollChrome(pathname, chromeConfig);
+  const useScrollChrome =
+    !disableScrollChrome && shouldUseSharedScrollChrome(pathname, chromeConfig);
 
   const page = useScrollChrome ? (
     <ScrollSectionsProvider dockAboveFooter>

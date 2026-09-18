@@ -1,3 +1,8 @@
+import {
+  ASSETS_MANAGED_DISPLAY,
+  ASSETS_MANAGED_LABEL,
+} from "@/components/numbers/constants";
+
 export function PortfolioDonut() {
   return (
     <div className="flex h-full w-full items-center justify-center p-6">
@@ -31,11 +36,11 @@ export function PortfolioDonut() {
           </svg>
         </div>
         <div className="pointer-events-none absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 text-center">
-          <p className="m-0 font-[family-name:var(--font-geist-mono)] text-xl font-normal tracking-[-0.03em] text-white">
-            $125,000
+          <p className="m-0 font-[family-name:var(--font-geist-mono)] text-[clamp(1.75rem,5vw,2.25rem)] font-normal tracking-[-0.04em] text-white">
+            {ASSETS_MANAGED_DISPLAY}
           </p>
-          <p className="m-0 font-[family-name:var(--font-inter)] text-xs font-medium leading-[1em] tracking-[-0.01em] text-token-muted">
-            Total Value
+          <p className="m-0 max-w-[12ch] font-[family-name:var(--font-inter)] text-[0.6875rem] font-medium leading-[1.15] tracking-[-0.01em] text-token-muted">
+            {ASSETS_MANAGED_LABEL}
           </p>
         </div>
       </div>

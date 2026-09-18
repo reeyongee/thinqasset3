@@ -908,28 +908,39 @@ html[data-intro-played] .hero-bg-scale {
   fill: transparent;
 }
 
+.feature-card-wrapper {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
 .feature-flip-card {
-  perspective: 1000px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 .feature-flip-inner {
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: center center;
 }
 
-.feature-flip-back {
-  transform: rotateY(0deg);
-  transform-style: preserve-3d;
-  transform-origin: center;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
+.feature-flip-back,
 .feature-flip-front {
-  transform: rotateY(180deg);
-  transform-style: preserve-3d;
-  transform-origin: center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transform-origin: center center;
+}
+
+/* Logo face toward camera at rotateY(0). Tiny Z offset avoids z-fighting. */
+.feature-flip-back {
+  transform: rotateY(0deg) translateZ(1px);
+}
+
+/* Content face starts away; inner rotateY(180) brings it forward. */
+.feature-flip-front {
+  transform: rotateY(180deg) translateZ(1px);
 }
 
 @keyframes feature-pie-spin {
@@ -942,9 +953,20 @@ html[data-intro-played] .hero-bg-scale {
 }
 
 .feature-pie-spin {
-  animation: none;
   transform-origin: center;
   will-change: transform;
+}
+
+.feature-visuals-active .feature-pie-spin {
+  animation: feature-pie-spin 24s linear infinite;
+}
+
+.feature-orion-visual {
+  --orb-core: 100px;
+}
+
+.feature-orion-badge {
+  z-index: 1;
 }
 
 .feature-orion-visual .feature-pulsing-orb {
@@ -955,42 +977,37 @@ html[data-intro-played] .hero-bg-scale {
   animation-play-state: running;
 }
 
-.feature-orion-visual {
-  --orb-size: 242px;
-}
-
 @keyframes feature-pulsing-orb {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.4;
   }
-  60% {
-    opacity: 0.3;
-  }
-  75%,
   100% {
-    width: var(--orb-size);
-    height: var(--orb-size);
+    transform: translate(-50%, -50%) scale(2.35);
     opacity: 0;
   }
 }
 
 .feature-pulsing-orb {
+  width: var(--orb-core);
+  height: var(--orb-core);
+  pointer-events: none;
   border-radius: 9999px;
-  border: 2px solid var(--ta-gold);
+  border: 1.5px solid color-mix(in srgb, var(--ta-gold) 80%, white);
   background: radial-gradient(
     circle,
-    color-mix(in srgb, var(--ta-gold) 65%, transparent) 0%,
-    transparent 80%
+    color-mix(in srgb, var(--ta-gold) 28%, transparent) 0%,
+    transparent 72%
   );
-  transform: translate(-50%, -50%);
-  animation: feature-pulsing-orb 4s linear infinite;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  animation: feature-pulsing-orb 3.15s cubic-bezier(0.12, 0.23, 0.21, 0.99)
+    infinite;
 }
 
 @media (max-width: 809.98px) {
   .feature-orion-visual {
-    --orb-size: 187px;
+    --orb-core: 88px;
   }
 }
 
@@ -1085,18 +1102,24 @@ html[data-intro-played] .hero-bg-scale {
 
   .feature-orion-visual .feature-pulsing-orb {
     animation-play-state: paused;
+    opacity: 0;
   }
 
   .feature-visuals-active .feature-orion-visual .feature-pulsing-orb {
     animation-play-state: paused;
+    opacity: 0;
   }
 
-  .feature-flip-back {
+  .feature-flip-inner {
     transform: rotateY(180deg);
   }
 
+  .feature-flip-back {
+    transform: rotateY(0deg) translateZ(1px);
+  }
+
   .feature-flip-front {
-    transform: rotateY(0deg);
+    transform: rotateY(180deg) translateZ(1px);
   }
 
   .globe-location-copy-inner {
