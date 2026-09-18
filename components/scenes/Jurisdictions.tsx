@@ -116,7 +116,7 @@ export default function Jurisdictions({ sectionRef }: { sectionRef: RefObject<HT
       <div className="sticky top-0 h-[100dvh] overflow-hidden pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:h-screen">
         <div aria-hidden className="bg-columns absolute inset-0 opacity-60" />
 
-        <div className="mx-auto grid h-full max-w-[1600px] grid-rows-[auto_1fr] items-stretch gap-6 px-5 pt-[6rem] md:grid-cols-12 md:grid-rows-none md:items-center md:gap-12 md:px-14 md:pt-16">
+        <div className="mx-auto grid h-full max-w-[1600px] grid-rows-1 items-stretch px-5 pt-[6rem] md:grid-cols-12 md:grid-rows-none md:items-center md:gap-12 md:px-14 md:pt-16">
           {/* LEFT — index (desktop only) */}
           <div className="hidden space-y-9 md:col-span-5 md:block">
             <p className="max-w-[38ch] text-sm leading-relaxed text-paper/55">
