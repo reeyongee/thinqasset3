@@ -10,6 +10,10 @@ export function usesNativeScroll(pathname: string): boolean {
   if (pathname === "/about") return true;
   if (pathname.startsWith("/services")) return true;
   if (pathname.startsWith("/lab/")) return true;
-  if (pathname.startsWith("/test/")) return true;
+  if (pathname.startsWith("/test")) return true;
+  if (pathname.startsWith("/our-")) return true;
+  if (pathname.startsWith("/board")) return true;
+  if (pathname.startsWith("/independent-directors")) return true;
   return false;
 }
+

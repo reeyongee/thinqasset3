@@ -12,6 +12,7 @@ import { createPortal } from "react-dom";
 import { PageHero } from "@/components/page-hero/PageHero";
 import { ScrollSection } from "@/components/scroll/ScrollSection";
 import { TransitionLink } from "@/components/transition/TransitionLink";
+import { GlowRing } from "@/components/ui/GlowButton";
 import { PAGE_HERO_IMAGES } from "@/lib/brand-assets";
 import { splitWords } from "@/lib/contact/splitWords";
 import {
@@ -32,6 +33,7 @@ import {
 } from "./constants";
 import { useContactMotion } from "./useContactMotion";
 import "./contact.css";
+import "./contact-cta-glow.css";
 
 type FormState = {
   firstName: string;
@@ -255,6 +257,7 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
               {CONTACT_CTA_CARDS.map((card) => {
                 const inner = (
                   <>
+                    <GlowRing />
                     <div className="contact-hero__bottom__button__info">
                       <p>{card.label}</p>
                       <h2>{card.title}</h2>
@@ -264,13 +267,22 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
                     </div>
                   </>
                 );
+                const className =
+                  "contact-hero__bottom__button glow-button flex flex-1 items-stretch justify-start whitespace-normal [&_.glow-button__glow-square]:h-[max(100cqh,100cqw)]";
+                const glowSurfaceStyle = {
+                  minHeight: 0,
+                  padding: 0,
+                  borderRadius: 16,
+                  overflow: "hidden",
+                } as const;
 
                 if (card.id === "form") {
                   return (
                     <button
                       key={card.id}
                       type="button"
-                      className="contact-hero__bottom__button"
+                      className={className}
+                      style={glowSurfaceStyle}
                       data-transition-item
                       onClick={openForm}
                     >
@@ -284,7 +296,8 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
                     <TransitionLink
                       key={card.id}
                       href={card.href}
-                      className="contact-hero__bottom__button"
+                      className={className}
+                      style={glowSurfaceStyle}
                       data-transition-item
                     >
                       {inner}
@@ -296,7 +309,8 @@ export function ContactPageContent({ startWithForm = false }: { startWithForm?: 
                   <a
                     key={card.id}
                     href={card.href!}
-                    className="contact-hero__bottom__button"
+                    className={className}
+                    style={glowSurfaceStyle}
                     data-transition-item
                   >
                     {inner}

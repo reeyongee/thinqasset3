@@ -32,6 +32,7 @@
   --ta-navy-deep: #161c24;
   --ta-navy-mid: #343d4a;
   --ta-navy-card: #2a252c;
+  --ta-maroon: #5a3840;
   --ta-gold: #b6a082;
   --ta-gold-hover: #c9b896;
   --ta-grey-muted: #9f9da0;
@@ -84,6 +85,7 @@
   --color-foreground: var(--foreground);
   --color-ta-navy: var(--ta-navy);
   --color-ta-navy-card: var(--ta-navy-card);
+  --color-ta-maroon: var(--ta-maroon);
   --color-ta-gold: var(--ta-gold);
   --color-ta-gold-hover: var(--ta-gold-hover);
   --color-ta-grey-muted: var(--ta-grey-muted);
@@ -372,9 +374,84 @@ html[data-intro-played] .hero-bg-scale {
   }
 
   .glow-button:hover .glow-button__spinner--hover,
-  .glow-button:focus-visible .glow-button__spinner--hover {
+  .glow-button:focus-visible .glow-button__spinner--hover,
+  .glow-button:focus-within .glow-button__spinner--hover {
     transform: rotate(135deg);
   }
+}
+
+/* Large card / column surfaces that reuse the conic rim */
+.glow-button--surface {
+  min-height: 0;
+  padding: 0;
+  white-space: normal;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.glow-button--surface .glow-button__glow-square {
+  height: max(100cqh, 100cqw);
+}
+
+/* Compact mono chrome (gallery pager / close) */
+.glow-button--chrome {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.85rem;
+  color: var(--ta-grey-light);
+  cursor: default;
+}
+
+.glow-button--chrome .glow-button__label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.glow-button--chrome .glow-chrome__hit {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  padding: 0.15rem 0.3rem;
+}
+
+.glow-button--chrome .glow-chrome__hit:hover,
+.glow-button--chrome .glow-chrome__hit:focus-visible {
+  color: var(--ta-gold);
+  outline: none;
+}
+
+.glow-button--chrome .glow-chrome__count {
+  color: var(--ta-grey-muted);
+  letter-spacing: 0.16em;
+}
+
+.glow-button--chrome .glow-chrome__esc {
+  color: var(--ta-grey-muted);
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+}
+
+.glow-button--chrome.glow-button--action {
+  cursor: pointer;
+}
+
+.glow-button--chrome.glow-button--action:hover,
+.glow-button--chrome.glow-button--action:focus-visible {
+  color: var(--ta-white);
+}
+
+.glow-button--chrome.glow-button--action:hover .glow-chrome__esc,
+.glow-button--chrome.glow-button--action:focus-visible .glow-chrome__esc {
+  color: var(--ta-gold);
 }
 
 .glow-button__inset {

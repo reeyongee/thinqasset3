@@ -1,6 +1,7 @@
 "use client";
 
 import { TransitionLink } from "@/components/transition/TransitionLink";
+import "./glow-ring.css";
 
 type GlowButtonProps = {
   href: string;
@@ -26,7 +27,8 @@ function isInternalRoute(href: string): boolean {
   );
 }
 
-function GlowButtonMarkup({ children }: { children: React.ReactNode }) {
+/** Conic gold rim layers. Parent must have `.glow-button` for hover/focus spin. */
+export function GlowRing() {
   return (
     <>
       <span className="glow-button__base" aria-hidden />
@@ -37,6 +39,14 @@ function GlowButtonMarkup({ children }: { children: React.ReactNode }) {
         </span>
       </span>
       <span className="glow-button__inset" aria-hidden />
+    </>
+  );
+}
+
+function GlowButtonMarkup({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <GlowRing />
       <span className="glow-button__label">{children}</span>
     </>
   );

@@ -28,10 +28,8 @@ const ScrollSectionsContext = createContext<ScrollSectionsContextValue | null>(n
 
 export function ScrollSectionsProvider({
   children,
-  dockAboveFooter = true,
 }: {
   children: ReactNode;
-  dockAboveFooter?: boolean;
 }) {
   const [entries, setEntries] = useState<SectionEntry[]>([]);
 
@@ -49,11 +47,13 @@ export function ScrollSectionsProvider({
 
   return (
     <ScrollSectionsContext.Provider value={value}>
-      {sections.length > 0 ? (
-        <ChapterBar sections={sections} chapters={chapters} dockAboveFooter={dockAboveFooter} />
-      ) : null}
-      <ScrollIndicator />
-      {children}
+      <div className="relative">
+        {sections.length > 0 ? (
+          <ChapterBar sections={sections} chapters={chapters} />
+        ) : null}
+        <ScrollIndicator />
+        {children}
+      </div>
     </ScrollSectionsContext.Provider>
   );
 }

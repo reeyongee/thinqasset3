@@ -46,7 +46,7 @@ export function SiteShell({ children, disableScrollChrome = false }: SiteShellPr
     !disableScrollChrome && shouldUseSharedScrollChrome(pathname, chromeConfig);
 
   const page = useScrollChrome ? (
-    <ScrollSectionsProvider dockAboveFooter>
+    <ScrollSectionsProvider>
       <div className="pb-[calc(3.5rem+env(safe-area-inset-bottom))]">{children}</div>
     </ScrollSectionsProvider>
   ) : (

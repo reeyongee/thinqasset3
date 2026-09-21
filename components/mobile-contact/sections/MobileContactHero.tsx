@@ -1,5 +1,7 @@
 import { TransitionLink } from "@/components/transition/TransitionLink";
 import { CONTACT_CTA_CARDS } from "@/components/contact/constants";
+import { GlowRing } from "@/components/ui/GlowButton";
+import "@/components/contact/contact-cta-glow.css";
 
 type MobileContactHeroProps = {
   onOpenForm: () => void;
@@ -25,6 +27,7 @@ export function MobileContactHero({ onOpenForm }: MobileContactHeroProps) {
         {CONTACT_CTA_CARDS.map((card) => {
           const inner = (
             <>
+              <GlowRing />
               <div className="mobile-contact-hero__card-copy">
                 <p className="mobile-contact-hero__card-label">{card.label}</p>
                 <h2 className="mobile-contact-hero__card-title">{card.title}</h2>
@@ -34,13 +37,21 @@ export function MobileContactHero({ onOpenForm }: MobileContactHeroProps) {
               </span>
             </>
           );
+          const className =
+            "mobile-contact-hero__card mobile-pressable glow-button whitespace-normal [&_.glow-button__glow-square]:h-[max(100cqh,100cqw)]";
+          const glowSurfaceStyle = {
+            minHeight: "4.75rem",
+            padding: "1rem 1.125rem",
+            overflow: "hidden",
+          } as const;
 
           if (card.id === "form") {
             return (
               <button
                 key={card.id}
                 type="button"
-                className="mobile-contact-hero__card mobile-pressable"
+                className={className}
+                style={glowSurfaceStyle}
                 data-transition-item
                 onClick={onOpenForm}
               >
@@ -54,7 +65,8 @@ export function MobileContactHero({ onOpenForm }: MobileContactHeroProps) {
               <TransitionLink
                 key={card.id}
                 href={card.href}
-                className="mobile-contact-hero__card mobile-pressable"
+                className={className}
+                style={glowSurfaceStyle}
                 data-transition-item
               >
                 {inner}
@@ -66,7 +78,8 @@ export function MobileContactHero({ onOpenForm }: MobileContactHeroProps) {
             <a
               key={card.id}
               href={card.href!}
-              className="mobile-contact-hero__card mobile-pressable"
+              className={className}
+              style={glowSurfaceStyle}
               data-transition-item
             >
               {inner}

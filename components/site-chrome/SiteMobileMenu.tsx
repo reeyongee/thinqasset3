@@ -125,6 +125,50 @@ export function SiteMobileMenu({
           aria-label="Primary mobile"
         >
           {SITE_NAV_LINKS.map((link, index) => {
+            if (link.children) {
+              const isGroupActive =
+                pathname === link.href ||
+                link.children.some((child) => pathname === child.href);
+
+              return (
+                <div key={link.label} className="flex flex-col">
+                  <div
+                    className={[
+                      "site-mobile-menu__link flex items-center justify-between",
+                      isGroupActive ? "site-mobile-menu__link--active" : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    style={{
+                      transitionDelay: open ? `${120 + index * 60}ms` : "0ms",
+                    }}
+                  >
+                    <span>{link.label}</span>
+                  </div>
+                  <div className="flex flex-col pl-4 pb-2 pt-1 gap-1">
+                    {link.children.map((child) => {
+                      const childActive = pathname === child.href;
+                      return (
+                        <TransitionLink
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setOpen(false)}
+                          className={[
+                            "py-1.5 text-[1.125rem] font-[family-name:var(--font-lp-saturnia)] transition-colors",
+                            childActive
+                              ? "text-[color:var(--ta-gold)] font-medium"
+                              : "text-white/60 hover:text-white",
+                          ].join(" ")}
+                        >
+                          {child.label}
+                        </TransitionLink>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            }
+
             const active = isNavLinkActive(link.href, pathname, hash);
 
             return (

@@ -1,0 +1,34 @@
+.contact-hero__bottom__button.glow-button {
+  overflow: hidden;
+  border-radius: 16px;
+  color: var(--ta-white);
+}
+
+.contact-hero__bottom__button .glow-button__inset {
+  background: color-mix(in srgb, var(--ta-navy-deep) 92%, var(--ta-gold) 8%);
+}
+
+.contact-hero__bottom__button:hover .glow-button__inset,
+.contact-hero__bottom__button:focus-visible .glow-button__inset {
+  background: color-mix(in srgb, var(--ta-navy-deep) 86%, var(--ta-gold) 14%);
+}
+
+.contact-hero__bottom__button__info,
+.contact-hero__bottom__button__arrow {
+  z-index: 1;
+}
+
+.mobile-contact-hero__card.glow-button {
+  overflow: hidden;
+  border-radius: var(--mobile-contact-radius-card, 0.5rem);
+  color: inherit;
+}
+
+.mobile-contact-hero__card .glow-button__inset {
+  background: var(--token-surface);
+}
+
+.mobile-contact-hero__card-copy,
+.mobile-contact-hero__card-arrow {
+  z-index: 1;
+}

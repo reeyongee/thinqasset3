@@ -1,6 +1,7 @@
 "use client";
 
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { GlowRing } from "@/components/ui/GlowButton";
 
 type ContactFormButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -20,14 +21,7 @@ export function ContactFormButton({
         .join(" ")}
       {...props}
     >
-      <span className="glow-button__base" aria-hidden />
-      <span className="glow-button__glow-wrap" aria-hidden>
-        <span className="glow-button__glow-square">
-          <span className="glow-button__spinner glow-button__spinner--hover" />
-          <span className="glow-button__spinner glow-button__spinner--mobile" />
-        </span>
-      </span>
-      <span className="glow-button__inset" aria-hidden />
+      <GlowRing />
       <span className="glow-button__label">{children}</span>
     </button>
   );

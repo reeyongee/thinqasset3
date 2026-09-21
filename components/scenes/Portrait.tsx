@@ -32,7 +32,7 @@ export function FounderPortrait({
               alt={alt}
               fill
               sizes="(max-width: 768px) 90vw, 40vw"
-              className="object-contain object-bottom"
+              className="object-cover object-center"
             />
           ) : (
             <div className="relative flex h-full w-full items-center justify-center bg-[linear-gradient(160deg,color-mix(in_srgb,var(--color-ink2)_70%,var(--color-brass)),var(--color-ink))]">
@@ -47,8 +47,7 @@ export function FounderPortrait({
         </motion.div>
         {/* caption plate */}
         <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-line bg-ink/90 px-4 py-3 font-tmono text-[9px] uppercase tracking-[0.26em] text-paper/60">
-          <span>Plate 01 — {FOUNDER.name}</span>
-          <span>Office of the CEO</span>
+          <span>Ritika Das, CEO</span>
         </figcaption>
       </div>
       {/* corner ticks */}
@@ -83,7 +82,7 @@ export default function Portrait({ sectionRef }: { sectionRef: RefObject<HTMLEle
         {/* 5 columns, hard left — portrait plate */}
         <motion.figure style={{ clipPath, opacity: frameO }} className="md:col-span-5 md:col-start-1">
           <FounderPortrait
-            src="/images/tbg-founder-portrait.webp"
+            src="/images/ritika2.png"
             alt={`${FOUNDER.name}, ${FOUNDER.title}, ${FOUNDER.org}.`}
             drift={drift}
           />

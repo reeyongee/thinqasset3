@@ -31,8 +31,8 @@ export function FounderLetterPage() {
   ];
 
   return (
-    <div className="founder-letter" data-transition-page>
-      <ChapterBar sections={sections} chapters={FOUNDER_CHAPTERS} dockAboveFooter />
+    <div className="founder-letter relative" data-transition-page>
+      <ChapterBar sections={sections} chapters={FOUNDER_CHAPTERS} />
       <ScrollIndicator />
       <div className="pb-[calc(3.5rem+env(safe-area-inset-bottom))]">
         <Hero sectionRef={hero} />

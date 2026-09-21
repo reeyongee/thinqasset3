@@ -19,6 +19,18 @@ export default function TestValuesPage() {
         }}
       >
         <a
+          href="/test-playground"
+          style={{
+            color: "var(--ta-gold)",
+            textDecoration: "none",
+            borderBottom: "1px solid color-mix(in srgb, var(--ta-gold) 40%, transparent)",
+            marginRight: "1rem",
+            fontWeight: 600,
+          }}
+        >
+          Design System & Transition Bench →
+        </a>
+        <a
           href="/test/ripe-hero"
           style={{
             color: "var(--ta-gold)",

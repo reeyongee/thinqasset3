@@ -15,9 +15,29 @@ export type HeaderConfig = {
   theme: HeaderTheme;
 };
 
-export const SITE_NAV_LINKS = [
+export type NavSubItem = {
+  label: string;
+  href: string;
+};
+
+export type NavLinkItem = {
+  label: string;
+  href: string;
+  children?: readonly NavSubItem[];
+};
+
+export const SITE_NAV_LINKS: readonly NavLinkItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
+  {
+    label: "Our Team",
+    href: "/our-team",
+    children: [
+      { label: "Our Team", href: "/our-team" },
+      { label: "Our Board", href: "/our-board" },
+      { label: "Our Independent Directors", href: "/our-independent-directors" },
+    ],
+  },
   { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
 ] as const;

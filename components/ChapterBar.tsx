@@ -1,8 +1,7 @@
 "use client";
 
-import { RefObject, useRef } from "react";
+import { RefObject } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useChapterBarDock } from "@/hooks/useChapterBarDock";
 import type { ScrollChapter } from "@/lib/scroll/types";
 
 export const FOUNDER_CHAPTERS: ScrollChapter[] = [
@@ -64,38 +63,43 @@ function ChapterLabel({
   );
 }
 
+/**
+ * Bottom reading-progress chrome.
+ *
+ * Lives in a full-height rail over main (position:relative) so `position:sticky`
+ * can pin it to the viewport bottom, then release it flush with the footer —
+ * no JS `bottom` writes, so it cannot drift out of sync while the footer scrolls.
+ *
+ * Stacking: below site header (50) and mobile menu (49), above page content.
+ */
 export default function ChapterBar({
   sections,
   chapters = FOUNDER_CHAPTERS,
-  dockAboveFooter = false,
 }: {
   sections: RefObject<HTMLElement | null>[];
   chapters?: ScrollChapter[];
-  /** Lift above the site footer once it scrolls into view. */
-  dockAboveFooter?: boolean;
 }) {
-  const barRef = useRef<HTMLDivElement>(null);
-  const dockBottom = useChapterBarDock(barRef, dockAboveFooter);
-
   return (
-    <div
-      ref={barRef}
-      role="status"
-      aria-live="polite"
-      aria-label="Reading progress"
-      style={{ bottom: dockAboveFooter ? dockBottom : undefined }}
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-line/25 bg-ink/92 px-4 py-3 backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-6 md:px-14"
-    >
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4">
-        <div className="relative h-4 min-w-[9.5rem] sm:min-w-[11rem]">
-          {sections.map((ref, i) => (
-            <ChapterLabel key={i} target={ref} chapter={chapters[i] ?? { num: null, label: "Section" }} />
-          ))}
-        </div>
-        <div className="flex items-center gap-1.5" aria-hidden>
-          {sections.map((ref, i) => (
-            <ChapterDot key={i} target={ref} />
-          ))}
+    <div className="chapter-bar-rail pointer-events-none absolute inset-0 z-40 overflow-visible in-data-mobile-menu-open:invisible">
+      <div className="sticky top-[100dvh] h-0">
+        <div
+          role="status"
+          aria-live="polite"
+          aria-label="Reading progress"
+          className="chapter-bar pointer-events-auto w-full -translate-y-full border-t border-line/25 bg-ink/92 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:px-6 md:px-14"
+        >
+          <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4">
+            <div className="relative h-4 min-w-[9.5rem] sm:min-w-[11rem]">
+              {sections.map((ref, i) => (
+                <ChapterLabel key={i} target={ref} chapter={chapters[i] ?? { num: null, label: "Section" }} />
+              ))}
+            </div>
+            <div className="flex items-center gap-1.5" aria-hidden>
+              {sections.map((ref, i) => (
+                <ChapterDot key={i} target={ref} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

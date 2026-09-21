@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useId, useState } from "react";
 import { TransitionLink } from "@/components/transition/TransitionLink";
 import { SERVICE_COLUMNS, type ServiceColumn } from "./constants";
+import { GlowRing } from "@/components/ui/GlowButton";
 
 type ServicesColumnsProps = {
   columns?: readonly ServiceColumn[];
@@ -93,6 +94,7 @@ export function ServicesColumns({
               data-visible={expanded}
               aria-hidden={!expanded}
             >
+              <GlowRing />
               <span className="glow-button__label">Explore pillar</span>
             </span>
           </article>

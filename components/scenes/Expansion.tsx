@@ -169,7 +169,7 @@ function RouteMap({
   const viewBox = useTransform(cameraX, (x) => `${x} ${VIEW_Y} ${VIEW_W} ${VIEW_H}`);
 
   return (
-    <div className="relative mx-auto h-full min-h-0 w-full max-w-[1600px] overflow-hidden">
+    <div className="mx-auto h-full min-h-0 w-full max-w-[1600px] overflow-hidden">
       <motion.svg
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
@@ -182,14 +182,6 @@ function RouteMap({
           <Node key={n.name} p={progress} n={n} cameraX={cameraX} compact={compact} />
         ))}
       </motion.svg>
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-ink to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-ink to-transparent"
-      />
     </div>
   );
 }
@@ -198,7 +190,7 @@ function RouteTicker({ windowStart }: { windowStart: MotionValue<number> }) {
   const x = useTransform(windowStart, (s) => `${(-s * 100) / NODES.length}%`);
 
   return (
-    <div className="relative mx-auto w-full max-w-[1600px] shrink-0">
+    <div className="mx-auto w-full max-w-[1600px] shrink-0">
       <div className="w-full overflow-hidden">
         <motion.div
           style={{ x, width: `${(NODES.length / WINDOW) * 100}%` }}
@@ -216,14 +208,6 @@ function RouteTicker({ windowStart }: { windowStart: MotionValue<number> }) {
           ))}
         </motion.div>
       </div>
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-ink to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-ink to-transparent"
-      />
     </div>
   );
 }
