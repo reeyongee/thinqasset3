@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import {
-  InteractiveCardGallery,
-  BOARD_MEMBERS,
-} from "@/components/test-playground/InteractiveCardGallery";
+import { ProfileTextPair } from "@/components/profiles/ProfileTextPair";
+import { BOARD_MEMBERS } from "@/components/test-playground/InteractiveCardGallery";
 import { createPageMetadata, noIndexRobots } from "@/lib/site-metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -14,10 +12,6 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function OurBoardPage() {
   return (
-    <InteractiveCardGallery
-      title="Our Board"
-      members={BOARD_MEMBERS}
-      mobileStack
-    />
+    <ProfileTextPair title="Our Board" members={BOARD_MEMBERS} />
   );
 }

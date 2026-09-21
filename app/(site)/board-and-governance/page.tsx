@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import {
-  InteractiveCardGallery,
-  BOARD_MEMBERS,
-} from "@/components/test-playground/InteractiveCardGallery";
+import { ProfileTextPair } from "@/components/profiles/ProfileTextPair";
+import { BOARD_MEMBERS } from "@/components/test-playground/InteractiveCardGallery";
 import { createPageMetadata, noIndexRobots } from "@/lib/site-metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -14,9 +12,6 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function BoardAndGovernancePage() {
   return (
-    <InteractiveCardGallery
-      title="Board and Governance"
-      members={BOARD_MEMBERS}
-    />
+    <ProfileTextPair title="Board and Governance" members={BOARD_MEMBERS} />
   );
 }

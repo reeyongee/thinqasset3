@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import {
-  InteractiveCardGallery,
-  INDEPENDENT_DIRECTORS,
-} from "@/components/test-playground/InteractiveCardGallery";
+import { ProfileTextPair } from "@/components/profiles/ProfileTextPair";
+import { INDEPENDENT_DIRECTORS } from "@/components/test-playground/InteractiveCardGallery";
 import { createPageMetadata, noIndexRobots } from "@/lib/site-metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -14,7 +12,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function IndependentDirectorsPage() {
   return (
-    <InteractiveCardGallery
+    <ProfileTextPair
       title="Our Independent Directors"
       members={INDEPENDENT_DIRECTORS}
     />
