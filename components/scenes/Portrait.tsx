@@ -47,7 +47,9 @@ export function FounderPortrait({
         </motion.div>
         {/* caption plate */}
         <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-line bg-ink/90 px-4 py-3 font-tmono text-[9px] uppercase tracking-[0.26em] text-paper/60">
-          <span>Ritika Das, CEO</span>
+          <span>
+            {FOUNDER.title}, {FOUNDER.org}
+          </span>
         </figcaption>
       </div>
       {/* corner ticks */}

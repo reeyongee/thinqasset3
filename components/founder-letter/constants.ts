@@ -1,7 +1,7 @@
 export const FOUNDER = {
   name: "Ritika Das",
-  title: "Founder & Chief Executive Officer",
-  org: "ThinqAsset Fund Management Ltd.",
+  title: "Founder and CEO",
+  org: "TBG group Holdings",
   place: "DIFC, Dubai",
   fullPlace: "Dubai International Financial Centre",
 } as const;
