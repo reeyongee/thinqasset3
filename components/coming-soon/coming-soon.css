@@ -43,11 +43,19 @@
 
 .coming-soon__title {
   margin: 0;
-  font-family: var(--font-albert-sans), sans-serif;
-  font-size: clamp(2.5rem, 7vw, 5.5rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  padding-bottom: 0.1em;
+  font-size: clamp(3.25rem, 9vw, 7rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, var(--ta-grey-light) 0%, var(--ta-gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.coming-soon .hero-nav-logo__mark {
+  height: clamp(52px, 8vw, 88px);
+  background-color: var(--ta-gold);
 }
 
 @keyframes coming-soon-wave {

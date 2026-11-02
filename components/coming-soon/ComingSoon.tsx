@@ -16,15 +16,15 @@ export function ComingSoon() {
           <svg key={d} className="coming-soon__wave" viewBox="0 0 2880 900" preserveAspectRatio="none">
             <defs>
               <linearGradient id={`coming-soon-glass-${i}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0.25" stopColor="#fff" stopOpacity="0.14" />
-                <stop offset="1" stopColor="#fff" stopOpacity="0" />
+                <stop offset="0.25" stopColor="var(--ta-gold)" stopOpacity="0.2" />
+                <stop offset="1" stopColor="var(--ta-gold)" stopOpacity="0" />
               </linearGradient>
             </defs>
             <path
               d={d}
               fill={`url(#coming-soon-glass-${i})`}
-              stroke="#fff"
-              strokeOpacity="0.28"
+              stroke="var(--ta-gold)"
+              strokeOpacity="0.45"
               vectorEffect="non-scaling-stroke"
             />
           </svg>
@@ -34,7 +34,7 @@ export function ComingSoon() {
         <span role="img" aria-label={THINQASSET_LOGO_ALT}>
           <ThinqAssetNavLogo />
         </span>
-        <h1 className="coming-soon__title">Coming soon</h1>
+        <h1 className="coming-soon__title font-display">Coming soon</h1>
       </div>
     </main>
   );
