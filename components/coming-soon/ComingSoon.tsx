@@ -30,10 +30,10 @@ export function ComingSoon() {
           </svg>
         ))}
       </div>
+      <span className="coming-soon__logo" role="img" aria-label={THINQASSET_LOGO_ALT}>
+        <ThinqAssetNavLogo />
+      </span>
       <div className="coming-soon__content">
-        <span role="img" aria-label={THINQASSET_LOGO_ALT}>
-          <ThinqAssetNavLogo />
-        </span>
         <h1 className="coming-soon__title font-display">Coming soon</h1>
       </div>
     </main>

@@ -53,9 +53,14 @@
   -webkit-text-fill-color: transparent;
 }
 
-.coming-soon .hero-nav-logo__mark {
-  height: clamp(52px, 8vw, 88px);
-  background-color: var(--ta-gold);
+.coming-soon__logo {
+  position: absolute;
+  top: 1.625rem;
+  left: clamp(1rem, 3vw, 2.5rem);
+}
+
+.coming-soon__logo .hero-nav-logo__mark {
+  height: 30px;
 }
 
 @keyframes coming-soon-wave {
