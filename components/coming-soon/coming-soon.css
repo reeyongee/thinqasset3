@@ -1,0 +1,63 @@
+.coming-soon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: var(--app-vh, 100vh);
+  overflow: hidden;
+  color: #fff;
+}
+
+.coming-soon__waves {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.coming-soon__wave {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 200%;
+  height: 100%;
+  animation: coming-soon-wave 24s linear infinite;
+}
+
+.coming-soon__wave:nth-child(2) {
+  animation-duration: 36s;
+  animation-direction: reverse;
+}
+
+.coming-soon__wave:nth-child(3) {
+  animation-duration: 16s;
+}
+
+.coming-soon__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.coming-soon__title {
+  margin: 0;
+  font-family: var(--font-albert-sans), sans-serif;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+@keyframes coming-soon-wave {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon__wave {
+    animation: none;
+  }
+}
