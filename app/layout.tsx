@@ -66,7 +66,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: preloaderBootScript }} />
+        {process.env.NODE_ENV !== "production" && (
+          <script dangerouslySetInnerHTML={{ __html: preloaderBootScript }} />
+        )}
       </head>
       <body className="min-h-full">
         <AppBootstrap />

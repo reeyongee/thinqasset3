@@ -16,6 +16,8 @@ export function isPreloaderPending(): boolean {
 
 export function shouldRunSitePreloader(pathname: string): boolean {
   if (typeof window === "undefined") return false;
+  // Production "/" is the coming soon page (see middleware.ts), which has no preloader.
+  if (process.env.NODE_ENV === "production") return false;
   if (pathname !== "/") return false;
   if (preloaderCompleted) return false;
   if (hasIntroPlayed()) return false;
